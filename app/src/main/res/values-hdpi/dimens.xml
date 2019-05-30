@@ -6,5 +6,4 @@
     <!-- Images -->
     <dimen name="size_image_height">150dip</dimen>
     <dimen name="size_image_width">@dimen/size_image_height</dimen>
-
 </resources>

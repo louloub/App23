@@ -10,12 +10,11 @@
 
     <!-- Déclaration de notre Toolbar -->
     <android.support.v7.widget.Toolbar
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
         android:id="@+id/activity_main_toolbar"
-        android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary"/>
+        android:layout_height="wrap_content"/>
 
     <!-- Block 1 prenant la première moitié de l'écran (propriété layout_weight) -->
     <LinearLayout
@@ -24,7 +23,6 @@
         android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:gravity="center">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +31,6 @@
             android:padding="@dimen/padding_title_land"
             android:textAlignment="center"
             android:textColor="#FFFFFF"/>
-
     </LinearLayout>
 
     <!-- Block 2 prenant la deuxième moitié de l'écran -->
@@ -42,13 +39,11 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center">
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/size_image_width"
             android:layout_height="@dimen/size_image_height"
-            android:src="@drawable/yourdj_noir" />
-
+            android:src="@drawable/yourdj_noir"/>
     </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>
