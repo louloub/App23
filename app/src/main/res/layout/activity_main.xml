@@ -8,42 +8,178 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- Déclaration de notre Toolbar -->
+    <!-- TOOLBAR -->
     <android.support.v7.widget.Toolbar
         android:theme="@style/ToolbarTheme"
         app:titleTextAppearance="@style/Toolbar.TitleText"
         android:id="@+id/activity_main_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo_yourdj"/>
+    </android.support.v7.widget.Toolbar>
 
-    <!-- Block 1 prenant la première moitié de l'écran (propriété layout_weight) -->
-    <LinearLayout
+    <!---->
+    <!-- ECOUTER -->
+    <!---->
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/intro_accueil"
-            android:textSize="@dimen/size_title"
-            android:padding="@dimen/padding_title_land"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
 
-    <!-- Block 2 prenant la deuxième moitié de l'écran -->
-    <LinearLayout
+        <android.support.v7.widget.AppCompatButton
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/carre_podcast"
+            android:text="@string/podcast"
+            />
+
+        <!--&lt;!&ndash; PODCAST &ndash;&gt;
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/carre_podcast">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/podcast"
+                android:textSize="@dimen/size_title"
+                android:padding="@dimen/padding_title_land"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </android.support.v7.widget.LinearLayoutCompat>-->
+
+        <!-- ARTISTES -->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/artistes"
+                android:textSize="@dimen/size_title"
+                android:padding="@dimen/padding_title_land"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <!---->
+    <!-- LIRE -->
+    <!---->
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/size_image_width"
-            android:layout_height="@dimen/size_image_height"
-            android:src="@drawable/yourdj_noir"/>
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/articles"
+            android:textSize="@dimen/size_title"
+            android:padding="@dimen/padding_title_land"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <!---->
+    <!-- DANSER -->
+    <!---->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+
+        <!-- EVENTS -->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#FFFFFF">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/evenements"
+                android:textSize="@dimen/size_title"
+                android:padding="@dimen/padding_title_land"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <!-- BON PLANS -->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bonsplans"
+                android:textSize="@dimen/size_title"
+                android:padding="@dimen/padding_title_land"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v7.widget.LinearLayoutCompat>
 
 </android.support.v7.widget.LinearLayoutCompat>

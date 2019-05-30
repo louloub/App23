@@ -1,10 +1,14 @@
 package com.example.app23;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,11 +18,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.configureToolbar();
+
+        // Disable title Toolbar
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Button btn_podcast = findViewById(R.id.carre_podcast);
+
+        btn_podcast.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openPodcastActivity();
+            }
+        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //2 - Inflate the menu and add it to the Toolbar
+        // Inflate the menu and add it to the Toolbar
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;
     }
@@ -42,5 +59,13 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //--------
+    // INTENT
+    //--------
+    public void openPodcastActivity() {
+        Intent intent = new Intent(this, podcast_activity.class);
+        startActivity(intent);
     }
 }

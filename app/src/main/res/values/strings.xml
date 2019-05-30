@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">App23</string>
-    <string name="intro_accueil">Votre Webzine House et Techno locale</string>
+    <string name="podcast">Podcast</string>
+    <string name="artistes">Artistes</string>
+    <string name="articles">Articles</string>
+    <string name="evenements">Evenements</string>
+    <string name="bonsplans">Bons Plans</string>
 </resources>
