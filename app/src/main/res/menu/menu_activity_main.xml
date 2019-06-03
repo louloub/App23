@@ -16,4 +16,10 @@
         app:showAsAction="ifRoom"
         android:title="Paramètres">
     </item>
+    <item
+        android:id="@+id/menu_activity_logo"
+        android:icon="@drawable/logo_yourdj"
+        app:showAsAction="ifRoom"
+        android:title="Logo">
+    </item>
 </menu>

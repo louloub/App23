@@ -1,6 +1,8 @@
 package com.example.app23;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,14 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.configureToolbar();
 
-        // Disable title Toolbar
+        // DISABLE TILE TOOLBAR
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // BUTTON
         Button btn_podcast = findViewById(R.id.carre_podcast);
-
         btn_podcast.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ALERTE DIALOG pour choisir la ville dès l'ouvertur de l'app
-
+        // ALERTE DIALOG
+        alertDialog();
     }
 
     @Override
@@ -43,13 +43,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void configureToolbar(){
-        // Get the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
-        // Sets the Toolbar
-        setSupportActionBar(toolbar);
-    }
-
+    //----------------
+    // BUTTONS TOOLBAR
+    //----------------
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -70,5 +66,34 @@ public class MainActivity extends AppCompatActivity {
     public void openPodcastActivity() {
         Intent intent = new Intent(this, podcast_activity.class);
         startActivity(intent);
+    }
+
+    //--------------
+    // ALERTE DIALOG
+    //--------------
+    public void alertDialog ()
+    {
+        android.support.v7.app.AlertDialog.Builder myPopup = new AlertDialog.Builder(this);
+        myPopup.setTitle("Salut");
+        myPopup.setMessage("Salut les gens c'est ton téléphone qui te parle");
+        myPopup.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Vous avez cliquez sur Oui", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        myPopup.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Vous avez cliquez sur Non", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        myPopup.setCancelable(false);
+
+        myPopup.show();
+
+
     }
 }
