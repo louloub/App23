@@ -20,4 +20,14 @@
         <item name="android:textStyle">italic</item>
         <item name="titleTextColor">@android:color/white</item>
     </style>
+
+    <!-- BUTTON THEME -->
+    <style name="ButtonTheme">
+        <item name="android:textSize">@dimen/size_title</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
 </resources>

@@ -8,7 +8,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-
 public class podcast_activity extends AppCompatActivity {
 
     private WebView webView;

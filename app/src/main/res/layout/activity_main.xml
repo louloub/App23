@@ -28,72 +28,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
         android:gravity="center">
 
+        <!-- PODCAST -->
         <android.support.v7.widget.AppCompatButton
-            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
             android:id="@+id/carre_podcast"
-            android:text="@string/podcast"
-            />
-
-        <!--&lt;!&ndash; PODCAST &ndash;&gt;
-        <android.support.v7.widget.LinearLayoutCompat
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/carre_podcast">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/podcast"
-                android:textSize="@dimen/size_title"
-                android:padding="@dimen/padding_title_land"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </android.support.v7.widget.LinearLayoutCompat>-->
-
+            android:text="@string/podcast"/>
         <!-- ARTISTES -->
-        <android.support.v7.widget.LinearLayoutCompat
-            android:orientation="horizontal"
+        <android.support.v7.widget.AppCompatButton
+            android:layout_weight="1"
+            android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/artistes"
-                android:textSize="@dimen/size_title"
-                android:padding="@dimen/padding_title_land"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </android.support.v7.widget.LinearLayoutCompat>
+            android:id="@+id/carre_artistes"
+            android:text="@string/artistes"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <!---->
@@ -104,21 +56,15 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/articles"
-            android:textSize="@dimen/size_title"
-            android:padding="@dimen/padding_title_land"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- ARTICLES -->
+        <android.support.v7.widget.AppCompatButton
+            android:layout_weight="1"
+            android:theme="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/carre_articles"
+            android:text="@string/articles"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <!---->
@@ -128,58 +74,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <!-- EVENTS -->
-        <android.support.v7.widget.LinearLayoutCompat
-            android:orientation="horizontal"
+        <android.support.v7.widget.AppCompatButton
+            android:layout_weight="1"
+            android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="#FFFFFF">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/evenements"
-                android:textSize="@dimen/size_title"
-                android:padding="@dimen/padding_title_land"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </android.support.v7.widget.LinearLayoutCompat>
+            android:id="@+id/carre_evenements"
+            android:text="@string/evenements"/>
 
         <!-- BON PLANS -->
-        <android.support.v7.widget.LinearLayoutCompat
-            android:orientation="horizontal"
+        <android.support.v7.widget.AppCompatButton
+            android:layout_weight="1"
+            android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bonsplans"
-                android:textSize="@dimen/size_title"
-                android:padding="@dimen/padding_title_land"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </android.support.v7.widget.LinearLayoutCompat>
-
+            android:id="@+id/carre_bonsplans"
+            android:text="@string/bonsplans"/>
     </android.support.v7.widget.LinearLayoutCompat>
-
 </android.support.v7.widget.LinearLayoutCompat>

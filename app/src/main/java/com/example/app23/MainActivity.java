@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // Disable title Toolbar
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        // BUTTON
         Button btn_podcast = findViewById(R.id.carre_podcast);
 
         btn_podcast.setOnClickListener(new View.OnClickListener(){
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 openPodcastActivity();
             }
         });
+
+        // ALERTE DIALOG pour choisir la ville dès l'ouvertur de l'app
 
     }
 
