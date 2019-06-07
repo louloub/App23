@@ -2,31 +2,25 @@ package com.example.app23;
 
 public class Artistes {
 
-    private int id;
-    private String title;
-    private String shortdesc;
-    private String image;
+    private String firstname;
+    private String lastname;
+    private String age;
 
-    public Artistes(int id, String title, String shortdesc, String image) {
-        this.id = id;
-        this.title = title;
-        this.shortdesc = shortdesc;
-        this.image = image;
+    public Artistes(String firstname, String lastname, String age) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
     }
 
-    public int getId() {
-        return id;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String getTitle() {
-        return title;
+    public String getLastname() {
+        return lastname;
     }
 
-    public String getShortdesc() {
-        return shortdesc;
-    }
-
-    public String getImage() {
-        return image;
+    public String getAge() {
+        return age;
     }
 }

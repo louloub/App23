@@ -34,12 +34,12 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         Artistes artistes = artistesList.get(position);
 
         //loading the image
-        Glide.with(mCtx)
+        /*Glide.with(mCtx)
                 .load(artistes.getImage())
-                .into(holder.imageView);
+                .into(holder.imageView);*/
 
-        holder.textViewTitle.setText(artistes.getTitle());
-        holder.textViewShortDesc.setText(artistes.getShortdesc());
+        holder.textViewTitle.setText(artistes.getFirstname());
+        holder.textViewShortDesc.setText(artistes.getLastname());
     }
 
     @Override
