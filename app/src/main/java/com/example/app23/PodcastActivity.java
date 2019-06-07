@@ -6,16 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-public class podcast_activity extends AppCompatActivity {
+public class PodcastActivity extends AppCompatActivity {
 
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_podcast_activity);
+        setContentView(R.layout.activity_podcast);
 
         webView = (WebView) findViewById(R.id.WebView);
 

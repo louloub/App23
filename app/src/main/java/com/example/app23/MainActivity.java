@@ -6,11 +6,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +27,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openPodcastActivity();
+            }
+        });
+
+        // BUTTON
+        Button btn_artistes = findViewById(R.id.carre_artistes);
+        btn_artistes.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openArtistesActivity();
             }
         });
 
@@ -64,7 +71,12 @@ public class MainActivity extends AppCompatActivity {
     // INTENT
     //--------
     public void openPodcastActivity() {
-        Intent intent = new Intent(this, podcast_activity.class);
+        Intent intent = new Intent(this, PodcastActivity.class);
+        startActivity(intent);
+    }
+
+    public void openArtistesActivity() {
+        Intent intent = new Intent(this, ArtistesActivity.class);
         startActivity(intent);
     }
 
