@@ -57,55 +57,9 @@ public class ArtistesActivity extends AppCompatActivity
 
         mContext = getApplicationContext();
 
-        textView = findViewById(R.id.textView);
-        textView.setText("test");
+        // textView = findViewById(R.id.textView);
 
         loadArtistes2();
-    }
-
-    private void loadArtistes()
-    {
-        /*String string = "string";
-        Log.d(TAG,"String loadArtistes = " + string);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_API, response ->
-        {
-            String string2 = "string2";
-            Log.d(TAG,"String2 loadArtistes = " + string2);
-
-            try
-            {
-                //converting the string to json array object
-                JSONArray array = new JSONArray(response);
-
-                //traversing through all the object
-                for (int i = 0; i < array.length(); i++)
-                {
-
-                    //getting product object from json array
-                    JSONObject product = array.getJSONObject(i);
-
-                    //adding the product to product list
-                    artistesList.add(new Artistes(
-                            product.getInt("id"),
-                            product.getString("title"),
-                            product.getString("shortdesc"),
-                            product.getString("image")
-                    ));
-                }
-
-                //creating adapter object and setting it to recyclerview
-                ArtistesAdapter adapter = new ArtistesAdapter(ArtistesActivity.this, artistesList);
-                recyclerView.setAdapter(adapter);
-            } catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
-        }, error -> {
-            //
-        });
-        //adding our stringrequest to queue
-        Volley.newRequestQueue(this).add(stringRequest);*/
     }
 
     private void loadArtistes2()
@@ -116,11 +70,7 @@ public class ArtistesActivity extends AppCompatActivity
                 (Request.Method.GET, URL, null, response ->
         {
             try {
-                textView.setText(response.toString());
-
                 Log.d(TAG, " JsonArrayRequest in try jsonArrayArtistesRequest " +response);
-
-                // JSONArray array = new JSONArray(response);
 
                 // Browse request contain json
                 for (int i = 0; i < response.length(); i++) {
