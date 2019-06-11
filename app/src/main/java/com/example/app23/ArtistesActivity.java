@@ -30,8 +30,7 @@ public class ArtistesActivity extends AppCompatActivity
 
     //this is the JSON Data URL
     // private static final String URL_API = "http://192.168.64.2/ApiYourDJ.php";
-    private static final String URL_API = "http://pastebin.com/raw/Em972E5s";
-
+    private static final String URL = "http://pastebin.com/raw/Em972E5s";
 
     //a list to store all the products
     List<Artistes> artistesList;
@@ -111,61 +110,46 @@ public class ArtistesActivity extends AppCompatActivity
 
     private void loadArtistes2()
     {
-        /*JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, URL_API, null,
-                        response -> textView.setText("test"),
-                        error -> {
-                    // TODO: Handle error
-                });
-
-        String json = jsonObjectRequest.toString();
-
-        Log.d(TAG, "Json to string = " +json);*/
-
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, URL_API, null, response ->
-
+        JsonArrayRequest jsonArrayArtistesRequest = new JsonArrayRequest
+                (Request.Method.GET, URL, null, response ->
         {
-            textView.setText(response.toString());
+            try {
+                textView.setText(response.toString());
 
-            try
-                    {
-                        Log.d(TAG,"String loadArtistes ");
+                Log.d(TAG, " JsonArrayRequest in try jsonArrayArtistesRequest " +response);
 
-                        //converting the string to json array object
-                        JSONArray array = new JSONArray(response);
+                // JSONArray array = new JSONArray(response);
 
-                        //traversing through all the object
-                        for (int i = 0; i < array.length(); i++)
-                        {
-                            Log.d(TAG,"String loadArtistes = " + i);
+                // Browse request contain json
+                for (int i = 0; i < response.length(); i++) {
 
-                            //getting product object from json array
-                            JSONObject artistes = array.getJSONObject(i);
+                    Log.d(TAG, " JsonArrayRequest in for " +i);
 
-                            String firstName = artistes.getString("firstname");
-                            String lastName = artistes.getString("lastname");
-                            String age = artistes.getString("age");
+                    // Getting product object from json array
+                    JSONObject artistesJsonObject = response.getJSONObject(i);
 
-                            //creating adapter object and setting it to recyclerview
-                            ArtistesAdapter adapter = new ArtistesAdapter(ArtistesActivity.this, artistesList);
-                            recyclerView.setAdapter(adapter);
+                    String firstName = artistesJsonObject.getString("firstname");
+                    String lastName = artistesJsonObject.getString("lastname");
+                    String age = artistesJsonObject.getString("age");
 
-                        }
+                    //creating adapter object and setting it to recyclerview
+                    ArtistesAdapter adapter = new ArtistesAdapter(ArtistesActivity.this, artistesList);
+                    recyclerView.setAdapter(adapter);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
                 },
-
                         error -> {
                             // Do something when error occurred
                         }
                 );
 
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonArrayArtistesRequest);
 
         /*JSONObject objet = objet;
         String json = objet.toString();*/
