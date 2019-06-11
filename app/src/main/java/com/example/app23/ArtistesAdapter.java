@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import java.io.Serializable;
 import java.util.List;
 
-public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.ArtistesViewHolder> implements Serializable {
+public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.ArtistesViewHolder>  {
 
     private Context mCtx;
     private List<Artistes> artistesList;
@@ -45,7 +45,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         holder.textViewShortDesc.setText(artistes.getLastname());
         holder.age.setText(artistes.getAge());
         holder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(mCtx, PodcastActivity.class);
+
 
                 String firstName = artistes.getFirstname();
                 String lastName = artistes.getLastname();
@@ -53,7 +53,9 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
 
                 Artistes artiste = new Artistes(firstName,lastName,age);
 
-                // intent.putExtra(this, artiste);
+                Intent intent = new Intent(mCtx, ArtistesPage.class);
+
+                intent.putExtra("artiste", artiste);
 
                 mCtx.startActivity(intent);
 
