@@ -134,6 +134,10 @@ public class ArtistesActivity extends AppCompatActivity
                     String lastName = artistesJsonObject.getString("lastname");
                     String age = artistesJsonObject.getString("age");
 
+                    Artistes artiste = new Artistes(firstName,lastName,age);
+
+                    artistesList.add(artiste);
+
                     //creating adapter object and setting it to recyclerview
                     ArtistesAdapter adapter = new ArtistesAdapter(ArtistesActivity.this, artistesList);
                     recyclerView.setAdapter(adapter);
