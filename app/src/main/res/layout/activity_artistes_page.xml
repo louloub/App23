@@ -5,17 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
 
         <!-- IMAGE -->
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:padding="4dp" />
+            android:src="@drawable/avatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"/>
 
         <!-- NOM -->
         <TextView
@@ -27,8 +29,7 @@
             android:text="Alex G"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:background="@color/colorPrimary"
-            android:textSize="@dimen/size_title"
-            />
+            android:textSize="@dimen/size_title" />
 
         <!-- BIO -->
         <TextView
@@ -85,6 +86,5 @@
             android:text="Liens : "
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold" />
-    </RelativeLayout>
-
+    </LinearLayout>
 </LinearLayout>

@@ -53,11 +53,9 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
                 Artistes artiste = new Artistes(firstName,lastName,age);
 
                 Intent intent = new Intent(mCtx, ArtistesPage.class);
-
                 intent.putExtra("artiste", artiste);
 
                 mCtx.startActivity(intent);
-
         });
     }
 

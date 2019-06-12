@@ -41,6 +41,7 @@ public class PodcastActivity extends AppCompatActivity {
                     "</body>" +
                 "</html>";
         Log.d("Iframe ", "onCreate: " + iframe);
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onShowCustomView(View view, CustomViewCallback callback) {
@@ -59,9 +60,12 @@ public class PodcastActivity extends AppCompatActivity {
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
         webView.loadDataWithBaseURL("", iframe, "text/html", "UTF-8", "");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            webView.createWebMessageChannel();
-//        }
+
+
+
+        //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        //            webView.createWebMessageChannel();
+        //        }
 
         //TEST 1
         /*// WebView
