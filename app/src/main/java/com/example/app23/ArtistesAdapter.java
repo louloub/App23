@@ -46,7 +46,6 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         holder.age.setText(artistes.getAge());
         holder.itemView.setOnClickListener(v -> {
 
-
                 String firstName = artistes.getFirstname();
                 String lastName = artistes.getLastname();
                 String age = artistes.getAge();
