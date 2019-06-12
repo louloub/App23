@@ -9,9 +9,10 @@
     android:orientation="vertical">
 
     <WebView
-        android:id="@+id/WebView"
+        android:id="@+id/WebViewSoundCloud"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        />
 
 </android.support.v7.widget.LinearLayoutCompat>
