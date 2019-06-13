@@ -3,6 +3,7 @@ package com.example.app23;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,5 +30,18 @@ public class ArtistesPage extends AppCompatActivity {
         tv_firstname.setText(firstName);
         tv_lastName.setText(lastName);
         tv_age.setText(age);
+
+        // DISABLE TILE TOOLBAR
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    //------------
+    // OPTION MENU
+    //------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu and add it to the Toolbar
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
     }
 }

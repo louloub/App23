@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -25,13 +26,26 @@ public class PodcastActivity extends AppCompatActivity {
 
         // loadingWebView();
         loadSoundCloudWebView();
+
+        // DISABLE TILE TOOLBAR
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
+    //------------
+    // OPTION MENU
+    //------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu and add it to the Toolbar
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+
+    //------------------------------
+    // INTEGRATION SOUNDCLOUD IFRAME
+    //------------------------------
     public void loadingWebView ()
     {
-        //------------------------------
-        // INTEGRATION SOUNDCLOUD IFRAME
-        //------------------------------
 
         String streamUrl = "https%3A//api.soundcloud.com/playlists/148369466&color=%23a1c332";
         // String streamUrl = "https://soundcloud.com/yourdjmusic/sets/yourdj-podcast";
@@ -63,17 +77,6 @@ public class PodcastActivity extends AppCompatActivity {
         webView.getSettings().setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
         webView.loadDataWithBaseURL("", iframe, "text/html", "UTF-8", "");
     }
-
-    //------------------------------
-    // INTEGRATION SOUNDCLOUD IFRAME
-    //------------------------------
-
-    /*<iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/148369466&color=%23a1c332&auto_play=false&"
-            "hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>*/
-
-    /*&amp;auto_play=false&amp; hide_related=false&amp; " +
-            "show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;*/
 
     public void loadSoundCloudWebView()
     {

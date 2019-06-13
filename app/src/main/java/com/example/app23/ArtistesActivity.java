@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
@@ -28,7 +29,7 @@ public class ArtistesActivity extends AppCompatActivity
 {
     private static final String TAG = "ArtistesActiviy";
 
-    //this is the JSON Data URL
+    // this is the JSON Data URL
     // private static final String URL_API = "http://192.168.64.2/ApiYourDJ.php";
     private static final String URL = "http://pastebin.com/raw/Em972E5s";
 
@@ -59,10 +60,26 @@ public class ArtistesActivity extends AppCompatActivity
 
         // textView = findViewById(R.id.textView);
 
-        loadArtistes2();
+        loadArtistes();
+
+        // DISABLE TILE TOOLBAR
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    private void loadArtistes2()
+    //------------
+    // OPTION MENU
+    //------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu and add it to the Toolbar
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+
+    //--------------
+    // LOAD ARTISTES
+    //--------------
+    private void loadArtistes()
     {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
