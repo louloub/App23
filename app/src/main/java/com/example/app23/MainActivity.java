@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         // DISABLE TILE TOOLBAR
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        // BUTTON
+        // BUTTON PODCAST
         Button btn_podcast = findViewById(R.id.carre_podcast);
         btn_podcast.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -30,12 +30,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // BUTTON
+        // BUTTON ARTISTES
         Button btn_artistes = findViewById(R.id.carre_artistes);
         btn_artistes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 openArtistesActivity();
+            }
+        });
+
+        // BUTTON ARTICLES
+        Button btn_articles = findViewById(R.id.carre_articles);
+        btn_articles.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openArticlesActivity();
             }
         });
 
@@ -76,7 +85,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openArtistesActivity() {
-        Intent intent = new Intent(this, ArtistesActivity.class);
+        Intent intent = new Intent(this, ArtistesListActivity.class);
+        startActivity(intent);
+    }
+
+    public void openArticlesActivity() {
+        Intent intent = new Intent(this, ArticlesListActivity.class);
         startActivity(intent);
     }
 

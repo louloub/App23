@@ -6,9 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/fond_dj">
 
+    <!---->
     <!-- TOOLBAR -->
+    <!---->
     <!--<android.support.v7.widget.Toolbar
         android:theme="@style/ToolbarTheme"
         app:titleTextAppearance="@style/Toolbar.TitleText"
@@ -19,8 +22,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/logo_yourdj"/>
-    </android.support.v7.widget.Toolbar>
--->
+    </android.support.v7.widget.Toolbar>-->
+
     <!---->
     <!-- ECOUTER -->
     <!---->

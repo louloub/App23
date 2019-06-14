@@ -16,16 +16,16 @@ import android.webkit.WebViewClient;
 public class PodcastActivity extends AppCompatActivity {
 
     private WebView webView;
+    final String URL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podcast);
 
-        webView = (WebView) findViewById(R.id.WebViewSoundCloud);
-
         // loadingWebView();
         loadSoundCloudWebView();
+        webView = (WebView) findViewById(R.id.WebViewSoundCloud);
 
         // DISABLE TILE TOOLBAR
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -90,7 +90,7 @@ public class PodcastActivity extends AppCompatActivity {
                         "</iframe>" +
                     "</body>" +
                 "</html>";
-        // WebView webView = (WebView) findViewById(R.id.WebViewSoundCloud);
+        WebView webView = (WebView) findViewById(R.id.WebViewSoundCloud);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new WebViewResizer(), "WebViewResizer");
         webView.setWebViewClient(new WebViewClient() {

@@ -8,11 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
-import java.io.Serializable;
 import java.util.List;
 
 public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.ArtistesViewHolder>  {
@@ -28,7 +24,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
     @Override
     public ArtistesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.artistes_list, null);
+        View view = inflater.inflate(R.layout.artistes_list_model, null);
         return new ArtistesViewHolder(view);
     }
 

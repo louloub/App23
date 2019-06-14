@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".ArticlesActivity"></activity>
+        <activity android:name=".ArticlesListActivity"></activity>
         <activity android:name=".ArtistesPageAdapter" />
         <activity android:name=".ArtistesPage" />
-        <activity android:name=".ArtistesActivity" />
+        <activity android:name=".ArtistesListActivity" />
         <activity android:name=".PodcastActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
