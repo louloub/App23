@@ -1,6 +1,7 @@
 package com.example.app23;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -27,7 +30,7 @@ public class ArtistesListActivity extends AppCompatActivity
 
     // private static final String URL = "http://192.168.64.2/artistes.json";
     // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes.json";
-    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes2.json";
+    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes3.json";
     // private static final String URL_API = "http://192.168.64.2/ApiYourDJ.php";
     // private static final String URL = "http://pastebin.com/raw/Em972E5s";
 
@@ -95,13 +98,20 @@ public class ArtistesListActivity extends AppCompatActivity
                     // Getting object from json array
                     JSONObject artistesJsonObject = response.getJSONObject(i);
 
-                    String firstName = artistesJsonObject.getString("name");
-                    Log.d(TAG, " JsonArrayRequest in for " +firstName);
+                    String name = artistesJsonObject.getString("name");
+                    String bio = artistesJsonObject.getString("bio");
+                    String photo = artistesJsonObject.getString("photo_url");
+                    String facebook = artistesJsonObject.getString("facebook_url");
+                    String soundcloud = artistesJsonObject.getString("soundcloud_url");
+                    String beatport = artistesJsonObject.getString("beatport_url");
+                    String mixcloud = artistesJsonObject.getString("mixcloud_url");
+                    String twitter = artistesJsonObject.getString("twitter_url");
+                    String residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
+                    String instagram = artistesJsonObject.getString("instagram_url");
+                    String site = artistesJsonObject.getString("site_url");
 
-                    String lastName = artistesJsonObject.getString("bio");
-                    String age = artistesJsonObject.getString("age");
-
-                    Artistes artiste = new Artistes(firstName,lastName,age);
+                    Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
+                    twitter,residentAdvisor,instagram,site);
 
                     artistesList.add(artiste);
 

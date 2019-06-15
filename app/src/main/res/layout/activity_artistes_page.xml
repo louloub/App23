@@ -13,7 +13,7 @@
 
         <!-- IMAGE -->
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivPhoto"
             android:src="@drawable/avatar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,11 +21,11 @@
 
         <!-- NOM -->
         <TextView
-            android:id="@+id/textViewTitle"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/imageView"
+            android:layout_toRightOf="@id/ivPhoto"
             android:text="Alex G"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:background="@color/colorPrimary"
@@ -33,13 +33,13 @@
 
         <!-- BIO -->
         <TextView
-            android:id="@+id/textViewShortDesc"
+            android:id="@+id/tvBio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewTitle"
+            android:layout_below="@id/tvName"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@id/imageView"
+            android:layout_toRightOf="@id/ivPhoto"
             android:text="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
@@ -59,12 +59,12 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:textStyle="bold" />-->
 
-        <!-- AGE -->
+        <!--&lt;!&ndash; AGE &ndash;&gt;
         <TextView
             android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewShortDesc"
+            android:layout_below="@id/tvBio"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/imageView"
@@ -72,19 +72,89 @@
             android:paddingRight="15dp"
             android:text="4.7"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
         <!-- LIENS -->
-        <TextView
+        <!--<TextView
             android:id="@+id/textViewPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/age"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@id/imageView"
+            android:layout_toRightOf="@id/ivPhoto"
             android:text="Liens : "
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- FB -->
+            <ImageView
+                android:id="@+id/ivFacebook"
+                android:src="@drawable/fb"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- SC -->
+            <ImageView
+                android:id="@+id/ivSoundcloud"
+                android:src="@drawable/sc"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- BP -->
+            <ImageView
+                android:id="@+id/ivBeatport"
+                android:src="@drawable/bp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- MC -->
+            <ImageView
+                android:id="@+id/ivMixcloud"
+                android:src="@drawable/mc"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- TW -->
+            <ImageView
+                android:id="@+id/ivTwitter"
+                android:src="@drawable/tw"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- RA -->
+            <ImageView
+                android:id="@+id/ivResidentAdvisor"
+                android:src="@drawable/ra"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- INSTA -->
+            <ImageView
+                android:id="@+id/ivInstagram"
+                android:src="@drawable/in"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+
+            <!-- SITE -->
+            <ImageView
+                android:id="@+id/ivSite"
+                android:src="@drawable/ws"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="4dp"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
