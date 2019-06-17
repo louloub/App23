@@ -35,6 +35,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/ivPhoto"
                     android:layout_margin="@dimen/generalMargin"
+                    android:padding="5dp"
                     android:text="Alex G"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                     android:background="@drawable/rounded_corner"

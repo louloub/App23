@@ -1,17 +1,17 @@
 package com.example.app23;
 
 import android.content.Intent;
-import android.net.MailTo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import java.util.Objects;
 
 public class PodcastActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class PodcastActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.WebViewSoundCloud);
 
         // DISABLE TILE TOOLBAR
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
     }
 
     //------------
