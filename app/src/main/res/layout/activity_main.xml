@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@drawable/fond_dj">
+    tools:context=".MainActivity">
 
     <!---->
     <!-- TOOLBAR -->
@@ -74,6 +73,8 @@
             android:layout_height="match_parent"
             android:id="@+id/carre_articles"
             android:layout_margin="@dimen/generalMargin"
+            android:background="@drawable/button"
+
             android:text="@string/articles"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -94,6 +95,8 @@
             android:layout_height="match_parent"
             android:id="@+id/carre_evenements"
             android:layout_margin="@dimen/generalMargin"
+            android:background="@drawable/button"
+
 
             android:text="@string/evenements"/>
 
@@ -105,6 +108,8 @@
             android:layout_height="match_parent"
             android:id="@+id/carre_bonsplans"
             android:layout_margin="@dimen/generalMargin"
+            android:background="@drawable/button"
+
 
             android:text="@string/bonsplans"/>
     </android.support.v7.widget.LinearLayoutCompat>
