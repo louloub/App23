@@ -41,8 +41,7 @@
             android:id="@+id/carre_podcast"
             android:background="@drawable/podcast"
             android:layout_margin="@dimen/generalMargin"
-            android:text="@string/podcast"
-            app:strokeColor="@color/colorPrimary"/>
+            android:text="@string/podcast" />
 
         <!-- ARTISTES -->
         <android.support.v7.widget.AppCompatButton
@@ -105,7 +104,7 @@
             android:layout_height="match_parent"
             android:id="@+id/carre_bonsplans"
             android:layout_margin="@dimen/generalMargin"
-            android:background="@drawable/bonsplans"
+            android:background="@drawable/bonplan"
             android:text="@string/bonsplans"/>
     </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v7.widget.LinearLayoutCompat>
