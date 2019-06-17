@@ -118,7 +118,6 @@ public class ArtistesListActivity extends AppCompatActivity
                     //creating adapter object and setting it to recyclerview
                     ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
                     recyclerView.setAdapter(adapter);
-
                 }
 
             } catch (JSONException e) {
@@ -131,8 +130,5 @@ public class ArtistesListActivity extends AppCompatActivity
                 );
 
         requestQueue.add(jsonArrayArtistesRequest);
-
-        /*JSONObject objet = objet;
-        String json = objet.toString();*/
     }
 }

@@ -57,7 +57,7 @@ public class Artistes implements Serializable {
         this.photoUrl = photoUrl;
     }
 
-    public String getFacebook_url() {
+    public String getFacebookUrl() {
         return facebook_url;
     }
 
