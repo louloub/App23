@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/colorAccent"
+    tools:targetApi="lollipop"
+    android:layout_height="20dp"
+    android:layout_width="20dp"
+    > <!-- ripple effect color -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/cardview_light_background" /> <!-- background color -->
+        </shape>
+    </item>
+</ripple>

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/border_item">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:background="@drawable/ripple"
+        android:padding="10dp">
 
         <!-- IMAGE -->
         <ImageView
@@ -34,7 +37,7 @@
                     android:layout_margin="@dimen/generalMargin"
                     android:text="Alex G"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/rounded_corner"
                     android:textSize="@dimen/size_title" />
 
                 <!-- BIO -->
@@ -55,11 +58,11 @@
 
         <!-- ICONS RS -->
         <LinearLayout
-            android:background="@drawable/gradient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/generalMargin"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <!-- FB -->
             <ImageView

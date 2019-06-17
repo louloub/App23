@@ -40,6 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/carre_podcast"
+            android:background="@drawable/button"
+            android:layout_margin="@dimen/generalMargin"
+
             android:text="@string/podcast"/>
         <!-- ARTISTES -->
         <android.support.v7.widget.AppCompatButton
@@ -48,6 +51,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/carre_artistes"
+            android:background="@drawable/button"
+            android:layout_margin="@dimen/generalMargin"
+
             android:text="@string/artistes"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -67,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/carre_articles"
+            android:layout_margin="@dimen/generalMargin"
             android:text="@string/articles"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -86,6 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/carre_evenements"
+            android:layout_margin="@dimen/generalMargin"
+
             android:text="@string/evenements"/>
 
         <!-- BON PLANS -->
@@ -95,6 +104,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/carre_bonsplans"
+            android:layout_margin="@dimen/generalMargin"
+
             android:text="@string/bonsplans"/>
     </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v7.widget.LinearLayoutCompat>
