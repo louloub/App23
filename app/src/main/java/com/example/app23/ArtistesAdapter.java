@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +98,13 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         holder.tvName.setText(artistes.getName());
         holder.tvBio.setText(artistes.getBio());
 
+        // LIMITER LA TAILLE DU TEXT PAR ITEM ET AFFICHER LES POINTS DE SUPSENSION
+        holder.tvBio.setMaxHeight(200);
+        holder.tvBio.setEllipsize(TextUtils.TruncateAt.END);
+        holder.tvBio.setLines(5);
+        holder.tvBio.setMaxLines(5);
+
+        // RECUPERATION DE LA PHOTO AVEC SON URL
         Glide.with(mCtx)
                 .load(artistes.getPhotoUrl())
                 .into(holder.ivPhoto);
@@ -158,18 +166,6 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         //-------------------------------------------------
         holder.itemView.setOnClickListener(v -> {
 
-                /*String name = artistes.getName();
-                String bio = artistes.getBio();
-                String photo = artistes.getPhotoUrl();
-                String facebook = artistes.getFacebookUrl();
-                String soundcloud = artistes.getSoundcloudUrl();
-                String beatport = artistes.getBeatportUrl();
-                String mixcloud = artistes.getMixcloudUrl();
-                String twitter = artistes.getTwitterUrl();
-                String residentAdvisor = artistes.getResidentAdvisorUrl();
-                String instagram = artistes.getInstagramUrl();
-                String site = artistes.getSiteUrl();*/
-
                 Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,
                         mixcloud,twitter,residentAdvisor,instagram,site);
 
@@ -186,23 +182,6 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
     }
 
     class ArtistesViewHolder extends RecyclerView.ViewHolder {
-
-        /*// Retrieve intent data
-        Intent i = getIntent();
-        Artistes artiste = (Artistes)i.getSerializableExtra("artiste");*/
-
-        /*// Retrieve data's objet
-        String name = artiste.getName();
-        String bio = artiste.getBio();
-        String photo = artiste.getPhotoUrl();
-        String facebook = artiste.getFacebookUrl();
-        String soundcloud = artiste.getSoundcloudUrl();
-        String beatport = artiste.getBeatportUrl();
-        String mixcloud = artiste.getMixcloudUrl();
-        String twitter = artiste.getTwitterUrl();
-        String residentAdvisor = artiste.getResidentAdvisorUrl();
-        String instagram = artiste.getInstagramUrl();
-        String site = artiste.getSiteUrl();*/
 
         TextView tvName, tvBio;
         ImageView ivPhoto, ivFacebook, ivSoundcloud, ivBeatport, ivMixcloud, ivTwitter, ivResidentAdvisor, ivInstagram, ivSite;
@@ -221,49 +200,6 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
             ivResidentAdvisor = itemView.findViewById(R.id.ivResidentAdvisor);
             ivInstagram = itemView.findViewById(R.id.ivInstagram);
             ivSite = itemView.findViewById(R.id.ivSite);
-
-            /*if (facebook.isEmpty()) {
-                ivFacebook.setVisibility(GONE);
-            }
-
-            if (soundcloud.isEmpty()) {
-                ivSoundcloud.setVisibility(GONE);
-            }
-
-            if (beatport.isEmpty()) {
-                ivBeatport.setVisibility(GONE);
-            }
-
-            if (mixcloud.isEmpty()) {
-                ivMixcloud.setVisibility(GONE);
-            }
-
-            if (twitter.isEmpty()) {
-                ivTwitter.setVisibility(GONE);
-            }
-
-            if (residentAdvisor.isEmpty()) {
-                ivResidentAdvisor.setVisibility(GONE);
-            }
-
-            if (instagram.isEmpty()) {
-                ivInstagram.setVisibility(GONE);
-            }
-
-            if (site.isEmpty()) {
-                ivSite.setVisibility(GONE);
-            }*/
-
-            /*
-            ivSoundcloud.setVisibility(GONE);
-            ivBeatport.setVisibility(GONE);
-            ivMixcloud.setVisibility(GONE);
-            ivTwitter.setVisibility(GONE);
-            ivResidentAdvisor.setVisibility(GONE);
-            ivInstagram.setVisibility(GONE);
-            ivSite.setVisibility(GONE);
-            */
-
 
         }
     }

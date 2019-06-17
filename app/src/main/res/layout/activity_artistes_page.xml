@@ -3,9 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:scrollbars="vertical">
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <LinearLayout
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
@@ -15,6 +19,7 @@
         <ImageView
             android:id="@+id/ivPhoto"
             android:src="@drawable/avatar"
+            android:layout_margin="@dimen/generalMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"/>
@@ -24,6 +29,7 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/generalMargin"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/ivPhoto"
             android:text="Alex G"
@@ -37,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvName"
+            android:layout_margin="@dimen/generalMargin"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/ivPhoto"
@@ -44,73 +51,77 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
         <LinearLayout
+            android:background="@drawable/gradient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/generalMargin"
+
             android:orientation="horizontal">
 
             <!-- FB -->
             <ImageView
                 android:id="@+id/ivFacebook"
                 android:src="@drawable/fb"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- SC -->
             <ImageView
                 android:id="@+id/ivSoundcloud"
                 android:src="@drawable/sc"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- BP -->
             <ImageView
                 android:id="@+id/ivBeatport"
                 android:src="@drawable/bp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- MC -->
             <ImageView
                 android:id="@+id/ivMixcloud"
                 android:src="@drawable/mc"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- TW -->
             <ImageView
                 android:id="@+id/ivTwitter"
                 android:src="@drawable/tw"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- RA -->
             <ImageView
                 android:id="@+id/ivResidentAdvisor"
                 android:src="@drawable/ra"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- INSTA -->
             <ImageView
                 android:id="@+id/ivInstagram"
                 android:src="@drawable/in"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
             <!-- SITE -->
             <ImageView
                 android:id="@+id/ivSite"
                 android:src="@drawable/ws"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/size_icon_width"
+                android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
         </LinearLayout>
     </LinearLayout>
+</ScrollView>
 </LinearLayout>

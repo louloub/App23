@@ -30,7 +30,7 @@ public class ArtistesListActivity extends AppCompatActivity
 
     // private static final String URL = "http://192.168.64.2/artistes.json";
     // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes.json";
-    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes3.json";
+    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes4.json";
     // private static final String URL_API = "http://192.168.64.2/ApiYourDJ.php";
     // private static final String URL = "http://pastebin.com/raw/Em972E5s";
 
