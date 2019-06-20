@@ -1,6 +1,7 @@
 package com.example.app23;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,8 +24,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistesListActivity extends AppCompatActivity
-{
+public class ArtistesListActivity extends AppCompatActivity {
+
+    float x1,x2,y1,y2;
+
     private static final String TAG = "ArtistesActiviy";
 
     // this is the JSON Data URL
@@ -130,5 +134,33 @@ public class ArtistesListActivity extends AppCompatActivity
                 );
 
         requestQueue.add(jsonArrayArtistesRequest);
+    }
+
+    //-----------
+    // SWIPE LEFT
+    //-----------
+
+    public boolean onTouchEvent (MotionEvent touchEvent)
+    {
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if(x1 < x2){
+                    // Left
+                    Intent i = new Intent(ArtistesListActivity.this, MainActivity.class);
+                    startActivity(i);
+                }else if(x1 > x2){
+                    // Right
+                    Intent i = new Intent(ArtistesListActivity.this, MainActivity.class);
+                    startActivity(i);
+                }
+                break;
+        }
+        return false;
     }
 }

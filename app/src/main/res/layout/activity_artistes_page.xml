@@ -36,6 +36,8 @@
                 android:padding="5dp"
                 android:layout_toRightOf="@id/ivPhoto"
                 android:text="Alex G"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:background="@drawable/rounded_corner"
                 android:textSize="@dimen/size_title" />

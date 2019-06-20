@@ -36,6 +36,8 @@
                     android:layout_toRightOf="@id/ivPhoto"
                     android:layout_margin="@dimen/generalMargin"
                     android:padding="5dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:text="Alex G"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                     android:background="@drawable/rounded_corner"
@@ -62,8 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/generalMargin"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <!-- FB -->
             <ImageView
