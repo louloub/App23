@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_activity_main_search:
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
+            case R.id.menu_activity_logo:
+                alertDialog();
+                Toast.makeText(this, "Choisis ta ville préférentielle ", Toast.LENGTH_LONG).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
