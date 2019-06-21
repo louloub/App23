@@ -9,7 +9,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class ArticlesListActivity extends AppCompatActivity {
+public class ArticlesListActivity extends OptionMenuActivity {
 
     private WebView webView;
     final String URL_ARTICLES_LIST = "https://www.yourdj.fr/tags/articles/toulouse/";

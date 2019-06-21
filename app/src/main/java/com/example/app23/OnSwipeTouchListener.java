@@ -1,6 +1,7 @@
 package com.example.app23;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,6 +45,8 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             boolean result = false;
             try {
+                // X = horizontal
+                // Y = vertical
                 float diffY = e2.getY() - e1.getY();
                 float diffX = e2.getX() - e1.getX();
                 if (Math.abs(diffX) > Math.abs(diffY)) {

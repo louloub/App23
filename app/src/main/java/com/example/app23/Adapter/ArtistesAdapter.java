@@ -1,4 +1,4 @@
-package com.example.app23;
+package com.example.app23.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.app23.Artistes;
+import com.example.app23.ArtistesPage;
+import com.example.app23.R;
 
 import java.util.List;
 
-import static android.content.Intent.getIntent;
-import static android.content.Intent.getIntentOld;
 import static android.view.View.GONE;
 
 public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.ArtistesViewHolder>  {

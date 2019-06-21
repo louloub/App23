@@ -2,18 +2,22 @@ package com.example.app23;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Objects;
 
-public class PodcastActivity extends AppCompatActivity {
+public class PodcastActivity extends OptionMenuActivity {
 
     private WebView webView;
     final String URL = "";
@@ -29,16 +33,6 @@ public class PodcastActivity extends AppCompatActivity {
 
         // DISABLE TILE TOOLBAR
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-    }
-
-    //------------
-    // OPTION MENU
-    //------------
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu and add it to the Toolbar
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
     }
 
     //------------------------------

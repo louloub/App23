@@ -3,17 +3,21 @@ package com.example.app23;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import static android.view.View.GONE;
 
-public class ArtistesPage extends AppCompatActivity {
+public class ArtistesPage extends OptionMenuActivity {
 
     private Context mCtx;
 
@@ -161,15 +165,5 @@ public class ArtistesPage extends AppCompatActivity {
 
         // DISABLE TILE TOOLBAR
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-    }
-
-    //------------
-    // OPTION MENU
-    //------------
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu and add it to the Toolbar
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
     }
 }

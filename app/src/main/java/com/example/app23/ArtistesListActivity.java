@@ -2,9 +2,6 @@ package com.example.app23;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,23 +13,16 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.app23.Adapter.ArtistesAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
-import android.support.v4.view.GestureDetectorCompat;
-import android.widget.Toast;
 
-public class ArtistesListActivity extends AppCompatActivity implements View.OnTouchListener {
-
-    private GestureDetectorCompat gestureDetectorCompat = null;
-
-    float x1,x2,y1,y2;
+public class ArtistesListActivity extends OptionMenuActivity implements View.OnTouchListener {
 
     private static final String TAG = "ArtistesActiviy";
 
@@ -77,65 +67,32 @@ public class ArtistesListActivity extends AppCompatActivity implements View.OnTo
         // DISABLE TILE TOOLBAR
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        // TODO
-        // Create a common gesture listener object.
-        DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
-        // Set activity in the listener.
-        gestureListener.setActivity(this);
-        // Create the gesture detector with the gesture listener.
-        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
-
-        /*recyclerView.setOnTouchListener(new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            // Interpret MotionEvent data
-            // Handle touch here
-            Log.d(TAG, "into SetOnClickListener onTouch");
-
-            *//*@Override
-            public void onSwipeLeft() {
-                Toast.makeText(ArtistesListActivity.this, "Left", Toast.LENGTH_SHORT).show();
-            }*//*
-
-        }
-        });*/
-
         //---------------
         // LISTENER SWIPE
         //---------------
         recyclerView.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override
             public void onSwipeDown() {
-                Toast.makeText(ArtistesListActivity.this, "Down", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(ArtistesListActivity.this, "Down", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSwipeLeft() {
-                Toast.makeText(ArtistesListActivity.this, "Left", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(ArtistesListActivity.this, "Left", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSwipeUp() {
-                Toast.makeText(ArtistesListActivity.this, "Up", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(ArtistesListActivity.this, "Up", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSwipeRight() {
-                Toast.makeText(ArtistesListActivity.this, "Right", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(ArtistesListActivity.this, "Right", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ArtistesListActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-    }
-
-    //------------
-    // OPTION MENU
-    //------------
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu and add it to the Toolbar
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
     }
 
     //------------------------
@@ -202,48 +159,9 @@ public class ArtistesListActivity extends AppCompatActivity implements View.OnTo
         }
     }
 
-    //-----------
-    // SWIPE LEFT
-    //-----------
-
-
-    // TODO
-    /*@Override
-    public boolean onTouchEvent(MotionEvent event) {
-        // Pass activity on touch event to the gesture detector.
-        gestureDetectorCompat.onTouchEvent(event);
-        // Return true to tell android OS that event has been consumed, do not pass it to other event listeners.
-        return true;
-    }*/
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         // ??
         return true;
-    }
-
-    @Override
-    public boolean onTouchEvent (MotionEvent touchEvent)
-    {
-        switch(touchEvent.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                x1 = touchEvent.getX();
-                y1 = touchEvent.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                x2 = touchEvent.getX();
-                y2 = touchEvent.getY();
-                if(x1 < x2){
-                    // Left
-                    Intent i = new Intent(ArtistesListActivity.this, MainActivity.class);
-                    startActivity(i);
-                }else if(x1 > x2){
-                    // Right
-                    Intent i = new Intent(ArtistesListActivity.this, MainActivity.class);
-                    startActivity(i);
-                }
-                break;
-        }
-        return false;
     }
 }
