@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.app23.Artistes;
-import com.example.app23.ArtistesPage;
+import com.example.app23.Object.Artistes;
+import com.example.app23.Activity.ArtistesPageActivity;
 import com.example.app23.R;
 
 import java.util.List;
@@ -170,7 +170,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
                 Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,
                         mixcloud,twitter,residentAdvisor,instagram,site);
 
-                Intent intent = new Intent(mCtx, ArtistesPage.class);
+                Intent intent = new Intent(mCtx, ArtistesPageActivity.class);
                 intent.putExtra("artiste", artiste);
 
                 mCtx.startActivity(intent);

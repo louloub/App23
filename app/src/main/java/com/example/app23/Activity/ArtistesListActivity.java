@@ -1,4 +1,4 @@
-package com.example.app23;
+package com.example.app23.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +15,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.ArtistesAdapter;
+import com.example.app23.Object.Artistes;
+import com.example.app23.Swipe.OnSwipeTouchListener;
+import com.example.app23.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

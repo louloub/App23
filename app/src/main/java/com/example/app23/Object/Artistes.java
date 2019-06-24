@@ -1,4 +1,4 @@
-package com.example.app23;
+package com.example.app23.Object;
 
 import java.io.Serializable;
 

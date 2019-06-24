@@ -1,4 +1,4 @@
-package com.example.app23;
+package com.example.app23.Activity;
 
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.app23.R;
 
 public class OptionMenuActivity extends AppCompatActivity {
 

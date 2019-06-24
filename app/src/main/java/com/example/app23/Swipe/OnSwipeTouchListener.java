@@ -1,4 +1,4 @@
-package com.example.app23;
+package com.example.app23.Swipe;
 
 import android.content.Context;
 import android.content.Intent;

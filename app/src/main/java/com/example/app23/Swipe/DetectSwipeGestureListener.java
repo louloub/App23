@@ -1,7 +1,9 @@
-package com.example.app23;
+package com.example.app23.Swipe;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import com.example.app23.Activity.ArtistesListActivity;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
         // Minimal x and y axis swipe distance.

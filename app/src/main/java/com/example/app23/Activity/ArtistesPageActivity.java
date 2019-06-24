@@ -1,23 +1,19 @@
-package com.example.app23;
+package com.example.app23.Activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.app23.Object.Artistes;
+import com.example.app23.R;
 
 import static android.view.View.GONE;
 
-public class ArtistesPage extends OptionMenuActivity {
+public class ArtistesPageActivity extends OptionMenuActivity {
 
     private Context mCtx;
 
