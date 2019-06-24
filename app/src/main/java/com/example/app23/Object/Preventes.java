@@ -12,7 +12,7 @@ public class Preventes implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getPrix(int prix) {
+    public int getPrix() {
         return this.prix;
     }
 
@@ -20,7 +20,7 @@ public class Preventes implements Serializable {
         this.prix = prix;
     }
 
-    public int getNombre(int nombre) {
+    public int getNombre() {
         return this.nombre;
     }
 

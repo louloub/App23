@@ -54,8 +54,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         // PREVENTES
         Preventes preventes = event.getPreventes();
-        int prixPreventes = preventes.getPrix(object.getInt("prix"));
-        int nbrPreventes = preventes.getNombre(object.getInt("nombre"));
+        int prixPreventes = preventes.getPrix();
+        int nbrPreventes = preventes.getNombre();
 
         // ARTISTES
         Artistes artistes = event.getArtistes();
@@ -138,8 +138,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
             ivFacebookEvent = itemView.findViewById(R.id.ivFacebookEvent);
-            tvNbrPreventes = itemView.findViewById(R.tvNbrPreventes);
-            tvPrixPreventes = itemView.findViewById(R.tvPrixPreventes);
+            tvNbrPreventes = itemView.findViewById(R.id.tvNbrPreventes);
+            tvPrixPreventes = itemView.findViewById(R.id.tvPrixPreventes);
             tvArtisteName = itemView.findViewById(R.id.tvArtisteName);
             tvLieux = itemView.findViewById(R.id.tvLieux);
         }

@@ -115,7 +115,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // Getting object from json array
                             JSONObject eventJsonObject = response.getJSONObject(i);
 
-                            String name = eventJsonObject.getString("name");
+                            String nameEvent = eventJsonObject.getString("name");
                             String photo = eventJsonObject.getString("photoUrl");
 
                             String dateStartDate = eventJsonObject.getString("dateStart");
@@ -128,8 +128,9 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
                             String facebookUrl = eventJsonObject.getString("facebook_url");
 
+                            //--------------------------
                             // RETRIEVE PREVENTES OBJECT
-
+                            //--------------------------
                             int preventesNbr = 0;
                             int preventesPrix = 0;
                             Preventes preventesNew = new Preventes(preventesNbr,preventesPrix);
@@ -166,35 +167,97 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
                                 }
                             } else {
+                            }
+
+                            //------------------------
+                            // RETRIEVE ARTISTES OBJET
+                            //------------------------
+                            String nameArtiste = "";
+                            String bioArtiste = "";
+                            String photoUrlArtiste = "";
+                            String facebookUrlArtiste = "";
+                            String soundcloudUrlArtiste = "";
+                            String beatportUrlArtiste = "";
+                            String mixcloudUrlArtiste = "";
+                            String twitterUrlArtiste = "";
+                            String residentAdvisorUrlArtiste = "";
+                            String instagramUrlArtiste = "";
+                            String siteUrlArtiste = "";
+
+                            Artistes artiste = new Artistes(nameArtiste,bioArtiste,photoUrlArtiste,facebookUrlArtiste,
+                                    soundcloudUrlArtiste,beatportUrlArtiste,mixcloudUrlArtiste,twitterUrlArtiste,
+                                    residentAdvisorUrlArtiste,instagramUrlArtiste,siteUrlArtiste);
+
+                            if(eventJsonObject.has("artistes"))
+                            {
+                                if (!eventJsonObject.isNull("artistes"))
+                                {
+                                    JSONObject artistes = eventJsonObject.getJSONObject("artistes");
+                                    // get data JSONArray from artistes
+                                    if (artistes.has("name"))
+                                    {
+                                        if (!artistes.isNull("name"))
+                                        {
+                                            String newNameArtiste = eventJsonObject.getString("name");
+                                            artiste.setName(newNameArtiste);
+                                        } else {
+                                        }
+                                    }
+
+                                    if (artistes.has("facebook_url"))
+                                    {
+                                        if (!artistes.isNull("facebook_url"))
+                                        {
+                                            String facebookUrlNew = eventJsonObject.getString("facebook_url");
+                                            artiste.setFacebookUrl(facebookUrlNew);
+                                        } else {
+                                        }
+                                    }
+
+                                } else {
+
+                                }
+                            } else {
 
                             }
 
-                            // TODO : création d'un object préventes pour la construction de l'événement
-
-                            /*JSONArray jsonArrayData;
-                            JSONArray jsonArray = null;
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject object = jsonArray.getJSONObject(Integer.parseInt("preventes"));
-                                jsonArrayData = object.getJSONArray("data");
-
-                                for(int k = 0 ; k<jsonArrayData.length();k++)
-                                {
-                                    Preventes preventes = new Preventes();
-                                    preventes.getNombre(object.getInt("nombre"));
-                                    preventes.getPrix(object.getInt("prix"));
-                                    // actorsList.add(actor);
-                                }
-                            }*/
-
-                            // Preventes preventes = eventJsonObject.get("preventes");
-
-                            // RETRIEVE ARTISTES OBJET
-                            Artistes artistes = eventJsonObject.get("artistes");
-
+                            //------------------------
                             // RETRIEVE LIEUX OBJET
-                            Lieux lieux = eventJsonObject.get("lieux");
+                            //------------------------
 
-                            Event event = new Event(name,photo,dateStart,dateEnd,facebookUrl,preventesNew,artistes,lieux);
+                            String photoUrlLieux = "";
+                            String nameLieux = "";
+                            String adresseLieux = "";
+                            String mapLieuIframeLieux = "";
+                            String facebookUrlLieux = "";
+                            String siteUrlLieux = "";
+
+                            Lieux lieuxEvent = new Lieux(photoUrlLieux,nameLieux,adresseLieux,mapLieuIframeLieux,
+                            facebookUrlLieux,siteUrlLieux);
+
+                            if(eventJsonObject.has("lieux"))
+                            {
+                                if (!eventJsonObject.isNull("lieux"))
+                                {
+                                    JSONObject lieux = eventJsonObject.getJSONObject("lieux");
+                                    // get data JSONArray from artistes
+                                    if (lieux.has("adresse"))
+                                    {
+                                        if (!lieux.isNull("adresse"))
+                                        {
+                                            String newAdresseLieux = eventJsonObject.getString("adresse");
+                                            artiste.setName(newAdresseLieux);
+                                        } else {
+                                        }
+                                    }
+                                } else {
+
+                                }
+                            } else {
+
+                            }
+
+                            Event event = new Event(nameEvent,photo,dateStart,dateEnd,facebookUrl,preventesNew,artiste,lieuxEvent);
 
                             eventList.add(event);
 
