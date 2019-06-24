@@ -53,9 +53,9 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         String site = artistes.getSiteUrl();
         String instagram = artistes.getInstagramUrl();
 
-        //------------------------------------
-        // DISPLAY ICON SOCIAL NETWORK IF LINK
-        //------------------------------------
+        //--------------------------------------
+        // DISPLAY ICON SOCIAL NETWORK IF LINKED
+        //--------------------------------------
             if (facebook.isEmpty()) {
                 holder.ivFacebook.setVisibility(GONE);
             }
@@ -190,10 +190,10 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         public ArtistesViewHolder(View itemView) {
             super(itemView);
 
-            tvName = itemView.findViewById(R.id.tvName);
+            tvName = itemView.findViewById(R.id.tvNameEvent);
             tvBio = itemView.findViewById(R.id.tvBio);
-            ivPhoto = itemView.findViewById(R.id.ivPhoto);
-            ivFacebook = itemView.findViewById(R.id.ivFacebook);
+            ivPhoto = itemView.findViewById(R.id.ivPhotoEvent);
+            ivFacebook = itemView.findViewById(R.id.ivFacebookEvent);
             ivSoundcloud = itemView.findViewById(R.id.ivSoundcloud);
             ivBeatport = itemView.findViewById(R.id.ivBeatport);
             ivMixcloud = itemView.findViewById(R.id.ivMixcloud);

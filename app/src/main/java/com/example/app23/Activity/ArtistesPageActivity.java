@@ -38,10 +38,10 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         String instagram = artiste.getInstagramUrl();
         String site = artiste.getSiteUrl();
 
-        TextView tv_firstname = findViewById(R.id.tvName);
+        TextView tv_firstname = findViewById(R.id.tvNameEvent);
         TextView tv_lastName = findViewById(R.id.tvBio);
-        ImageView iv_photo = findViewById(R.id.ivPhoto);
-        ImageView iv_facebook = findViewById(R.id.ivFacebook);
+        ImageView iv_photo = findViewById(R.id.ivPhotoEvent);
+        ImageView iv_facebook = findViewById(R.id.ivFacebookEvent);
         ImageView iv_soundcloud = findViewById(R.id.ivSoundcloud);
         ImageView iv_beatport = findViewById(R.id.ivBeatport);
         ImageView iv_mixcloud = findViewById(R.id.ivMixcloud);

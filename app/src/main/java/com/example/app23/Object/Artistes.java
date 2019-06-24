@@ -7,7 +7,7 @@ public class Artistes implements Serializable {
     private String name;
     private String bio;
     private String photoUrl;
-    private String facebook_url;
+    private String facebookUrl;
     private String soundcloudUrl;
     private String beatportUrl;
     private String mixcloudUrl;
@@ -16,14 +16,14 @@ public class Artistes implements Serializable {
     private String instagramUrl;
     private String siteUrl;
 
-    public Artistes(String name, String bio, String photoUrl, String facebook_url, String soundcloudUrl,
+    public Artistes(String name, String bio, String photoUrl, String facebookUrl, String soundcloudUrl,
                     String beatportUrl, String mixcloudUrl, String twitterUrl, String residentAdvisorUrl,
                     String instagramUrl, String siteUrl)
     {
         this.name = name;
         this.bio = bio;
         this.photoUrl = photoUrl;
-        this.facebook_url = facebook_url;
+        this.facebookUrl = facebookUrl;
         this.soundcloudUrl = soundcloudUrl;
         this.beatportUrl = beatportUrl;
         this.mixcloudUrl = mixcloudUrl;
@@ -58,11 +58,11 @@ public class Artistes implements Serializable {
     }
 
     public String getFacebookUrl() {
-        return facebook_url;
+        return facebookUrl;
     }
 
-    public void setFacebook_url(String facebook_url) {
-        this.facebook_url = facebook_url;
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl = facebookUrl;
     }
 
     public String getSoundcloudUrl() {

@@ -36,7 +36,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     // private static final String URL_API = "http://192.168.64.2/ApiYourDJ.php";
     // private static final String URL = "http://pastebin.com/raw/Em972E5s";
 
-    //a list to store all the products
+    // a list to store all the artistes
     List<Artistes> artistesList;
 
     //the recyclerview
@@ -51,8 +51,8 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artistes_list);
 
-        //getting the recyclerview from xml
-        recyclerView = findViewById(R.id.recylcerView);
+        // getting the recyclerview from xml
+        recyclerView = findViewById(R.id.recylcerViewArtistesList);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

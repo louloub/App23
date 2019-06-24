@@ -16,7 +16,7 @@
 
         <!-- IMAGE -->
         <ImageView
-            android:id="@+id/ivPhoto"
+            android:id="@+id/ivPhotoEvent"
             android:layout_width="120dp"
             android:layout_height="90dp"
             android:padding="4dp"
@@ -29,11 +29,11 @@
 
                 <!-- NOM -->
                 <TextView
-                    android:id="@+id/tvName"
+                    android:id="@+id/tvNameEvent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/ivPhoto"
+                    android:layout_toRightOf="@id/ivPhotoEvent"
                     android:layout_margin="@dimen/generalMargin"
                     android:padding="5dp"
                     android:paddingStart="20dp"
@@ -51,9 +51,9 @@
                     android:ellipsize="marquee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvName"
+                    android:layout_below="@id/tvNameEvent"
                     android:layout_margin="@dimen/generalMargin"
-                    android:layout_toRightOf="@id/ivPhoto"
+                    android:layout_toRightOf="@id/ivPhotoEvent"
                     android:text="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
             </LinearLayout>
@@ -68,7 +68,7 @@
 
             <!-- FB -->
             <ImageView
-                android:id="@+id/ivFacebook"
+                android:id="@+id/ivFacebookEvent"
                 android:src="@drawable/fb"
                 android:layout_width="@dimen/size_icon_width"
                 android:layout_height="@dimen/size_icon_height"
