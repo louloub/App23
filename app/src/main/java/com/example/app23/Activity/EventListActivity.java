@@ -116,57 +116,56 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // Getting object from json array
                             JSONObject eventJsonObject = response.getJSONObject(i);
 
-                            String nameEvent = eventJsonObject.getString("name");
-                            String photo = eventJsonObject.getString("photo_url");
+                            String nameEvent = eventJsonObject.getString("name_event");
+                            String photoUrlEvent = eventJsonObject.getString("photo_url_event");
 
                             // DATE
-                            String dateStartDate = eventJsonObject.getString("dateStart");
+                            String dateStartDate = eventJsonObject.getString("dateStart_event");
                             SimpleDateFormat dateStartString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
-                            Date dateStart = dateStartString.parse(dateStartDate);
+                            Date dateStartEvent = dateStartString.parse(dateStartDate);
 
-                            String dateEndDate = eventJsonObject.getString("dateEnd");
+                            String dateEndDate = eventJsonObject.getString("dateEnd_event");
                             SimpleDateFormat dateEndString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
-                            Date dateEnd = dateEndString.parse(dateEndDate);
+                            Date dateEndEvent = dateEndString.parse(dateEndDate);
 
-                            String facebookUrl = eventJsonObject.getString("facebook_url");
+                            String facebookUrlEvent = eventJsonObject.getString("facebook_url_event");
 
                             //--------------------------
                             // RETRIEVE PREVENTES OBJECT
                             //--------------------------
                             int preventesNbr = 0;
                             int preventesPrix = 0;
-                            Preventes preventesNew = new Preventes(preventesNbr,preventesPrix);
+                            Preventes preventesEvent = new Preventes(preventesNbr,preventesPrix);
 
-                            if(eventJsonObject.has("preventes"))
+                            if(eventJsonObject.has("preventes_event"))
                             {
-                                if (!eventJsonObject.isNull("preventes"))
+                                if (!eventJsonObject.isNull("preventes_event"))
                                 {
-                                    JSONObject preventes = eventJsonObject.getJSONObject("preventes");
+                                    JSONObject preventes = eventJsonObject.getJSONObject("preventes_event");
                                     // get data JSONArray from preventes
-                                    if (preventes.has("nombre"))
+                                    if (preventes.has("nombre_preventes"))
                                     {
-                                        if (!preventes.isNull("nombre"))
+                                        if (!preventes.isNull("nombre_preventes"))
                                         {
-                                            int newPreventesNbr = eventJsonObject.getInt("nombre");
-                                            preventesNew.setNombre(newPreventesNbr);
+                                            int newPreventesNbr = preventes.getInt("nombre_preventes");
+                                            Log.d(TAG, "newPreventesNbr = " +newPreventesNbr);
+                                            preventesEvent.setNombre(newPreventesNbr);
                                         } else {
                                         }
-                                    } else {
-                                        // details2 not found
-                                        if (preventes.has("prix"))
+                                        if (preventes.has("prix_preventes"))
                                         {
-                                            if (!preventes.isNull("prix"))
+                                            if (!preventes.isNull("prix_preventes"))
                                             {
-                                                int newPreventesPrix = eventJsonObject.getInt("prix");
-                                                preventesNew.setPrix(newPreventesPrix);
+                                                int newPreventesPrix = preventes.getInt("prix_preventes");
+                                                Log.d(TAG, "newPreventesPrix = " +newPreventesPrix);
+                                                preventesEvent.setPrix(newPreventesPrix);
                                             } else {
-                                                // details2 found but null
                                             }
                                         } else {
                                         }
+                                    } else {
                                     }
                                 } else {
-
                                 }
                             } else {
                             }
@@ -190,37 +189,33 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     soundcloudUrlArtiste,beatportUrlArtiste,mixcloudUrlArtiste,twitterUrlArtiste,
                                     residentAdvisorUrlArtiste,instagramUrlArtiste,siteUrlArtiste);
 
-                            if(eventJsonObject.has("artistes"))
+                            if(eventJsonObject.has("artistes_event"))
                             {
-                                if (!eventJsonObject.isNull("artistes"))
+                                if (!eventJsonObject.isNull("artistes_event"))
                                 {
-                                    JSONObject artistes = eventJsonObject.getJSONObject("artistes");
+                                    JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
                                     // get data JSONArray from artistes
-                                    if (artistes.has("name"))
+                                    if (artistes.has("name_artiste"))
                                     {
-                                        if (!artistes.isNull("name"))
+                                        if (!artistes.isNull("name_artiste"))
                                         {
-                                            String newNameArtiste = eventJsonObject.getString("name");
+                                            String newNameArtiste = artistes.getString("name_artiste");
                                             artiste.setName(newNameArtiste);
                                         } else {
                                         }
                                     }
-
-                                    if (artistes.has("facebook_url"))
+                                    if (artistes.has("facebook_url_artiste"))
                                     {
-                                        if (!artistes.isNull("facebook_url"))
+                                        if (!artistes.isNull("facebook_url_artiste"))
                                         {
-                                            String facebookUrlNew = eventJsonObject.getString("facebook_url");
+                                            String facebookUrlNew = artistes.getString("facebook_url_artiste");
                                             artiste.setFacebookUrl(facebookUrlNew);
                                         } else {
                                         }
                                     }
-
                                 } else {
-
                                 }
                             } else {
-
                             }
 
                             //------------------------
@@ -237,35 +232,54 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             Lieux lieuxEvent = new Lieux(photoUrlLieux,nameLieux,adresseLieux,mapLieuIframeLieux,
                                     facebookUrlLieux,siteUrlLieux);
 
-                            if(eventJsonObject.has("lieux"))
+                            if(eventJsonObject.has("lieux_event"))
                             {
-                                if (!eventJsonObject.isNull("lieux"))
+                                if (!eventJsonObject.isNull("lieux_event"))
                                 {
-                                    JSONObject lieux = eventJsonObject.getJSONObject("lieux");
+                                    JSONObject lieux = eventJsonObject.getJSONObject("lieux_event");
                                     // get data JSONArray from artistes
-                                    if (lieux.has("adresse"))
+                                    if (lieux.has("name_lieux"))
                                     {
-                                        if (!lieux.isNull("adresse"))
+                                        if (!lieux.isNull("name_lieux"))
                                         {
-                                            String newAdresseLieux = eventJsonObject.getString("adresse");
-                                            artiste.setName(newAdresseLieux);
+                                            String newNameLieux = lieux.getString("name_lieux");
+                                            lieuxEvent.setNameLieux(newNameLieux);
+                                        } else {
+                                        }
+                                    }
+                                    if (lieux.has("adresse_lieux"))
+                                    {
+                                        if (!lieux.isNull("adresse_lieux"))
+                                        {
+                                            String newAdresseLieux = lieux.getString("adresse_lieux");
+                                            lieuxEvent.setAdresse(newAdresseLieux);
                                         } else {
                                         }
                                     }
                                 } else {
-
                                 }
                             } else {
-
                             }
 
-                            Event event = new Event(nameEvent,photo,dateStart,dateEnd,facebookUrl,preventesNew,artiste,lieuxEvent);
+                            Log.d(TAG, "photoUrlEvent = " +photoUrlEvent);
+                            Event event = new Event(photoUrlEvent,nameEvent,dateStartEvent,dateEndEvent,facebookUrlEvent,preventesEvent,artiste,lieuxEvent);
 
                             eventList.add(event);
 
                             // creating adapter object and setting it to recyclerview
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
+
+                            /*private String photoUrl;
+                            private String name;
+                            private Date dateStart;
+                            private Date dateEnd;
+                            private String facebookUrl;
+                            private Preventes preventes;
+                            private Artistes artistes;
+                            private Lieux lieux;*/
+
+
                         }
 
                     } catch (JSONException e) {

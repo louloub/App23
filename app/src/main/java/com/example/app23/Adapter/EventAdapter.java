@@ -79,8 +79,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
         else {}
 
-
-
         // TODO : masquer ou non si les éléments sont vides ou non
         // TODO trouve une solution pour remplacer GLIDE
 

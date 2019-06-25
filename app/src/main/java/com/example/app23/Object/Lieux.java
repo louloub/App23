@@ -33,7 +33,7 @@ public class Lieux implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setNameLieux(String name) {
         this.name = name;
     }
 
