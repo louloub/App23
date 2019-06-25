@@ -19,6 +19,8 @@ import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -48,14 +50,32 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         String photo = event.getPhotoUrl();
         String name = event.getName();
+
         Date dateStart = event.getDateStart();
+        DateFormat formatterDateStart = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+        String dateStartString = formatterDateStart.format(dateStart);
+
         Date dateEnd = event.getDateEnd();
+        DateFormat formatterDateEnd = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+        String dateEndString = formatterDateEnd.format(dateEnd);
+
         String facebook = event.getFacebookUrl();
+
+        /*String dateStartDate = eventJsonObject.getString("dateStart_event");
+        SimpleDateFormat dateStartString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
+        Date dateStartEvent = dateStartString.parse(dateStartDate);
+
+        String dateEndDate = eventJsonObject.getString("dateEnd_event");
+        SimpleDateFormat dateEndString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
+        Date dateEndEvent = dateEndString.parse(dateEndDate);*/
+
 
         // PREVENTES
         Preventes preventes = event.getPreventes();
         int prixPreventes = preventes.getPrix();
+        String prixPreventesString = Integer.toString(prixPreventes);
         int nbrPreventes = preventes.getNombre();
+        String nbrPreventesString = Integer.toString(nbrPreventes);
 
         // ARTISTES
         Artistes artistes = event.getArtistes();
@@ -88,11 +108,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 .into(holder.ivPhotoEvent);
 
         holder.tvNameEvent.setText(event.getName());
-        holder.tvDateStart.setText((CharSequence) dateStart);
-        holder.tvDateEnd.setText((CharSequence) dateEnd);
+        holder.tvDateStart.setText(dateStartString);
+        holder.tvDateEnd.setText(dateEndString);
         holder.tvArtisteName.setText(artisteName);
-        holder.tvNbrPreventes.setText(prixPreventes);
-        holder.tvNbrPreventes.setText(nbrPreventes);
+        holder.tvPrixPreventes.setText(prixPreventesString);
+        holder.tvNbrPreventes.setText(nbrPreventesString);
         holder.tvLieux.setText(nomLieux);
 
         //--------------------------------------------------
