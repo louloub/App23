@@ -9,6 +9,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+
+/*
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+*/
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -37,10 +43,10 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
     private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event.json";
 
     // a list to store all the event
-    List<Event> eventList;
+    private List<Event> eventList;
 
     // recyclerview
-    RecyclerView recyclerViewEventList;
+    private RecyclerView recyclerViewEventList;
     private Context mContext;
 
     @Override
