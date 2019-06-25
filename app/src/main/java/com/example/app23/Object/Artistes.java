@@ -61,7 +61,7 @@ public class Artistes implements Serializable {
         return facebook_url;
     }
 
-    public void setFacebook_url(String facebook_url) {
+    public void setFacebookUrl(String facebook_url) {
         this.facebook_url = facebook_url;
     }
 

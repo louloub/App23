@@ -45,6 +45,13 @@ public class MainActivity extends OptionMenuActivity {
             openArticlesActivity();
         });
 
+        // BUTTON EVENT
+        Button btn_event = findViewById(R.id.carre_evenements);
+        btn_event.setOnClickListener(v -> {
+            btn_event.startAnimation(animation);
+            openEventActivity();
+        });
+
         // ALERTE DIALOG
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         boolean dialogShown = settings.getBoolean("dialogShown", false);
@@ -72,6 +79,11 @@ public class MainActivity extends OptionMenuActivity {
 
     public void openArticlesActivity() {
         Intent intent = new Intent(this, ArticlesListActivity.class);
+        startActivity(intent);
+    }
+
+    private void openEventActivity() {
+        Intent intent = new Intent(this, EventListActivity.class);
         startActivity(intent);
     }
 }
