@@ -72,10 +72,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         // PREVENTES
         Preventes preventes = event.getPreventes();
-        int prixPreventes = preventes.getPrix();
-        String prixPreventesString = Integer.toString(prixPreventes);
-        int nbrPreventes = preventes.getNombre();
-        String nbrPreventesString = Integer.toString(nbrPreventes);
+        int prixPreventesInt = preventes.getPrix();
+        String prixPreventesString = Integer.toString(prixPreventesInt);
+        int nbrPreventesInt = preventes.getNombre();
+        String nbrPreventesString = Integer.toString(nbrPreventesInt);
 
         // ARTISTES
         Artistes artistes = event.getArtistes();
@@ -107,7 +107,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 .load(event.getPhotoUrl())
                 .into(holder.ivPhotoEvent);
 
-        holder.tvNameEvent.setText(event.getName());
+        holder.tvNameEvent.setText(name);
         holder.tvDateStart.setText(dateStartString);
         holder.tvDateEnd.setText(dateEndString);
         holder.tvArtisteName.setText(artisteName);
