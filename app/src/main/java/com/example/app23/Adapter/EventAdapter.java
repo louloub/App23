@@ -53,9 +53,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String facebook = event.getFacebookUrl();
 
         // PREVENTES
-        /*Preventes preventes = event.getPreventes();
-        int prixPreventes = preventes.getPrix(object.getInt("prix"));
-        int nbrPreventes = preventes.getNombre(object.getInt("nombre"));*/
+        Preventes preventes = event.getPreventes();
+        int prixPreventes = preventes.getPrix();
+        int nbrPreventes = preventes.getNombre();
 
         // ARTISTES
         Artistes artistes = event.getArtistes();
@@ -84,17 +84,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // TODO : masquer ou non si les éléments sont vides ou non
         // TODO trouve une solution pour remplacer GLIDE
 
-        /*// RECUPERATION DE LA PHOTO AVEC SON URL
+        // RECUPERATION DE LA PHOTO AVEC SON URL
         Glide.with(mCtx)
                 .load(event.getPhotoUrl())
-                .into(holder.ivPhotoEvent);*/
+                .into(holder.ivPhotoEvent);
 
         holder.tvNameEvent.setText(event.getName());
         holder.tvDateStart.setText((CharSequence) dateStart);
         holder.tvDateEnd.setText((CharSequence) dateEnd);
         holder.tvArtisteName.setText(artisteName);
-        // holder.tvNbrPreventes.setText(prixPreventes);
-        // holder.tvNbrPreventes.setText(nbrPreventes);
+        holder.tvNbrPreventes.setText(prixPreventes);
+        holder.tvNbrPreventes.setText(nbrPreventes);
         holder.tvLieux.setText(nomLieux);
 
         //--------------------------------------------------
@@ -111,10 +111,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //-------------------------------------------------
         holder.itemView.setOnClickListener(v -> {
 
-            // Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux);
+            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux);
 
             Intent intent = new Intent(mCtx, EventPageActivity.class);
-            // intent.putExtra("event", eventForIntent);
+            intent.putExtra("event", eventForIntent);
 
             mCtx.startActivity(intent);
         });
@@ -138,8 +138,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
             ivFacebookEvent = itemView.findViewById(R.id.ivFacebookEvent);
-            // tvNbrPreventes = itemView.findViewById(R.tvNbrPreventes);
-            // tvPrixPreventes = itemView.findViewById(R.tvPrixPreventes);
+            tvNbrPreventes = itemView.findViewById(R.id.tvNbrPreventes);
+            tvPrixPreventes = itemView.findViewById(R.id.tvPrixPreventes);
             tvArtisteName = itemView.findViewById(R.id.tvArtisteName);
             tvLieux = itemView.findViewById(R.id.tvLieux);
         }

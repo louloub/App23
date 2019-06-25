@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EventListActivity extends OptionMenuActivity implements View.OnTouchListener  {
 
@@ -116,15 +117,16 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             JSONObject eventJsonObject = response.getJSONObject(i);
 
                             String nameEvent = eventJsonObject.getString("name");
-                            String photo = eventJsonObject.getString("photoUrl");
+                            String photo = eventJsonObject.getString("photo_url");
 
+                            // DATE
                             String dateStartDate = eventJsonObject.getString("dateStart");
-                            SimpleDateFormat sdfstart = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            Date dateStart = sdfstart.parse(dateStartDate);
+                            SimpleDateFormat dateStartString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
+                            Date dateStart = dateStartString.parse(dateStartDate);
 
                             String dateEndDate = eventJsonObject.getString("dateEnd");
-                            SimpleDateFormat sdfend = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            Date dateEnd = sdfend.parse(dateEndDate);
+                            SimpleDateFormat dateEndString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
+                            Date dateEnd = dateEndString.parse(dateEndDate);
 
                             String facebookUrl = eventJsonObject.getString("facebook_url");
 
