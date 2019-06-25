@@ -221,7 +221,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             //------------------------
                             // RETRIEVE LIEUX OBJET
                             //------------------------
-
                             String photoUrlLieux = "";
                             String nameLieux = "";
                             String adresseLieux = "";
@@ -269,17 +268,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // creating adapter object and setting it to recyclerview
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
-
-                            /*private String photoUrl;
-                            private String name;
-                            private Date dateStart;
-                            private Date dateEnd;
-                            private String facebookUrl;
-                            private Preventes preventes;
-                            private Artistes artistes;
-                            private Lieux lieux;*/
-
-
                         }
 
                     } catch (JSONException e) {

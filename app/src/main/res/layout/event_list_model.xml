@@ -111,19 +111,19 @@
             android:layout_height="@dimen/size_icon_height"
             android:padding="4dp"/>
 
-        <!-- PV PRIX -->
+        <!--&lt;!&ndash; PV PRIX &ndash;&gt;
         <TexteView
             android:id="@+id/tvPrixPreventes"
             android:layout_width="@dimen/size_icon_width"
             android:layout_height="@dimen/size_icon_height"
             android:padding="4dp"/>
 
-        <!-- PV NOMBRE -->
+        &lt;!&ndash; PV NOMBRE &ndash;&gt;
         <TexteView
             android:id="@+id/tvNbrPreventes"
             android:layout_width="@dimen/size_icon_width"
             android:layout_height="@dimen/size_icon_height"
-            android:padding="4dp"/>
+            android:padding="4dp"/>-->
 
 
     </LinearLayout>
