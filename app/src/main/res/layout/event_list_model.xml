@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/border_item">
 
+    <!-- LINEAR BAR DU HAUT -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -26,15 +27,33 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:background="@drawable/rounded_corner"
             android:textSize="@dimen/size_title" />
+
+        <!-- FB -->
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/ivFacebookEvent"
+            android:src="@drawable/fb"
+            android:layout_width="@dimen/size_icon_width"
+            android:layout_height="@dimen/size_icon_height"
+            android:padding="4dp"/>
     </LinearLayout>
 
-    <!-- VISUEL EVENT-->
-    <ImageView
-        android:id="@+id/ivPhotoEvent"
+    <!-- LINEAR CENTER -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:src="@drawable/articles" />
+        android:layout_height="162dp"
+        android:background="@drawable/ripple"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <!-- VISUEL EVENT-->
+        <ImageView
+            android:id="@+id/ivPhotoEvent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/articles"/>
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -43,21 +62,39 @@
 
         <!-- DATE -->
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- "DU" -->
+            <TextView
+                android:id="@+id/du"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/generalMargin"
+                android:text="Du" />
+
+            <!-- START DATE -->
             <TextView
                 android:id="@+id/tvDateStart"
                 android:ellipsize="marquee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvNameEvent"
                 android:layout_margin="@dimen/generalMargin"
-                android:layout_toRightOf="@id/ivPhotoEvent"
                 android:text="Jeudi 11 Juin 2019 15h00"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
+            <!-- "AU" -->
+            <TextView
+                android:id="@+id/au"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/generalMargin"
+                android:text="au" />
+
+            <!-- END DATE -->
             <TextView
                 android:id="@+id/tvDateEnd"
                 android:ellipsize="marquee"
@@ -70,55 +107,90 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
         </LinearLayout>
 
-        <!-- ARTISTES -->
-        <TextView
-            android:id="@+id/tvArtisteName"
-            android:ellipsize="marquee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvNameEvent"
-            android:layout_margin="@dimen/generalMargin"
-            android:layout_toRightOf="@id/ivPhotoEvent"
-            android:text="DJ1 - DJ2 - DJ3 ..."
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+        <!-- LINEAR DJ -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!-- LIEUX -->
-        <TextView
-            android:id="@+id/tvLieux"
-            android:ellipsize="marquee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvNameEvent"
-            android:layout_margin="@dimen/generalMargin"
-            android:layout_toRightOf="@id/ivPhotoEvent"
-            android:text="12 Allée de bidules 31765 Orléans"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+            <!-- "DJS" -->
+            <TextView
+                android:id="@+id/tvArtisteList"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/generalMargin"
+                android:layout_toRightOf="@id/ivPhotoEvent"
+                android:text="DJs : "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+            <!-- LISTE DJS -->
+            <TextView
+                android:id="@+id/tvArtisteName"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNameEvent"
+                android:layout_margin="@dimen/generalMargin"
+                android:layout_toRightOf="@id/ivPhotoEvent"
+                android:text="DJ1 - DJ2 - DJ3 ..."
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
+        <!-- LINEAR LIEUX -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- "LIEUX" -->
+            <TextView
+                android:id="@+id/lieux"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/generalMargin"
+                android:layout_toRightOf="@id/ivPhotoEvent"
+                android:text="Lieux : "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+
+            <!-- LIEUX -->
+            <TextView
+                android:id="@+id/tvLieux"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNameEvent"
+                android:layout_margin="@dimen/generalMargin"
+                android:layout_toRightOf="@id/ivPhotoEvent"
+                android:text="12 Allée de bidules 31765 Orléans"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+        </LinearLayout>
 
     </LinearLayout>
 
-    <!-- ICONS RS & BONS PLANS -->
+    <!-- BONS PLANS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/generalMargin"
         android:orientation="horizontal">
 
-        <!-- FB -->
-        <ImageView
-            android:id="@+id/ivFacebookEvent"
-            android:src="@drawable/fb"
-            android:layout_width="@dimen/size_icon_width"
-            android:layout_height="@dimen/size_icon_height"
-            android:padding="4dp"/>
+        <!-- PV NOMBRE -->
+        <TextView
+            android:id="@+id/tvNbrPreventes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_margin="@dimen/generalMargin"
+            android:padding="5dp"
+            android:text="10"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:background="@drawable/rounded_corner"
+            android:textSize="@dimen/size_title" />
 
         <!-- PV PRIX -->
-        <!--<TexteView
-            android:id="@+id/tvPrixPreventes"
-            android:text=""
-            android:layout_width="@dimen/size_icon_width"
-            android:layout_height="@dimen/size_icon_height"
-            android:padding="4dp"/>-->
-
         <TextView
             android:id="@+id/tvPrixPreventes"
             android:layout_width="wrap_content"
@@ -131,23 +203,17 @@
             android:background="@drawable/rounded_corner"
             android:textSize="@dimen/size_title" />
 
-        <!-- PV NOMBRE -->
-        <!--<TexteView
-            android:id="@+id/tvNbrPreventes"
-            android:text=""
-            android:layout_width="@dimen/size_icon_width"
-            android:layout_height="@dimen/size_icon_height"
-            android:padding="4dp"/>-->
-        <TextView
-            android:id="@+id/tvNbrPreventes"
+        <!-- CONCOURS -->
+        <Button
+            android:id="@+id/tvConcours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_margin="@dimen/generalMargin"
             android:padding="5dp"
-            android:text="5€"
+            android:text="Jeu Concours"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/rounded_corner_concours"
             android:textSize="@dimen/size_title" />
 
     </LinearLayout>

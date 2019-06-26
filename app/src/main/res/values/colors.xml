@@ -13,5 +13,8 @@
     <color name="colorSecondaryDark">#000000</color>
     <color name="colorSecondaryLight">#484848</color>
 
+    <color name="colorConcours">#ffc107</color>
+    <color name="colorConcoursOpacity80">#CCffc107</color>
+
     <color name="grey">#DCDCDC</color>
 </resources>
