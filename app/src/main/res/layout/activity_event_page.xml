@@ -112,20 +112,43 @@
             android:padding="4dp"/>
 
         <!-- PV PRIX -->
-        <TexteView
+        <!--<TexteView
             android:id="@+id/tvPrixPreventes"
             android:text=""
             android:layout_width="@dimen/size_icon_width"
             android:layout_height="@dimen/size_icon_height"
-            android:padding="4dp"/>
+            android:padding="4dp"/>-->
+
+        <TextView
+            android:id="@+id/tvPrixPreventes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_margin="@dimen/generalMargin"
+            android:padding="5dp"
+            android:text="5€"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:background="@drawable/rounded_corner"
+            android:textSize="@dimen/size_title" />
 
         <!-- PV NOMBRE -->
-        <TexteView
+        <!--<TexteView
             android:id="@+id/tvNbrPreventes"
             android:text=""
             android:layout_width="@dimen/size_icon_width"
             android:layout_height="@dimen/size_icon_height"
-            android:padding="4dp"/>
+            android:padding="4dp"/>-->
+        <TextView
+            android:id="@+id/tvNbrPreventes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_margin="@dimen/generalMargin"
+            android:padding="5dp"
+            android:text="5€"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:background="@drawable/rounded_corner"
+            android:textSize="@dimen/size_title" />
 
     </LinearLayout>
 
