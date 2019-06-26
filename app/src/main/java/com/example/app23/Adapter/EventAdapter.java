@@ -103,9 +103,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
         else {}
 
-        // TODO : masquer ou non si les éléments sont vides ou non
-        // TODO trouve une solution pour remplacer GLIDE
-
         //--------------------------------------
         // RECUPERATION DE LA PHOTO AVEC SON URL
         //--------------------------------------
@@ -124,14 +121,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvNbrPreventes.setText(nbrPreventesString);*/
         holder.tvLieux.setText(nomLieux);
 
+        holder.btnPreventes.setVisibility(View.VISIBLE);
         if (nbrPreventesInt==0) {
             holder.btnPreventes.setVisibility(GONE);
         } else {
             holder.btnPreventes.setText("Il reste " + nbrPreventesString + " places à " + prixPreventesString + " €");
         }
 
+        holder.btnConcours.setVisibility(View.VISIBLE);
         if (concoursUrl.isEmpty()) {
-            holder.btnConcours.setVisibility(GONE);
+            holder.btnConcours.setVisibility(View.GONE);
         } else {
         }
 
