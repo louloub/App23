@@ -137,7 +137,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             //--------------------------
                             int preventesNbr = 0;
                             int preventesPrix = 0;
-                            Preventes preventesEvent = new Preventes(preventesNbr,preventesPrix);
+                            String preventesUrl = "";
+                            Preventes preventesEvent = new Preventes(preventesNbr,preventesPrix, preventesUrl);
 
                             if(eventJsonObject.has("preventes_event"))
                             {
@@ -154,6 +155,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             preventesEvent.setNombre(newPreventesNbr);
                                         } else {
                                         }
+
                                         if (preventes.has("prix_preventes"))
                                         {
                                             if (!preventes.isNull("prix_preventes"))
@@ -161,6 +163,18 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                                 int newPreventesPrix = preventes.getInt("prix_preventes");
                                                 Log.d(TAG, "newPreventesPrix = " +newPreventesPrix);
                                                 preventesEvent.setPrix(newPreventesPrix);
+                                            } else {
+                                            }
+
+                                            if (preventes.has("preventes_url"))
+                                            {
+                                                if (!preventes.isNull("preventes_url"))
+                                                {
+                                                    String newPreventesUrl = preventes.getString("preventes_url");
+                                                    Log.d(TAG, "newPreventesUrl = " +newPreventesUrl);
+                                                    preventesEvent.setPreventesUrl(newPreventesUrl);
+                                                } else {
+                                                }
                                             } else {
                                             }
                                         } else {

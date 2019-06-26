@@ -6,10 +6,20 @@ public class Preventes implements Serializable {
 
     private int prix;
     private int nombre;
+    private String preventesUrl;
 
-    public Preventes(int prix, int nombre) {
+    public Preventes(int prix, int nombre, String preventesUrl) {
         this.prix = prix;
         this.nombre = nombre;
+        this.preventesUrl = preventesUrl;
+    }
+
+    public String getPreventesUrl() {
+        return preventesUrl;
+    }
+
+    public void setPreventesUrl(String preventesUrl) {
+        this.preventesUrl = preventesUrl;
     }
 
     public int getPrix() {
