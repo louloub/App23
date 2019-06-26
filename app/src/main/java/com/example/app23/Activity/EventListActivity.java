@@ -2,7 +2,6 @@ package com.example.app23.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -128,7 +127,12 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             SimpleDateFormat dateEndString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
                             Date dateEndEvent = dateEndString.parse(dateEndDate);
 
+                            // FACEBOOK
                             String facebookUrlEvent = eventJsonObject.getString("facebook_url_event");
+
+                            // CONCOURS
+                            String concoursUrl = eventJsonObject.getString("concours_url");
+                            Log.d(TAG, "concoursUrl = "  +concoursUrl);
 
                             //--------------------------
                             // RETRIEVE PREVENTES OBJECT
@@ -261,7 +265,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             }
 
                             Log.d(TAG, "photoUrlEvent = " +photoUrlEvent);
-                            Event event = new Event(photoUrlEvent,nameEvent,dateStartEvent,dateEndEvent,facebookUrlEvent,preventesEvent,artiste,lieuxEvent);
+                            Event event = new Event(photoUrlEvent,nameEvent,dateStartEvent,dateEndEvent,facebookUrlEvent,preventesEvent,artiste,lieuxEvent, concoursUrl);
 
                             eventList.add(event);
 

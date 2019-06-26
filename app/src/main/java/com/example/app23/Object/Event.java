@@ -13,9 +13,10 @@ public class Event implements Serializable {
     private Preventes preventes;
     private Artistes artistes;
     private Lieux lieux;
+    private String concoursUrl;
 
     public Event(String photoUrl, String name, Date dateStart, Date dateEnd, String facebookUrl,
-                 Preventes preventes, Artistes artistes, Lieux lieux) {
+                 Preventes preventes, Artistes artistes, Lieux lieux, String concoursUrl) {
         this.photoUrl = photoUrl;
         this.name = name;
         this.dateStart = dateStart;
@@ -24,6 +25,15 @@ public class Event implements Serializable {
         this.preventes = preventes;
         this.artistes = artistes;
         this.lieux = lieux;
+        this.concoursUrl = concoursUrl;
+    }
+
+    public String getConcoursUrl() {
+        return concoursUrl;
+    }
+
+    public void setConcoursUrl(String concoursUrl) {
+        this.concoursUrl = concoursUrl;
     }
 
     public Date getDateEnd() {

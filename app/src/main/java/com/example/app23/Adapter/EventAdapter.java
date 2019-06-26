@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -86,6 +87,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         Lieux lieux = event.getLieux();
         String nomLieux = lieux.getName();
 
+        // CONCOURS
+        String concoursUrl = event.getConcoursUrl();
+
         //---------------------------------
         // HOLDER / DISPLAY IMAGE IF LINKED
         //---------------------------------
@@ -102,18 +106,34 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // TODO : masquer ou non si les éléments sont vides ou non
         // TODO trouve une solution pour remplacer GLIDE
 
+        //--------------------------------------
         // RECUPERATION DE LA PHOTO AVEC SON URL
+        //--------------------------------------
         Glide.with(mCtx)
                 .load(event.getPhotoUrl())
                 .into(holder.ivPhotoEvent);
 
+        //-------------
+        // SET CONTAINT
+        //-------------
         holder.tvNameEvent.setText(name);
         holder.tvDateStart.setText(dateStartString);
         holder.tvDateEnd.setText(dateEndString);
         holder.tvArtisteName.setText(artisteName);
-        holder.tvPrixPreventes.setText(prixPreventesString);
-        holder.tvNbrPreventes.setText(nbrPreventesString);
+        /*holder.tvPrixPreventes.setText(prixPreventesString);
+        holder.tvNbrPreventes.setText(nbrPreventesString);*/
         holder.tvLieux.setText(nomLieux);
+
+        if (nbrPreventesInt==0) {
+            holder.btnPreventes.setVisibility(GONE);
+        } else {
+            holder.btnPreventes.setText("Il reste " + nbrPreventesString + " places à " + prixPreventesString + " €");
+        }
+
+        if (concoursUrl.isEmpty()) {
+            holder.btnConcours.setVisibility(GONE);
+        } else {
+        }
 
         //--------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON SOCIAL NETWORK ICON
@@ -125,11 +145,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         });
 
         //-------------------------------------------------
-        // LISTENER FOR WHEN WE CLICK ON ARTIST IN THE LIST
+        // LISTENER FOR WHEN WE CLICK ON EVENT IN THE LIST
         //-------------------------------------------------
         holder.itemView.setOnClickListener(v -> {
 
-            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux);
+            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux, concoursUrl);
 
             Intent intent = new Intent(mCtx, EventPageActivity.class);
             intent.putExtra("event", eventForIntent);
@@ -147,6 +167,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         TextView tvNameEvent, tvDateStart, tvDateEnd, tvArtisteName, tvLieux, tvNbrPreventes, tvPrixPreventes;
         ImageView ivPhotoEvent, ivFacebookEvent;
+        Button btnPreventes, btnConcours;
 
         public EventViewHolder(View itemView) {
             super(itemView);
@@ -156,10 +177,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
             ivFacebookEvent = itemView.findViewById(R.id.ivFacebookEvent);
-            tvNbrPreventes = itemView.findViewById(R.id.tvNbrPreventes);
-            tvPrixPreventes = itemView.findViewById(R.id.tvPrixPreventes);
+            /*tvNbrPreventes = itemView.findViewById(R.id.tvNbrPreventes);
+            tvPrixPreventes = itemView.findViewById(R.id.tvPrixPreventes);*/
             tvArtisteName = itemView.findViewById(R.id.tvArtisteName);
             tvLieux = itemView.findViewById(R.id.tvLieux);
+            btnPreventes = itemView.findViewById(R.id.btnPreventes);
+            btnConcours = itemView.findViewById(R.id.btnConcours);
         }
     }
 }

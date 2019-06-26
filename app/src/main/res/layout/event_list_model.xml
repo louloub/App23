@@ -177,7 +177,20 @@
         android:orientation="horizontal">
 
         <!-- PREVENTES -->
-        <RelativeLayout
+
+        <Button
+            android:id="@+id/btnPreventes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_margin="@dimen/generalMargin"
+            android:padding="5dp"
+            android:text="10 préventes à 5€"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:background="@drawable/rounded_corner_concours"
+            android:textSize="@dimen/size_title" />
+
+        <!--<RelativeLayout
             android:elevation="2dp"
             android:outlineSpotShadowColor="@color/grey"
             android:clickable="true"
@@ -197,7 +210,7 @@
                 android:layout_margin="@dimen/generalMargin"
                 android:padding="5dp">
 
-                <!-- NBR PLACE -->
+                &lt;!&ndash; NBR PLACE &ndash;&gt;
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -211,7 +224,7 @@
                         android:layout_height="wrap_content"/>
                 </android.support.v7.widget.LinearLayoutCompat>
 
-                <!-- "PLACES à" -->
+                &lt;!&ndash; "PLACES à" &ndash;&gt;
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -225,7 +238,7 @@
                         android:layout_height="wrap_content"/>
                 </android.support.v7.widget.LinearLayoutCompat>
 
-                <!-- PRIX PLACE -->
+                &lt;!&ndash; PRIX PLACE &ndash;&gt;
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -240,7 +253,7 @@
                         android:layout_height="wrap_content"/>
                 </android.support.v7.widget.LinearLayoutCompat>
 
-                <!-- "€" -->
+                &lt;!&ndash; "€" &ndash;&gt;
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -256,7 +269,7 @@
 
 
         </android.support.v7.widget.LinearLayoutCompat>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
         <!-- PV NOMBRE -->
         <!--<TextView
