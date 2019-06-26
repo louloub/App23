@@ -9,6 +9,7 @@ import com.example.app23.R;
 
 public class ArticlesListActivity extends OptionMenuActivity {
 
+    private static final String NAME_FOR_ACTIONBAR = "Articles";
     private WebView webView;
     final String URL_ARTICLES_LIST = "https://www.yourdj.fr/tags/articles/toulouse/";
 
@@ -17,8 +18,7 @@ public class ArticlesListActivity extends OptionMenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_articles);
 
-        // DISABLE TILE TOOLBAR
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
 
         // loadingWebView();
         loadArticlesWebView();

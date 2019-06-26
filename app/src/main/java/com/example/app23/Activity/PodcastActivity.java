@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class PodcastActivity extends OptionMenuActivity {
 
+    private static final String NAME_FOR_ACTIONBAR = "Podcast";
     private WebView webView;
     final String URL = "";
 
@@ -27,8 +28,7 @@ public class PodcastActivity extends OptionMenuActivity {
         loadSoundCloudWebView();
         webView = (WebView) findViewById(R.id.WebViewSoundCloud);
 
-        // DISABLE TILE TOOLBAR
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
     }
 
     //------------------------------

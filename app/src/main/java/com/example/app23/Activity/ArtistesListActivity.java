@@ -26,6 +26,7 @@ import java.util.List;
 
 public class ArtistesListActivity extends OptionMenuActivity implements View.OnTouchListener {
 
+    private static final String NAME_FOR_ACTIONBAR = "Artistes";
     private static final String TAG = "ArtistesActiviy";
 
     // this is the JSON Data URL
@@ -66,8 +67,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
         loadArtistes();
 
-        // DISABLE TILE TOOLBAR
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
 
         //---------------
         // LISTENER SWIPE

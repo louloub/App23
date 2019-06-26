@@ -35,6 +35,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
     private static final String TAG = "EventListActiviy";
     private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event.json";
+    private static final String NAME_FOR_ACTIONBAR = "Événements";
 
     // a list to store all the event
     List<Event> eventList;
@@ -59,12 +60,9 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
         mContext = getApplicationContext();
 
-        // textView = findViewById(R.id.textView);
-
         loadEvents();
 
-        // DISABLE TILE TOOLBAR
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
 
         //---------------
         // LISTENER SWIPE

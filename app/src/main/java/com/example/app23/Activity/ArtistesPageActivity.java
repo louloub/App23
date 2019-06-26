@@ -15,6 +15,7 @@ import static android.view.View.GONE;
 
 public class ArtistesPageActivity extends OptionMenuActivity {
 
+    private static final String NAME_FOR_ACTIONBAR = "Page Artiste";
     private Context mCtx;
 
     @Override
@@ -159,7 +160,6 @@ public class ArtistesPageActivity extends OptionMenuActivity {
                 .load(photo)
                 .into(iv_photo);
 
-        // DISABLE TILE TOOLBAR
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
     }
 }
