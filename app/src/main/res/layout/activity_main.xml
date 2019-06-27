@@ -33,7 +33,18 @@
         android:gravity="center">
 
         <!-- PODCAST -->
-        <android.support.v7.widget.AppCompatButton
+        <android.support.design.button.MaterialButton
+            android:layout_weight="1"
+            android:theme="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/carre_podcast"
+            android:layout_margin="@dimen/generalMargin"
+            android:text="@string/podcast"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+        <!-- OLD BUTTON PODCAST -->
+        <!--<android.support.v7.widget.AppCompatButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
@@ -41,7 +52,7 @@
             android:id="@+id/carre_podcast"
             android:background="@drawable/podcast"
             android:layout_margin="@dimen/generalMargin"
-            android:text="@string/podcast" />
+            android:text="@string/podcast" />-->
 
         <!-- ARTISTES -->
         <android.support.v7.widget.AppCompatButton
