@@ -33,7 +33,7 @@
         android:gravity="center">
 
         <!-- PODCAST -->
-        <android.support.design.button.MaterialButton
+        <!-- <android.support.design.button.MaterialButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
@@ -41,10 +41,12 @@
             android:id="@+id/carre_podcast"
             android:layout_margin="@dimen/generalMargin"
             android:text="@string/podcast"
+            android:background="@drawable/podcast"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+            -->
 
         <!-- OLD BUTTON PODCAST -->
-        <!--<android.support.v7.widget.AppCompatButton
+        <android.support.v7.widget.AppCompatButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
             android:layout_width="match_parent"
@@ -52,9 +54,10 @@
             android:id="@+id/carre_podcast"
             android:background="@drawable/podcast"
             android:layout_margin="@dimen/generalMargin"
-            android:text="@string/podcast" />-->
+            android:text="@string/podcast"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
 
-        <!-- ARTISTES -->
+        <!-- OLD ARTISTES -->
         <android.support.v7.widget.AppCompatButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
@@ -63,7 +66,8 @@
             android:id="@+id/carre_artistes"
             android:background="@drawable/artistes"
             android:layout_margin="@dimen/generalMargin"
-            android:text="@string/artistes"/>
+            android:text="@string/artistes"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <!---->
@@ -75,7 +79,7 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <!-- ARTICLES -->
+        <!-- OLD ARTICLES -->
         <android.support.v7.widget.AppCompatButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
@@ -84,7 +88,8 @@
             android:id="@+id/carre_articles"
             android:layout_margin="@dimen/generalMargin"
             android:background="@drawable/articles"
-            android:text="@string/articles"/>
+            android:text="@string/articles"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <!---->
@@ -96,7 +101,7 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <!-- EVENTS -->
+        <!-- OLD EVENTS -->
         <android.support.v7.widget.AppCompatButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
@@ -105,9 +110,9 @@
             android:id="@+id/carre_evenements"
             android:layout_margin="@dimen/generalMargin"
             android:background="@drawable/event"
-            android:text="@string/evenements" />
+            android:text="@string/evenements"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
 
-        <!-- BON PLANS -->
         <android.support.v7.widget.AppCompatButton
             android:layout_weight="1"
             android:theme="@style/ButtonTheme"
@@ -116,6 +121,8 @@
             android:id="@+id/carre_bonsplans"
             android:layout_margin="@dimen/generalMargin"
             android:background="@drawable/bonplan"
-            android:text="@string/bonsplans"/>
+            android:text="@string/bonsplans"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
     </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v7.widget.LinearLayoutCompat>

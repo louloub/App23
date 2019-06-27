@@ -1,8 +1,11 @@
 package com.example.app23.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -10,6 +13,8 @@ import android.widget.Button;
 import com.example.app23.R;
 
 public class MainActivity extends OptionMenuActivity {
+
+    private Context mCtx;
 
     public static final String PREFS_NAME = "MyPrefsFile";
 
