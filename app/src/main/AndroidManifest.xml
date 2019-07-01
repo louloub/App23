@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".Activity.EventPageActivity"></activity>
+        <activity
+            android:name=".Activity.ui.login.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity android:name=".Activity.EventPageActivity" />
         <activity android:name=".Activity.EventListActivity" />
         <activity android:name=".Activity.ArticlesListActivity" />
         <activity android:name=".Activity.ArtistesPageActivity" />

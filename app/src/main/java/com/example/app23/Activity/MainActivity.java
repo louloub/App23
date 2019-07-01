@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.example.app23.Activity.ui.login.LoginActivity;
 import com.example.app23.R;
 
 public class MainActivity extends OptionMenuActivity {
@@ -22,6 +23,9 @@ public class MainActivity extends OptionMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
 
         // BUTTON ANIMATION
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha);
