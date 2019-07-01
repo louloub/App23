@@ -3,20 +3,17 @@ package com.example.app23.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.example.app23.Activity.ui.login.LoginActivity;
 import com.example.app23.R;
 
 public class MainActivity extends OptionMenuActivity {
 
     private Context mCtx;
-
+    private static final String NAME_FOR_ACTIONBAR = "YourDJ";
     public static final String PREFS_NAME = "MyPrefsFile";
 
     @Override
@@ -24,14 +21,16 @@ public class MainActivity extends OptionMenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        // DISABLE TILE TOOLBAR
+        // getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
+
+        // LOGIN ACTIVITY
+        /*Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);*/
 
         // BUTTON ANIMATION
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.alpha);
-
-        // DISABLE TILE TOOLBAR
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // BUTTON PODCAST
         Button btn_podcast = findViewById(R.id.carre_podcast);
@@ -66,7 +65,7 @@ public class MainActivity extends OptionMenuActivity {
         boolean dialogShown = settings.getBoolean("dialogShown", false);
 
         if (!dialogShown) {
-            alertDialog();
+            alertDialogCityChoice();
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("dialogShown", true);
             editor.commit();

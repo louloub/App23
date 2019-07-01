@@ -22,6 +22,8 @@
             android:layout_marginLeft="5dp"
             android:layout_margin="@dimen/generalMargin"
             android:padding="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="WonderDay OpenAIr"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:background="@drawable/rounded_corner"

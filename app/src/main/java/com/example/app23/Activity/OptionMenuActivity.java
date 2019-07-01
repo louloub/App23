@@ -24,7 +24,7 @@ public class OptionMenuActivity extends AppCompatActivity {
     //--------------
     // ALERTE DIALOG
     //--------------
-    public void alertDialog ()
+    public void alertDialogCityChoice()
     {
         // Setup Alert builder
         android.support.v7.app.AlertDialog.Builder myPopup = new AlertDialog.Builder(this);
@@ -67,7 +67,7 @@ public class OptionMenuActivity extends AppCompatActivity {
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_activity_logo:
-                alertDialog();
+                alertDialogCityChoice();
                 Toast.makeText(this, "Choisis ta ville préférentielle ", Toast.LENGTH_LONG).show();
                 return true;
             default:

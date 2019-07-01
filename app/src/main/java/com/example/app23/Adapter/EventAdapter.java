@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +21,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
-import com.example.app23.Activity.PodcastActivity;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
@@ -34,6 +35,13 @@ import java.util.List;
 import static android.view.View.GONE;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
+
+    // public static String FACEBOOK_URL = "fb://page/?id=258326807569567";
+    // public static String FACEBOOK_URL = "https://www.facebook.com/Bejiines/photos/a.386011438160632/2492243550870733/?type=3&theater&ifg=1";
+    public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
+    // public static String FACEBOOK_URL = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
+    // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
+    public static String FACEBOOK_PAGE_ID = "YourPageName";
 
     private Context mCtx;
     private List<Event> eventList;
@@ -210,7 +218,20 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         if (concoursUrl.isEmpty()) {
             holder.btnConcours.setVisibility(View.GONE);
         } else {
+
         }
+
+        //---------------------------------------------
+        // LISTENER FOR WHEN WE CLICK ON CONTEST BUTTON
+        //---------------------------------------------
+        holder.btnConcours.setOnClickListener(v ->
+        {
+            // getOpenFacebookIntent(mCtx.getPackageManager(), concoursUrl);
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            String facebookUrl = getConcoursFacebookURL(mCtx);
+            facebookIntent.setData(Uri.parse(facebookUrl));
+            mCtx.startActivity(facebookIntent);
+        });
 
         //--------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON SOCIAL NETWORK ICON
@@ -271,4 +292,59 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             // If changing the WebView height, do it on the main thread!
         }
     }
+
+    //----------------------
+    // INTENT FB APPLICATION
+    //----------------------
+
+
+    /*public static Intent getOpenFacebookIntent(Context context) {
+
+        Intent intent;
+        try {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/YourDJToulouse/posts/2226766570725571"));
+
+            // intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://YourDJToulouse/posts/2226766570725571"));
+        } catch (Exception e) {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/YourDJToulouse/posts/2226766570725571"));
+        }
+        return null;
+    }*/
+
+    // SOLUTION 2
+
+    public static Intent getOpenFacebookIntent(PackageManager pm, String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+
+    // SOLUTION 3
+
+    // method to get the right URL to use in the intent
+    public String getConcoursFacebookURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
+    }
+
+    /*Intent launchFacebookApplication = getPackageManager().getLaunchIntentForPackage("com.facebook.katana");
+    startActivity(launchFacebookApplication);*/
 }
