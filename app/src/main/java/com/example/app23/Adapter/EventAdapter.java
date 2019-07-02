@@ -1,5 +1,6 @@
 package com.example.app23.Adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,13 @@ import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -33,14 +42,16 @@ import java.util.Date;
 import java.util.List;
 
 import static android.view.View.GONE;
+import static com.facebook.AccessTokenManager.TAG;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
 
     // public static String FACEBOOK_URL = "fb://page/?id=258326807569567";
     // public static String FACEBOOK_URL = "https://www.facebook.com/Bejiines/photos/a.386011438160632/2492243550870733/?type=3&theater&ifg=1";
-    public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
+    // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
     // public static String FACEBOOK_URL = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
-    // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
+    public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
     public static String FACEBOOK_PAGE_ID = "YourPageName";
 
     private Context mCtx;
@@ -149,13 +160,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 // START WEBVIEW
                 //--------------
 
-
-                // https://www.yourdj.fr/page/billeterie-yourdj/?event_id=2769
-                // webViewPreventes.loadUrl("http:\\\\www.google.com");
-                // webViewPreventes.loadUrl("https://www.yourdj.fr\\page\\billeterie-yourdj\\?event_id=2769");
-                // webViewPreventes.loadDataWithBaseURL("https://www.yourdj.fr/page/billeterie-yourdj/?event_id=2769", holder.toString() , "text/html", "utf-8", "");
-                // webViewPreventes.loadUrl("http://www.google.fr");
-
                 String iframe = "<!DOCTYPE html>" +
                         "<html>" +
                             "<body>" +
@@ -226,7 +230,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //---------------------------------------------
         holder.btnConcours.setOnClickListener(v ->
         {
-            // getOpenFacebookIntent(mCtx.getPackageManager(), concoursUrl);
+
+            // onShareResult(v);
+
+            // mCtx.getConcoursFacebookURL();
+
+            // SDK FACEBOOK
+            /*ShareLinkContent content = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse(FACEBOOK_URL))
+                    .build();
+            */
+
+            getOpenFacebookIntent(mCtx.getPackageManager(), concoursUrl);
             Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
             String facebookUrl = getConcoursFacebookURL(mCtx);
             facebookIntent.setData(Uri.parse(facebookUrl));
@@ -344,6 +359,48 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             return FACEBOOK_URL; //normal web url
         }
     }
+
+    // SOLUTION 4
+
+    // TODO : regler le soucis de SHAREDIALOG
+
+    public void onShareResult(View view){
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        final ShareDialog shareDialog = new ShareDialog((Activity) this.mCtx);
+
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                Log.d(TAG, "success");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "error");
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "cancel");
+            }
+        });
+
+        if (shareDialog.canShow(ShareLinkContent.class)) {
+
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setQuote("Game Result Highscore")
+                    // .setContentDescription("My new highscore is !!")
+                    .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=de.ginkoboy.flashcards"))
+                    //.setImageUrl(Uri.parse("android.resource://de.ginkoboy.flashcards/" + R.drawable.logo_flashcards_pro))
+                    // .setImageUrl(Uri.parse("http://bagpiper-andy.de/bilder/dudelsack%20app.png"))
+                    .build();
+
+            shareDialog.show(linkContent);
+        }
+    }
+
 
     /*Intent launchFacebookApplication = getPackageManager().getLaunchIntentForPackage("com.facebook.katana");
     startActivity(launchFacebookApplication);*/

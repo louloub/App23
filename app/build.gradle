@@ -54,4 +54,6 @@ dependencies {
     // GSON
     implementation 'com.google.code.gson:gson:2.8.2'
 
+    // FACEBOOK
+    implementation 'com.facebook.android:facebook-share:5.1.0'
 }
