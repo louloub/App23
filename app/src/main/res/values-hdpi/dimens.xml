@@ -8,8 +8,8 @@
     <dimen name="size_image_width">@dimen/size_image_height</dimen>
 
     <!-- Social Network Icons -->
-    <dimen name="size_icon_height">30dip</dimen>
-    <dimen name="size_icon_width">30dip</dimen>
+    <dimen name="size_icon_height">40dip</dimen>
+    <dimen name="size_icon_width">40dip</dimen>
 
     <!-- Margin -->
     <dimen name="generalMargin">5dip</dimen>

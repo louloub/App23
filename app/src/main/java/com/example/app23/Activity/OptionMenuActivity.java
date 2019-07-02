@@ -55,6 +55,9 @@ public class OptionMenuActivity extends AppCompatActivity {
         myPopup.show();
     }
 
+    //--------------------
+    // ITEM IN OPTION MENU
+    //--------------------
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -91,10 +94,14 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         // Set content with retrieve data about intent + Click on social network icon
         //---------------------------------------------------------------------------
 
+        // BUTTON ANIMATION
+        Animation animation = AnimationUtils.loadAnimation(ArtistesPageActivity.this, R.anim.alpha);
+
         tv_firstname.setText(name);
         tv_lastName.setText(bio);
 
         iv_facebook.setOnClickListener(v -> {
+            iv_facebook.startAnimation(animation);
             String facebookUrl = artiste.getFacebookUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(facebookUrl));
@@ -102,6 +109,7 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         });
 
         iv_soundcloud.setOnClickListener(v -> {
+            iv_soundcloud.startAnimation(animation);
             String soundcloudUrl = artiste.getSoundcloudUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(soundcloudUrl));
@@ -109,6 +117,7 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         });
 
         iv_beatport.setOnClickListener(v -> {
+            iv_beatport.startAnimation(animation);
             String beatportUrl = artiste.getBeatportUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(beatportUrl));
@@ -116,6 +125,7 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         });
 
         iv_mixcloud.setOnClickListener(v -> {
+            iv_mixcloud.startAnimation(animation);
             String mixcloudUrl = artiste.getMixcloudUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(mixcloudUrl));
@@ -123,18 +133,15 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         });
 
         iv_twitter.setOnClickListener(v -> {
+            iv_twitter.startAnimation(animation);
             String twitterUrl = artiste.getTwitterUrl();
-            if (!twitterUrl.isEmpty()) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(twitterUrl));
-                getApplicationContext().startActivity(intent);
-            }
-            else {
-
-            }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(twitterUrl));
+            getApplicationContext().startActivity(intent);
         });
 
         iv_residentAdvisor.setOnClickListener(v -> {
+            iv_residentAdvisor.startAnimation(animation);
             String residentAdvisorUrl = artiste.getResidentAdvisorUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(residentAdvisorUrl));
@@ -142,6 +149,7 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         });
 
         iv_instagram.setOnClickListener(v -> {
+            iv_instagram.startAnimation(animation);
             String instagramUrl = artiste.getInstagramUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(instagramUrl));
@@ -149,6 +157,7 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         });
 
         iv_site.setOnClickListener(v -> {
+            iv_site.startAnimation(animation);
             String siteUrl = artiste.getSiteUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(siteUrl));

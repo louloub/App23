@@ -59,14 +59,14 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ICONS RS -->
+        <!--&lt;!&ndash; ICONS RS &ndash;&gt;
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/generalMargin"
             android:orientation="horizontal">
 
-            <!-- FB -->
+            &lt;!&ndash; FB &ndash;&gt;
             <ImageView
                 android:id="@+id/ivFacebook"
                 android:src="@drawable/fb"
@@ -74,16 +74,16 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- FB BUTTON EXAMPLE-->
-            <!--<Button
+            &lt;!&ndash; FB BUTTON EXAMPLE&ndash;&gt;
+            &lt;!&ndash;<Button
                 android:id="@+id/ivFacebook"
                 android:background="@drawable/fb"
                 android:src="@drawable/fb"
                 android:layout_width="@dimen/size_icon_width"
                 android:layout_height="@dimen/size_icon_height"
-                android:padding="4dp"/>-->
+                android:padding="4dp"/>&ndash;&gt;
 
-            <!-- SC -->
+            &lt;!&ndash; SC &ndash;&gt;
             <ImageView
                 android:id="@+id/ivSoundcloud"
                 android:src="@drawable/sc"
@@ -91,7 +91,7 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- BP -->
+            &lt;!&ndash; BP &ndash;&gt;
             <ImageView
                 android:id="@+id/ivBeatport"
                 android:src="@drawable/bp"
@@ -99,7 +99,7 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- MC -->
+            &lt;!&ndash; MC &ndash;&gt;
             <ImageView
                 android:id="@+id/ivMixcloud"
                 android:src="@drawable/mc"
@@ -107,7 +107,7 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- TW -->
+            &lt;!&ndash; TW &ndash;&gt;
             <ImageView
                 android:id="@+id/ivTwitter"
                 android:src="@drawable/tw"
@@ -115,7 +115,7 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- RA -->
+            &lt;!&ndash; RA &ndash;&gt;
             <ImageView
                 android:id="@+id/ivResidentAdvisor"
                 android:src="@drawable/ra"
@@ -123,7 +123,7 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- INSTA -->
+            &lt;!&ndash; INSTA &ndash;&gt;
             <ImageView
                 android:id="@+id/ivInstagram"
                 android:src="@drawable/in"
@@ -131,14 +131,14 @@
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
 
-            <!-- SITE -->
+            &lt;!&ndash; SITE &ndash;&gt;
             <ImageView
                 android:id="@+id/ivSite"
                 android:src="@drawable/ws"
                 android:layout_width="@dimen/size_icon_width"
                 android:layout_height="@dimen/size_icon_height"
                 android:padding="4dp"/>
-        </LinearLayout>
+        </LinearLayout>-->
 
     <!-- TRAIT SEPARATION -->
     <View

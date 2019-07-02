@@ -1,6 +1,5 @@
 package com.example.app23.Adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +8,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.app23.Activity.EventListActivity;
@@ -38,14 +38,17 @@ import static android.view.View.GONE;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
 
-    // public static String FACEBOOK_URL = "fb://page/?id=258326807569567";
-    // public static String FACEBOOK_URL = "https://www.facebook.com/Bejiines/photos/a.386011438160632/2492243550870733/?type=3&theater&ifg=1";
-    // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
-    // public static String FACEBOOK_URL = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
-    public static String FACEBOOK_URL = "https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
+    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
+    // public static String FACEBOOK_URL_FOR_SHARING = "fb://page/?id=258326807569567";
+    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/Bejiines/photos/a.386011438160632/2492243550870733/?type=3&theater&ifg=1";
+    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
+    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
+    public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
 
-    // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
-    public static String FACEBOOK_PAGE_ID = "YourPageName";
+    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/sharer/sharer.php?u=";
+
+    // TODO : comment gérer le changement de ville pour cette constante ?
+    public static String FACEBOOK_PAGE_ID = "YourDJMontpellier";
 
     private Context mCtx;
     private List<Event> eventList;
@@ -120,7 +123,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 .into(holder.ivPhotoEvent);
 
         //-------------
-        // SET CONTAINT
+        // SET CONTENT
         //-------------
         holder.tvNameEvent.setText(name);
         holder.tvDateStart.setText(dateStartString);
@@ -207,16 +210,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //---------------------------------------------
         holder.btnConcours.setOnClickListener(v ->
         {
-            getOpenFacebookIntent(mCtx.getPackageManager(), concoursUrl);
-            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-            String facebookUrl = getConcoursFacebookURL(mCtx);
-            facebookIntent.setData(Uri.parse(facebookUrl));
-            mCtx.startActivity(facebookIntent);
+            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux,concoursUrl);
+
+            Intent intent = new Intent(mCtx, EventPageActivity.class);
+            intent.putExtra("event", eventForIntent);
+
+            mCtx.startActivity(intent);
         });
 
-        //--------------------------------------------------
-        // LISTENER FOR WHEN WE CLICK ON SOCIAL NETWORK ICON
-        //--------------------------------------------------
+        //--------------------------------------------------------
+        // LISTENER FOR WHEN WE CLICK ON EVENT SOCIAL NETWORK ICON
+        //--------------------------------------------------------
         holder.ivFacebookEvent.setOnClickListener(v -> {
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(facebook));
@@ -281,7 +285,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
             if (applicationInfo.enabled) {
                 // http://stackoverflow.com/a/24547437/1048340
-                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+                uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=" + url);
             }
 
         } catch (PackageManager.NameNotFoundException ignored) {
@@ -290,17 +294,55 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     // method to get the right URL to use in the intent
-    public String getConcoursFacebookURL(Context context) {
+    public String getConcoursFacebookURL(Context context, String url) {
         PackageManager packageManager = context.getPackageManager();
         try {
             int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
             if (versionCode >= 3002850) { // newer versions of fb app
-                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                return "fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=" + url;
             } else { // older versions of fb app
                 return "fb://page/" + FACEBOOK_PAGE_ID;
             }
         } catch (PackageManager.NameNotFoundException e) {
-            return FACEBOOK_URL; // normal web url
+            // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
+            return FACEBOOK_URL_FOR_SHARING; // normal web url
         }
+    }
+
+    //----------------------------------------
+    // ALERTDIALOG FOR CLICK ON CONTEST BUTTON
+    //----------------------------------------
+
+    public void alertDialogConcours()
+    {
+        // Setup Alert builder
+        android.support.v7.app.AlertDialog.Builder myPopup = new android.support.v7.app.AlertDialog.Builder(mCtx);
+        myPopup.setTitle("Consignes du concours YourDJ !");
+        myPopup.setMessage("Message");
+
+        /*// Ddd a radio button list
+        String[] villes = {"Montpellier", "Toulouse", "Marseille", "Bordeaux", "Nantes"};
+        int checkedItems = 0;
+        myPopup.setSingleChoiceItems(villes, checkedItems, (dialog, which) -> {
+        });
+        myPopup.setPositiveButton("Valider", (dialogInterface, i) -> {
+            ListView lw = ((android.support.v7.app.AlertDialog)dialogInterface).getListView();
+            Object checkedItem = lw.getAdapter().getItem(lw.getCheckedItemPosition());
+            Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItem, Toast.LENGTH_LONG).show();
+            // TODO : utiliser "checkedItem" pour le choix du contenu par ville
+        });
+
+        *//*myPopup.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Vous avez cliquez sur Non", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+        myPopup.setCancelable(false);
+
+        // create and show the alert dialog
+        android.support.v7.app.AlertDialog dialog = myPopup.create();
+        myPopup.show();
     }
 }

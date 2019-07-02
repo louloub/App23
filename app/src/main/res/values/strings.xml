@@ -14,4 +14,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="contest_condition">1 - Envoie ton nom prénom mail à concours@yourdj.fr en précisant pour quel jeu tu joues \n2 - Clique sur le boutton ci-dessous pour partager le post sur Facebook
+        \n3 - RDV sur la page Facebook de ta ville dans quelques jours pour les résultats ... </string>
 </resources>

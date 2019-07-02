@@ -56,7 +56,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         //------------------------------------
         // DISPLAY ICON SOCIAL NETWORK IF LINK
         //------------------------------------
-            if (facebook.isEmpty()) {
+            /*if (facebook.isEmpty()) {
                 holder.ivFacebook.setVisibility(GONE);
             }
             else {}
@@ -94,7 +94,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
             if (site.isEmpty()) {
                 holder.ivSite.setVisibility(GONE);
             }
-            else {}
+            else {}*/
 
         holder.tvName.setText(artistes.getName());
         holder.tvBio.setText(artistes.getBio());
@@ -113,7 +113,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         //--------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON SOCIAL NETWORK ICON
         //--------------------------------------------------
-        holder.ivFacebook.setOnClickListener(v -> {
+        /*holder.ivFacebook.setOnClickListener(v -> {
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(facebook));
             mCtx.startActivity(intent);
@@ -160,7 +160,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(instagram));
             mCtx.startActivity(intent);
-        });
+        });*/
 
         //-------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON ARTIST IN THE LIST
