@@ -28,13 +28,6 @@ import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -42,8 +35,6 @@ import java.util.Date;
 import java.util.List;
 
 import static android.view.View.GONE;
-import static com.facebook.AccessTokenManager.TAG;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
 
@@ -51,7 +42,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     // public static String FACEBOOK_URL = "https://www.facebook.com/Bejiines/photos/a.386011438160632/2492243550870733/?type=3&theater&ifg=1";
     // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
     // public static String FACEBOOK_URL = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
-    public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
+    public static String FACEBOOK_URL = "https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
+
+    // public static String FACEBOOK_URL = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
     public static String FACEBOOK_PAGE_ID = "YourPageName";
 
     private Context mCtx;
@@ -72,11 +65,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public void onBindViewHolder(EventViewHolder holder, int position) {
         Event event = eventList.get(position);
 
-        // Nom, date et DJ obligatoirement rempli à la création d'un événement sur le site
-
         String photo = event.getPhotoUrl();
         String name = event.getName();
 
+        // DATE
         Date dateStart = event.getDateStart();
         DateFormat formatterDateStart = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         String dateStartString = formatterDateStart.format(dateStart);
@@ -86,15 +78,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String dateEndString = formatterDateEnd.format(dateEnd);
 
         String facebook = event.getFacebookUrl();
-
-        /*String dateStartDate = eventJsonObject.getString("dateStart_event");
-        SimpleDateFormat dateStartString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
-        Date dateStartEvent = dateStartString.parse(dateStartDate);
-
-        String dateEndDate = eventJsonObject.getString("dateEnd_event");
-        SimpleDateFormat dateEndString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
-        Date dateEndEvent = dateEndString.parse(dateEndDate);*/
-
 
         // PREVENTES
         Preventes preventes = event.getPreventes();
@@ -143,8 +126,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvDateStart.setText(dateStartString);
         holder.tvDateEnd.setText(dateEndString);
         holder.tvArtisteName.setText(artisteName);
-        /*holder.tvPrixPreventes.setText(prixPreventesString);
-        holder.tvNbrPreventes.setText(nbrPreventesString);*/
         holder.tvLieux.setText(nomLieux);
 
         holder.btnPreventes.setVisibility(View.VISIBLE);
@@ -159,7 +140,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 //--------------
                 // START WEBVIEW
                 //--------------
-
                 String iframe = "<!DOCTYPE html>" +
                         "<html>" +
                             "<body>" +
@@ -172,7 +152,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 WebView webViewPreventes = new WebView(mCtx);
                 webViewPreventes.getSettings().setJavaScriptEnabled(true);
                 webViewPreventes.addJavascriptInterface(new WebViewResizer(), "WebViewResizer");
-
                 webViewPreventes.setWebViewClient(new WebViewClient(){
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -202,11 +181,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 });
                 webViewPreventes.loadDataWithBaseURL("", iframe, "text/html", "UTF-8", "");
 
-
                 //--------------
                 // END WEBVIEW
                 //--------------
-
                 alertDialogPreventes.setView(webViewPreventes);
                 alertDialogPreventes.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                     @Override
@@ -230,17 +207,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //---------------------------------------------
         holder.btnConcours.setOnClickListener(v ->
         {
-
-            // onShareResult(v);
-
-            // mCtx.getConcoursFacebookURL();
-
-            // SDK FACEBOOK
-            /*ShareLinkContent content = new ShareLinkContent.Builder()
-                    .setContentUrl(Uri.parse(FACEBOOK_URL))
-                    .build();
-            */
-
             getOpenFacebookIntent(mCtx.getPackageManager(), concoursUrl);
             Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
             String facebookUrl = getConcoursFacebookURL(mCtx);
@@ -278,7 +244,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     class EventViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvNameEvent, tvDateStart, tvDateEnd, tvArtisteName, tvLieux, tvNbrPreventes, tvPrixPreventes;
+        TextView tvNameEvent, tvDateStart, tvDateEnd, tvArtisteName, tvLieux;
         ImageView ivPhotoEvent, ivFacebookEvent;
         Button btnPreventes, btnConcours;
 
@@ -290,8 +256,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
             ivFacebookEvent = itemView.findViewById(R.id.ivFacebookEvent);
-            /*tvNbrPreventes = itemView.findViewById(R.id.tvNbrPreventes);
-            tvPrixPreventes = itemView.findViewById(R.id.tvPrixPreventes);*/
             tvArtisteName = itemView.findViewById(R.id.tvArtisteName);
             tvLieux = itemView.findViewById(R.id.tvLieux);
             btnPreventes = itemView.findViewById(R.id.btnPreventes);
@@ -311,23 +275,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     //----------------------
     // INTENT FB APPLICATION
     //----------------------
-
-
-    /*public static Intent getOpenFacebookIntent(Context context) {
-
-        Intent intent;
-        try {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/YourDJToulouse/posts/2226766570725571"));
-
-            // intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://YourDJToulouse/posts/2226766570725571"));
-        } catch (Exception e) {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/YourDJToulouse/posts/2226766570725571"));
-        }
-        return null;
-    }*/
-
-    // SOLUTION 2
-
     public static Intent getOpenFacebookIntent(PackageManager pm, String url) {
         Uri uri = Uri.parse(url);
         try {
@@ -342,66 +289,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new Intent(Intent.ACTION_VIEW, uri);
     }
 
-
-    // SOLUTION 3
-
     // method to get the right URL to use in the intent
     public String getConcoursFacebookURL(Context context) {
         PackageManager packageManager = context.getPackageManager();
         try {
             int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-            if (versionCode >= 3002850) { //newer versions of fb app
+            if (versionCode >= 3002850) { // newer versions of fb app
                 return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
-            } else { //older versions of fb app
+            } else { // older versions of fb app
                 return "fb://page/" + FACEBOOK_PAGE_ID;
             }
         } catch (PackageManager.NameNotFoundException e) {
-            return FACEBOOK_URL; //normal web url
+            return FACEBOOK_URL; // normal web url
         }
     }
-
-    // SOLUTION 4
-
-    // TODO : regler le soucis de SHAREDIALOG
-
-    public void onShareResult(View view){
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        CallbackManager callbackManager = CallbackManager.Factory.create();
-        final ShareDialog shareDialog = new ShareDialog((Activity) this.mCtx);
-
-        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-
-            @Override
-            public void onSuccess(Sharer.Result result) {
-                Log.d(TAG, "success");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "error");
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "cancel");
-            }
-        });
-
-        if (shareDialog.canShow(ShareLinkContent.class)) {
-
-            ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                    .setQuote("Game Result Highscore")
-                    // .setContentDescription("My new highscore is !!")
-                    .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=de.ginkoboy.flashcards"))
-                    //.setImageUrl(Uri.parse("android.resource://de.ginkoboy.flashcards/" + R.drawable.logo_flashcards_pro))
-                    // .setImageUrl(Uri.parse("http://bagpiper-andy.de/bilder/dudelsack%20app.png"))
-                    .build();
-
-            shareDialog.show(linkContent);
-        }
-    }
-
-
-    /*Intent launchFacebookApplication = getPackageManager().getLaunchIntentForPackage("com.facebook.katana");
-    startActivity(launchFacebookApplication);*/
 }
