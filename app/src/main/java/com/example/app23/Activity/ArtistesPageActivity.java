@@ -131,22 +131,13 @@ public class ArtistesPageActivity extends OptionMenuActivity {
             getApplicationContext().startActivity(intent);
         });
 
-        /*iv_mixcloud.setOnClickListener(v -> {
-            iv_mixcloud.startAnimation(animation);
-            String mixcloudUrl = artiste.getMixcloudUrl();
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(mixcloudUrl));
-            getApplicationContext().startActivity(intent);
-        });*/
-
         iv_mixcloud.setOnClickListener(v -> {
             iv_mixcloud.startAnimation(animation);
             String mixcloudUrl = artiste.getMixcloudUrl();
-
             Intent intent = null;
 
             try {
-                // get the Twitter app if possible
+                // get the Mixcloud app if possible
                 this.getPackageManager().getPackageInfo("com.mixcloud.player", 0);
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mixcloudUrl));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -155,14 +146,7 @@ public class ArtistesPageActivity extends OptionMenuActivity {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mixcloudUrl));
             }
             this.startActivity(intent);
-
-            /*
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(mixcloudUrl));
-            getApplicationContext().startActivity(intent);*/
         });
-
-
 
         iv_twitter.setOnClickListener(v -> {
             iv_twitter.startAnimation(animation);
@@ -188,12 +172,32 @@ public class ArtistesPageActivity extends OptionMenuActivity {
             getApplicationContext().startActivity(intent);
         });
 
-        iv_instagram.setOnClickListener(v -> {
+        /*iv_instagram.setOnClickListener(v -> {
             iv_instagram.startAnimation(animation);
             String instagramUrl = artiste.getInstagramUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(instagramUrl));
             getApplicationContext().startActivity(intent);
+        });*/
+
+        iv_instagram.setOnClickListener(v -> {
+            iv_instagram.startAnimation(animation);
+            String instagramUrl = artiste.getInstagramUrl();
+            Intent intent = null;
+            try {
+                // get the Instagram app if possible
+                this.getPackageManager().getPackageInfo("com.instagram.android", 0);
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            } catch (Exception e) {
+                // no Instagram app, revert to browser
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl));
+            }
+            this.startActivity(intent);
+
+            /*Intent intent = new Intent (Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(instagramUrl));
+            getApplicationContext().startActivity(intent);*/
         });
 
         iv_site.setOnClickListener(v -> {
