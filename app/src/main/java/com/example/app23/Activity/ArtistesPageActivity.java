@@ -172,14 +172,6 @@ public class ArtistesPageActivity extends OptionMenuActivity {
             getApplicationContext().startActivity(intent);
         });
 
-        /*iv_instagram.setOnClickListener(v -> {
-            iv_instagram.startAnimation(animation);
-            String instagramUrl = artiste.getInstagramUrl();
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(instagramUrl));
-            getApplicationContext().startActivity(intent);
-        });*/
-
         iv_instagram.setOnClickListener(v -> {
             iv_instagram.startAnimation(animation);
             String instagramUrl = artiste.getInstagramUrl();
@@ -194,10 +186,6 @@ public class ArtistesPageActivity extends OptionMenuActivity {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl));
             }
             this.startActivity(intent);
-
-            /*Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(instagramUrl));
-            getApplicationContext().startActivity(intent);*/
         });
 
         iv_site.setOnClickListener(v -> {
