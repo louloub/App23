@@ -276,7 +276,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
     }
 
-    //----------------------
+    /*//----------------------
     // INTENT FB APPLICATION
     //----------------------
     public static Intent getOpenFacebookIntent(PackageManager pm, String url) {
@@ -307,7 +307,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
             return FACEBOOK_URL_FOR_SHARING; // normal web url
         }
-    }
+    }*/
 
     //----------------------------------------
     // ALERTDIALOG FOR CLICK ON CONTEST BUTTON

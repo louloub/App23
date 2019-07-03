@@ -2,6 +2,8 @@ package com.example.app23.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -15,6 +17,8 @@ import com.example.app23.Object.Artistes;
 import com.example.app23.R;
 
 import static android.view.View.GONE;
+import static com.example.app23.Adapter.EventAdapter.FACEBOOK_PAGE_ID;
+import static com.example.app23.Adapter.EventAdapter.FACEBOOK_URL_FOR_SHARING;
 
 public class ArtistesPageActivity extends OptionMenuActivity {
 
@@ -103,9 +107,12 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         iv_facebook.setOnClickListener(v -> {
             iv_facebook.startAnimation(animation);
             String facebookUrl = artiste.getFacebookUrl();
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(facebookUrl));
-            getApplicationContext().startActivity(intent);
+
+            getOpenFacebookIntent(this.getPackageManager(), facebookUrl);
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            String facebookUrlApp = getFacebookURL(this, facebookUrl);
+            facebookIntent.setData(Uri.parse(facebookUrlApp));
+            this.startActivity(facebookIntent);
         });
 
         iv_soundcloud.setOnClickListener(v -> {
@@ -124,20 +131,53 @@ public class ArtistesPageActivity extends OptionMenuActivity {
             getApplicationContext().startActivity(intent);
         });
 
-        iv_mixcloud.setOnClickListener(v -> {
+        /*iv_mixcloud.setOnClickListener(v -> {
             iv_mixcloud.startAnimation(animation);
             String mixcloudUrl = artiste.getMixcloudUrl();
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(mixcloudUrl));
             getApplicationContext().startActivity(intent);
+        });*/
+
+        iv_mixcloud.setOnClickListener(v -> {
+            iv_mixcloud.startAnimation(animation);
+            String mixcloudUrl = artiste.getMixcloudUrl();
+
+            Intent intent = null;
+
+            try {
+                // get the Twitter app if possible
+                this.getPackageManager().getPackageInfo("com.mixcloud.player", 0);
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mixcloudUrl));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            } catch (Exception e) {
+                // no Mixcloud app, revert to browser
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mixcloudUrl));
+            }
+            this.startActivity(intent);
+
+            /*
+            Intent intent = new Intent (Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(mixcloudUrl));
+            getApplicationContext().startActivity(intent);*/
         });
+
+
 
         iv_twitter.setOnClickListener(v -> {
             iv_twitter.startAnimation(animation);
             String twitterUrl = artiste.getTwitterUrl();
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(twitterUrl));
-            getApplicationContext().startActivity(intent);
+            Intent intent = null;
+            try {
+                // get the Twitter app if possible
+                this.getPackageManager().getPackageInfo("com.twitter.android", 0);
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(twitterUrl));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            } catch (Exception e) {
+                // no Twitter app, revert to browser
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(twitterUrl));
+            }
+            this.startActivity(intent);
         });
 
         iv_residentAdvisor.setOnClickListener(v -> {
@@ -170,5 +210,38 @@ public class ArtistesPageActivity extends OptionMenuActivity {
                 .into(iv_photo);
 
         getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
+    }
+
+    //----------------------
+    // INTENT FB APPLICATION
+    //----------------------
+    public static Intent getOpenFacebookIntent(PackageManager pm, String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+    // Todo : les constantes sont initié sur l'activité précédente, comment gérer ca ?
+    // method to get the right URL to use in the intent
+    public String getFacebookURL(Context context, String url) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { // newer versions of fb app
+                return "fb://facewebmodal/f?href=" + url + "posts";
+            } else { // older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
+            return FACEBOOK_URL_FOR_SHARING; // normal web url
+        }
     }
 }
