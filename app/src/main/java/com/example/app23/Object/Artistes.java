@@ -1,6 +1,7 @@
 package com.example.app23.Object;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Artistes implements Serializable {
 

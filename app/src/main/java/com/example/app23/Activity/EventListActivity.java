@@ -209,18 +209,57 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             {
                                 if (!eventJsonObject.isNull("artistes_event"))
                                 {
-                                    /*JSONArray arr = new JSONArray(jstring);
-                                    for (int i = 0; i < arr.length(); i++) { // Walk through the Array.
-                                        JSONObject obj = arr.getJSONObject(i);
-                                        JSONArray arr2 = obj.getJSONArray("fileName");
-                                        // Do whatever.
-                                    }*/
+                                    JSONArray jsonArrayArtistes = eventJsonObject.getJSONArray("artistes_event");
 
+                                    for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
+                                    {
+                                        JSONObject jsonObjectArtistes = jsonArrayArtistes.getJSONObject(iA);
+
+                                        ArrayList<Artistes> artistesList = new ArrayList<>();
+
+                                        // JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
+                                        // Getting object from json array
+                                        // JSONObject artistInObjetcEvent = artistes.getJSONObject(String.valueOf(iA));
+
+                                        // ARTISTE NAME
+                                        if (jsonObjectArtistes.has("name_artiste")) {
+                                            if (!jsonObjectArtistes.isNull("name_artiste")) {
+                                                String newNameArtiste = jsonObjectArtistes.getString("name_artiste");
+                                                artiste.setName(newNameArtiste);
+                                            } else {
+                                            }
+                                        }
+
+                                        // ARTISTE FACEBOOK URL
+                                        if (jsonObjectArtistes.has("facebook_url_artiste")) {
+                                            if (!jsonObjectArtistes.isNull("facebook_url_artiste")) {
+                                                String facebookUrlNew = jsonObjectArtistes.getString("facebook_url_artiste");
+                                                artiste.setFacebookUrl(facebookUrlNew);
+                                            } else {
+                                            }
+                                        }
+
+                                        artistesList.add(new Artistes("newNameArtiste", "", "",
+                                                "facebookUrlNew", "", "",
+                                                "", "", "", "",
+                                                ""));
+
+                                    }
+                                } else {
+                                }
+                            } else {
+                            }
+
+
+                            // TODO : fonctionne pour scanner tous les artistes mais ca affiche une page évenement seule avec uniquement le dernier artiste
+
+                            /*if(eventJsonObject.has("artistes_event"))
+                            {
+                                if (!eventJsonObject.isNull("artistes_event"))
+                                {
                                     JSONArray artistesArray = eventJsonObject.getJSONArray("artistes_event");
 
-
                                     // JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
-
 
                                     for (int iA = 0; iA < artistesArray.length(); iA++) {
                                         // Getting object from json array
@@ -236,46 +275,24 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                                 artiste.setName(newArtisteName);
                                             } else {
                                             }
-
-                                        /*    if (artistes.has("prix_preventes"))
-                                            {
-                                                if (!artistes.isNull("prix_preventes"))
-                                                {
-                                                    int newPreventesPrix = artistes.getInt("prix_preventes");
-                                                    Log.d(TAG, "newPreventesPrix = " +newPreventesPrix);
-                                                    preventesEvent.setPrix(newPreventesPrix);
-                                                } else {
-                                                }
-
-                                                if (artistes.has("preventes_url"))
-                                                {
-                                                    if (!artistes.isNull("preventes_url"))
-                                                    {
-                                                        String newPreventesUrl = artistes.getString("preventes_url");
-                                                        Log.d(TAG, "newPreventesUrl = " +newPreventesUrl);
-                                                        preventesEvent.setPreventesUrl(newPreventesUrl);
-                                                    } else {
-                                                    }
-                                                } else {
-                                                }
-                                            } else {
-                                            }*/
                                         } else {
                                         }
-
                                     }
-
-
-
-
-
                                 } else {
                                 }
                             } else {
-                            }
+                            }*/
 
+                            // TODO : code trouvé en ligne :
 
+                                    /*JSONArray arr = new JSONArray(jstring);
+                                    for (int i = 0; i < arr.length(); i++) { // Walk through the Array.
+                                        JSONObject obj = arr.getJSONObject(i);
+                                        JSONArray arr2 = obj.getJSONArray("fileName");
+                                        // Do whatever.
+                                    }*/
 
+                            // TODO : code test :
 
                             /*if(eventJsonObject.has("artistes_event"))
                             {
@@ -323,6 +340,41 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             } else {
                             }*/
 
+                            // TODO : code fonctionne pour Artiste mais 1 seul artiste :
+
+                            /*
+
+                            if(eventJsonObject.has("artistes_event"))
+                            {
+                                if (!eventJsonObject.isNull("artistes_event"))
+                                {
+                                    JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
+                                    // get data JSONArray from artistes
+                                    if (artistes.has("name_artiste"))
+                                    {
+                                        if (!artistes.isNull("name_artiste"))
+                                        {
+                                            String newNameArtiste = artistes.getString("name_artiste");
+                                            artiste.setName(newNameArtiste);
+                                        } else {
+                                        }
+                                    }
+                                    if (artistes.has("facebook_url_artiste"))
+                                    {
+                                        if (!artistes.isNull("facebook_url_artiste"))
+                                        {
+                                            String facebookUrlNew = artistes.getString("facebook_url_artiste");
+                                            artiste.setFacebookUrl(facebookUrlNew);
+                                        } else {
+                                        }
+                                    }
+                                } else {
+                                }
+                            } else {
+                            }
+
+                            */
+
                             //------------------------
                             // RETRIEVE LIEUX OBJET
                             //------------------------
@@ -341,7 +393,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                 if (!eventJsonObject.isNull("lieux_event"))
                                 {
                                     JSONObject lieux = eventJsonObject.getJSONObject("lieux_event");
-                                    // get data JSONArray from artistes
                                     if (lieux.has("name_lieux"))
                                     {
                                         if (!lieux.isNull("name_lieux"))
@@ -366,7 +417,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             }
 
                             Log.d(TAG, "photoUrlEvent = " +photoUrlEvent);
-                            Event event = new Event(photoUrlEvent,nameEvent,dateStartEvent,dateEndEvent,facebookUrlEvent,preventesEvent,artiste,lieuxEvent, concoursUrl);
+                            Event event = new Event(photoUrlEvent,nameEvent,dateStartEvent,dateEndEvent,
+                                    facebookUrlEvent,preventesEvent,artiste,lieuxEvent, concoursUrl);
 
                             eventList.add(event);
 

@@ -2,6 +2,7 @@ package com.example.app23.Object;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Event implements Serializable {
 
