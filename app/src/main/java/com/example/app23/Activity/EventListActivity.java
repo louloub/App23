@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +22,7 @@ import com.example.app23.Object.Preventes;
 import com.example.app23.R;
 import com.example.app23.Swipe.OnSwipeTouchListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +36,9 @@ import java.util.Locale;
 public class EventListActivity extends OptionMenuActivity implements View.OnTouchListener  {
 
     private static final String TAG = "EventListActiviy";
-    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event.json";
+    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
+
+    // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event.json";
     private static final String NAME_FOR_ACTIONBAR = "Événements";
 
     // a list to store all the event
@@ -103,12 +107,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                 (Request.Method.GET, URL, null, response ->
                 {
                     try {
-                        Log.d(TAG, " JsonArrayRequest in try jsonArrayEventRequest " +response);
-
                         // Browse request contain json
                         for (int i = 0; i < response.length(); i++) {
-
-                            Log.d(TAG, " JsonArrayRequest in for " +i);
 
                             // Getting object from json array
                             JSONObject eventJsonObject = response.getJSONObject(i);
@@ -186,9 +186,9 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             } else {
                             }
 
-                            //------------------------
-                            // RETRIEVE ARTISTES OBJET
-                            //------------------------
+                            //-------------------------
+                            // RETRIEVE ARTISTES OBJECT
+                            //-------------------------
                             String nameArtiste = "";
                             String bioArtiste = "";
                             String photoUrlArtiste = "";
@@ -209,7 +209,96 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             {
                                 if (!eventJsonObject.isNull("artistes_event"))
                                 {
-                                    JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
+                                    /*JSONArray arr = new JSONArray(jstring);
+                                    for (int i = 0; i < arr.length(); i++) { // Walk through the Array.
+                                        JSONObject obj = arr.getJSONObject(i);
+                                        JSONArray arr2 = obj.getJSONArray("fileName");
+                                        // Do whatever.
+                                    }*/
+
+                                    JSONArray artistesArray = eventJsonObject.getJSONArray("artistes_event");
+
+
+                                    // JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
+
+
+                                    for (int iA = 0; iA < artistesArray.length(); iA++) {
+                                        // Getting object from json array
+                                        JSONObject artistInObjetcEvent = artistesArray.getJSONObject(iA);
+
+                                        // get data JSONArray from preventes
+                                        if (artistInObjetcEvent.has("name_artiste"))
+                                        {
+                                            if (!artistInObjetcEvent.isNull("name_artiste"))
+                                            {
+                                                String newArtisteName = artistInObjetcEvent.getString("name_artiste");
+                                                Log.d(TAG, "newArtisteName = " +newArtisteName);
+                                                artiste.setName(newArtisteName);
+                                            } else {
+                                            }
+
+                                        /*    if (artistes.has("prix_preventes"))
+                                            {
+                                                if (!artistes.isNull("prix_preventes"))
+                                                {
+                                                    int newPreventesPrix = artistes.getInt("prix_preventes");
+                                                    Log.d(TAG, "newPreventesPrix = " +newPreventesPrix);
+                                                    preventesEvent.setPrix(newPreventesPrix);
+                                                } else {
+                                                }
+
+                                                if (artistes.has("preventes_url"))
+                                                {
+                                                    if (!artistes.isNull("preventes_url"))
+                                                    {
+                                                        String newPreventesUrl = artistes.getString("preventes_url");
+                                                        Log.d(TAG, "newPreventesUrl = " +newPreventesUrl);
+                                                        preventesEvent.setPreventesUrl(newPreventesUrl);
+                                                    } else {
+                                                    }
+                                                } else {
+                                                }
+                                            } else {
+                                            }*/
+                                        } else {
+                                        }
+
+                                    }
+
+
+
+
+
+                                } else {
+                                }
+                            } else {
+                            }
+
+
+
+
+                            /*if(eventJsonObject.has("artistes_event"))
+                            {
+                                if (!eventJsonObject.isNull("artistes_event"))
+                                {
+                                    *//*JSONArray jsonArray = new JSONArray(artiste);
+
+                                    // Log.d(TAG, "tes test" +jsonArray);
+
+                                    String[] artistesList = new String[jsonArray.length()];
+
+                                    for (int iA = 0; iA < jsonArray.length(); iA++) {
+
+                                        //getting json object from the json array
+                                        JSONObject objArtiste = jsonArray.getJSONObject(iA);
+
+                                        //getting the name from the json object and putting it inside string array
+                                        artistesList[iA] = objArtiste.getString("name");
+                                    }*//*
+
+
+
+                                    *//*JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
                                     // get data JSONArray from artistes
                                     if (artistes.has("name_artiste"))
                                     {
@@ -228,11 +317,11 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             artiste.setFacebookUrl(facebookUrlNew);
                                         } else {
                                         }
-                                    }
+                                    }*//*
                                 } else {
                                 }
                             } else {
-                            }
+                            }*/
 
                             //------------------------
                             // RETRIEVE LIEUX OBJET
