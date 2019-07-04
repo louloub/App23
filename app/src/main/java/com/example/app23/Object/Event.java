@@ -1,8 +1,8 @@
 package com.example.app23.Object;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Event implements Serializable {
 
@@ -12,12 +12,12 @@ public class Event implements Serializable {
     private Date dateEnd;
     private String facebookUrl;
     private Preventes preventes;
-    private Artistes artistes;
+    private ArrayList<Artistes> artistes;
     private Lieux lieux;
     private String concoursUrl;
 
     public Event(String photoUrl, String name, Date dateStart, Date dateEnd, String facebookUrl,
-                 Preventes preventes, Artistes artistes, Lieux lieux, String concoursUrl) {
+                 Preventes preventes, ArrayList<Artistes> artistes, Lieux lieux, String concoursUrl) {
         this.photoUrl = photoUrl;
         this.name = name;
         this.dateStart = dateStart;
@@ -85,11 +85,11 @@ public class Event implements Serializable {
         this.preventes = preventes;
     }
 
-    public Artistes getArtistes() {
+    public ArrayList<Artistes> getArtistes() {
         return artistes;
     }
 
-    public void setArtistes(Artistes artistes) {
+    public void setArtistes(ArrayList<Artistes> artistes) {
         this.artistes = artistes;
     }
 

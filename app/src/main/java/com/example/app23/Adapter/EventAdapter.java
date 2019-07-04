@@ -91,7 +91,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String preventesUrl = preventes.getPreventesUrl();
 
         // ARTISTES
-        Artistes artistes = event.getArtistes();
+        Artistes artistes = (Artistes) event.getArtistes();
         // TODO : afficher plusieurs artistes avec un loop
         String artisteName = artistes.getName();
         // TODO : rendre le DJ cliquable si il est sur notre site
