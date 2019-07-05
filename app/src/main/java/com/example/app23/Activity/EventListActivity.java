@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -213,9 +212,23 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
                                     for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
                                     {
-                                        JSONObject jsonObjectArtistes = jsonArrayArtistes.getJSONObject(iA);
+                                        JSONObject artisteFromList = jsonArrayArtistes.getJSONObject(iA);
 
-                                        ArrayList<Artistes> artistesList = new ArrayList<>();
+                                        Log.d(TAG, "JSONObject : " +artisteFromList +iA );
+
+                                        if (artisteFromList.has("name_artiste")) {
+                                            if (!artisteFromList.isNull("name_artiste")) {
+                                                String newArtisteName = artisteFromList.getString("name_artiste");
+                                                artiste.setName(newArtisteName);
+                                                Log.d(TAG, "newArtisteName =  " + newArtisteName);
+                                            } else {
+                                            }
+                                        }
+
+
+                                        // JSONObject jsonObjectArtistes = jsonArrayArtistes.getJSONObject(iA);
+
+                                        /*ArrayList<Artistes> artistesList = new ArrayList<>();
 
                                         // JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
                                         // Getting object from json array
@@ -239,10 +252,15 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             }
                                         }
 
+                                        *//*Artistes artistesInList = new Artistes("newNameArtiste", "", "",
+                                                "facebookUrlNew", "", "",
+                                                "", "", "", "",
+                                                "") ;*//*
+
                                         artistesList.add(new Artistes("newNameArtiste", "", "",
                                                 "facebookUrlNew", "", "",
                                                 "", "", "", "",
-                                                ""));
+                                                ""));*/
 
                                     }
                                 } else {
