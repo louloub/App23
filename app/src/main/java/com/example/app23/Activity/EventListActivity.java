@@ -204,6 +204,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     soundcloudUrlArtiste,beatportUrlArtiste,mixcloudUrlArtiste,twitterUrlArtiste,
                                     residentAdvisorUrlArtiste,instagramUrlArtiste,siteUrlArtiste);
 
+                            ArrayList artistesList = new ArrayList<Artistes>();
+
                             if(eventJsonObject.has("artistes_event"))
                             {
                                 if (!eventJsonObject.isNull("artistes_event"))
@@ -211,125 +213,12 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     // JSON ARRAY ARTISTES contient les 4 Artistes
                                     JSONArray jsonArrayArtistes = eventJsonObject.getJSONArray("artistes_event");
 
-                                    ArrayList artistesList = new ArrayList<>();
-
                                     for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
                                     {
                                         // JSON ARTISTE FROM list est un artiste au format JSON OBJECT
                                         JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
 
-                                        // Artistes artistes1 = new Artistes(jsonArtisteFromList);
-
-                                        Log.d(TAG, " jsonArtisteFromList = " +jsonArtisteFromList );
-
                                         artistesList.add(jsonArtisteFromList);
-                                        // artistesList.get(iA);
-
-                                        Log.d(TAG, "artistesList =  " + artistesList);
-
-
-                                        /*JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
-
-                                        ArrayList<JSONObject> artistesList = new ArrayList<>();
-
-                                        artistesList.add(jsonArtisteFromList);
-
-                                        Log.d(TAG, "artistesList = " +artistesList  );*/
-
-                                        /*if (jsonArtisteFromList.has("name_artiste")) {
-                                            if (!jsonArtisteFromList.isNull("name_artiste")) {
-                                                String newArtisteName = jsonArtisteFromList.getString("name_artiste");
-                                                artistes1.setName(newArtisteName);
-                                                Log.d(TAG, "newArtisteName =  " + newArtisteName);
-                                            } else {
-                                            }
-
-                                            if (jsonArtisteFromList.has("facebook_url_artiste")) {
-                                                if (!jsonArtisteFromList.isNull("facebook_url_artiste")) {
-                                                    String newArtisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
-                                                    artistes1.setFacebookUrl(newArtisteFacebookUrl);
-                                                    Log.d(TAG, "newArtisteName =  " + newArtisteFacebookUrl);
-                                                } else {
-                                                }
-                                            }
-
-                                            ArrayList artistesList = new ArrayList<>();
-
-                                            *//*Artistes newArtiste = new Artistes(nameArtiste,bioArtiste,photoUrlArtiste,facebookUrlArtiste,
-                                                    soundcloudUrlArtiste,beatportUrlArtiste,mixcloudUrlArtiste,twitterUrlArtiste,
-                                                    residentAdvisorUrlArtiste,instagramUrlArtiste,siteUrlArtiste);*//*
-
-                                            artistesList.add(artistes1);
-                                            // artistesList.get(iA);
-
-                                            Log.d(TAG, "artistesList =  " + artistesList);
-
-                                        }*/
-
-
-
-                                        /*Artistes newArtiste = new Artistes(newArtisteName,bioArtiste,photoUrlArtiste,newArtisteFacebookUrl,
-                                                soundcloudUrlArtiste,beatportUrlArtiste,mixcloudUrlArtiste,twitterUrlArtiste,
-                                                residentAdvisorUrlArtiste,instagramUrlArtiste,siteUrlArtiste);*/
-
-                                        /*ArrayList<JSONObject> artistesList = new ArrayList<>();
-
-                                        artistesList.add(artisteFromList);*/
-
-
-                                        /*String artisteFromListString = artisteFromList.toString();
-
-                                        final Gson gson = new GsonBuilder().create();
-
-                                        final Artistes artistes = gson.fromJson(artisteFromListString, Artistes.class);
-
-                                        Log.d(TAG, "JSONObject : " +artisteFromList +iA );
-
-                                        if (artisteFromList.has("name_artiste")) {
-                                            if (!artisteFromList.isNull("name_artiste")) {
-                                                String newArtisteName = artisteFromList.getString("name_artiste");
-                                                artiste.setName(newArtisteName);
-                                                Log.d(TAG, "newArtisteName =  " + newArtisteName);
-                                            } else {
-                                            }
-                                        }*/
-
-
-                                        // JSONObject jsonObjectArtistes = jsonArrayArtistes.getJSONObject(iA);
-
-                                        /*ArrayList<Artistes> artistesList = new ArrayList<>();
-
-                                        // JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
-                                        // Getting object from json array
-                                        // JSONObject artistInObjetcEvent = artistes.getJSONObject(String.valueOf(iA));
-
-                                        // ARTISTE NAME
-                                        if (jsonObjectArtistes.has("name_artiste")) {
-                                            if (!jsonObjectArtistes.isNull("name_artiste")) {
-                                                String newNameArtiste = jsonObjectArtistes.getString("name_artiste");
-                                                artiste.setName(newNameArtiste);
-                                            } else {
-                                            }
-                                        }
-
-                                        // ARTISTE FACEBOOK URL
-                                        if (jsonObjectArtistes.has("facebook_url_artiste")) {
-                                            if (!jsonObjectArtistes.isNull("facebook_url_artiste")) {
-                                                String facebookUrlNew = jsonObjectArtistes.getString("facebook_url_artiste");
-                                                artiste.setFacebookUrl(facebookUrlNew);
-                                            } else {
-                                            }
-                                        }
-
-                                        *//*Artistes artistesInList = new Artistes("newNameArtiste", "", "",
-                                                "facebookUrlNew", "", "",
-                                                "", "", "", "",
-                                                "") ;*//*
-
-                                        artistesList.add(new Artistes("newNameArtiste", "", "",
-                                                "facebookUrlNew", "", "",
-                                                "", "", "", "",
-                                                ""));*/
 
                                     }
                                 } else {
@@ -337,130 +226,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             } else {
                             }
 
-
-                            // TODO : fonctionne pour scanner tous les artistes mais ca affiche une page évenement seule avec uniquement le dernier artiste
-
-                            /*if(eventJsonObject.has("artistes_event"))
-                            {
-                                if (!eventJsonObject.isNull("artistes_event"))
-                                {
-                                    JSONArray artistesArray = eventJsonObject.getJSONArray("artistes_event");
-
-                                    // JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
-
-                                    for (int iA = 0; iA < artistesArray.length(); iA++) {
-                                        // Getting object from json array
-                                        JSONObject artistInObjetcEvent = artistesArray.getJSONObject(iA);
-
-                                        // get data JSONArray from preventes
-                                        if (artistInObjetcEvent.has("name_artiste"))
-                                        {
-                                            if (!artistInObjetcEvent.isNull("name_artiste"))
-                                            {
-                                                String newArtisteName = artistInObjetcEvent.getString("name_artiste");
-                                                Log.d(TAG, "newArtisteName = " +newArtisteName);
-                                                artiste.setName(newArtisteName);
-                                            } else {
-                                            }
-                                        } else {
-                                        }
-                                    }
-                                } else {
-                                }
-                            } else {
-                            }*/
-
-                            // TODO : code trouvé en ligne :
-
-                                    /*JSONArray arr = new JSONArray(jstring);
-                                    for (int i = 0; i < arr.length(); i++) { // Walk through the Array.
-                                        JSONObject obj = arr.getJSONObject(i);
-                                        JSONArray arr2 = obj.getJSONArray("fileName");
-                                        // Do whatever.
-                                    }*/
-
-                            // TODO : code test :
-
-                            /*if(eventJsonObject.has("artistes_event"))
-                            {
-                                if (!eventJsonObject.isNull("artistes_event"))
-                                {
-                                    *//*JSONArray jsonArray = new JSONArray(artiste);
-
-                                    // Log.d(TAG, "tes test" +jsonArray);
-
-                                    String[] artistesList = new String[jsonArray.length()];
-
-                                    for (int iA = 0; iA < jsonArray.length(); iA++) {
-
-                                        //getting json object from the json array
-                                        JSONObject objArtiste = jsonArray.getJSONObject(iA);
-
-                                        //getting the name from the json object and putting it inside string array
-                                        artistesList[iA] = objArtiste.getString("name");
-                                    }*//*
-
-
-
-                                    *//*JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
-                                    // get data JSONArray from artistes
-                                    if (artistes.has("name_artiste"))
-                                    {
-                                        if (!artistes.isNull("name_artiste"))
-                                        {
-                                            String newNameArtiste = artistes.getString("name_artiste");
-                                            artiste.setName(newNameArtiste);
-                                        } else {
-                                        }
-                                    }
-                                    if (artistes.has("facebook_url_artiste"))
-                                    {
-                                        if (!artistes.isNull("facebook_url_artiste"))
-                                        {
-                                            String facebookUrlNew = artistes.getString("facebook_url_artiste");
-                                            artiste.setFacebookUrl(facebookUrlNew);
-                                        } else {
-                                        }
-                                    }*//*
-                                } else {
-                                }
-                            } else {
-                            }*/
-
-                            // TODO : code fonctionne pour Artiste mais 1 seul artiste :
-
-                            /*
-
-                            if(eventJsonObject.has("artistes_event"))
-                            {
-                                if (!eventJsonObject.isNull("artistes_event"))
-                                {
-                                    JSONObject artistes = eventJsonObject.getJSONObject("artistes_event");
-                                    // get data JSONArray from artistes
-                                    if (artistes.has("name_artiste"))
-                                    {
-                                        if (!artistes.isNull("name_artiste"))
-                                        {
-                                            String newNameArtiste = artistes.getString("name_artiste");
-                                            artiste.setName(newNameArtiste);
-                                        } else {
-                                        }
-                                    }
-                                    if (artistes.has("facebook_url_artiste"))
-                                    {
-                                        if (!artistes.isNull("facebook_url_artiste"))
-                                        {
-                                            String facebookUrlNew = artistes.getString("facebook_url_artiste");
-                                            artiste.setFacebookUrl(facebookUrlNew);
-                                        } else {
-                                        }
-                                    }
-                                } else {
-                                }
-                            } else {
-                            }
-
-                            */
+                            // protected static ArrayList<Player> players = new ArrayList<Player>();
+                            // Map<String, Object> profileMap = profile.toMap();
 
                             //------------------------
                             // RETRIEVE LIEUX OBJET
@@ -503,15 +270,21 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             } else {
                             }
 
-                            Log.d(TAG, "photoUrlEvent = " +photoUrlEvent);
+                            //---------------------------------------
+                            // CREATE EVENT WITH RETRIEVE INFORMATION
+                            //---------------------------------------
                             Event event = new Event(photoUrlEvent,nameEvent,dateStartEvent,dateEndEvent,
-                                    facebookUrlEvent,preventesEvent,artiste,lieuxEvent, concoursUrl);
+                                    facebookUrlEvent,preventesEvent,artistesList,lieuxEvent, concoursUrl);
 
                             eventList.add(event);
 
                             // creating adapter object and setting it to recyclerview
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
+
+
+
+
                         }
 
                     } catch (JSONException e) {

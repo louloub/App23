@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Artistes implements Serializable {
+public class Artistes extends ArrayList<Artistes> implements Serializable {
 
     private String name;
     private String bio;
@@ -127,5 +127,33 @@ public class Artistes implements Serializable {
 
     public void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
+    }
+
+    // ----------------
+    // ArrayList
+    // ----------------
+
+    public ArrayList<Object> toArtistesArrayList() {
+        ArrayList<Object> result = new ArrayList<>();
+        result.add(name);
+        result.add(bio);
+        result.add(photoUrl);
+        result.add(facebook_url);
+        result.add(soundcloudUrl);
+        result.add(beatportUrl);
+        result.add(mixcloudUrl);
+        result.add(twitterUrl);
+        result.add(mixcloudUrl);
+        result.add(twitterUrl);
+        result.add(residentAdvisorUrl);
+        result.add(instagramUrl);
+        result.add(siteUrl);
+
+        return result;
+    }
+
+    @Override
+    public Stream<Artistes> stream() {
+        return null;
     }
 }
