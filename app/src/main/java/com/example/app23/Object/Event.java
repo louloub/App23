@@ -12,12 +12,12 @@ public class Event implements Serializable {
     private Date dateEnd;
     private String facebookUrl;
     private Preventes preventes;
-    private ArrayList<Artistes> artistes;
+    private Artistes artistes;
     private Lieux lieux;
     private String concoursUrl;
 
     public Event(String photoUrl, String name, Date dateStart, Date dateEnd, String facebookUrl,
-                 Preventes preventes, ArrayList<Artistes> artistes, Lieux lieux, String concoursUrl) {
+                 Preventes preventes, Artistes artistes, Lieux lieux, String concoursUrl) {
         this.photoUrl = photoUrl;
         this.name = name;
         this.dateStart = dateStart;
@@ -85,11 +85,11 @@ public class Event implements Serializable {
         this.preventes = preventes;
     }
 
-    public ArrayList<Artistes> getArtistes() {
+    public Artistes getArtistes() {
         return artistes;
     }
 
-    public void setArtistes(ArrayList<Artistes> artistes) {
+    public void setArtistes(Artistes artistes) {
         this.artistes = artistes;
     }
 

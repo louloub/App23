@@ -1,11 +1,13 @@
 package com.example.app23.Object;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Artistes extends ArrayList<Artistes> implements Serializable {
+public class Artistes implements Serializable {
 
     private String name;
     private String bio;
@@ -34,6 +36,9 @@ public class Artistes extends ArrayList<Artistes> implements Serializable {
         this.residentAdvisorUrl = residentAdvisorUrl;
         this.instagramUrl = instagramUrl;
         this.siteUrl = siteUrl;
+    }
+
+    public Artistes(JSONObject jsonArtisteFromList) {
     }
 
     public String getName() {
@@ -122,15 +127,5 @@ public class Artistes extends ArrayList<Artistes> implements Serializable {
 
     public void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
-    }
-
-    @Override
-    public Stream<Artistes> stream() {
-        return null;
-    }
-
-    @Override
-    public Stream<Artistes> parallelStream() {
-        return null;
     }
 }
