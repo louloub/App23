@@ -218,11 +218,11 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                         // JSON ARTISTE FROM list est un artiste au format JSON OBJECT
                                         JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
 
-                                        Artistes artistes1 = new Artistes(jsonArtisteFromList);
+                                        // Artistes artistes1 = new Artistes(jsonArtisteFromList);
 
-                                        Log.d(TAG, " artistes1 = " +artistes1 );
+                                        Log.d(TAG, " jsonArtisteFromList = " +jsonArtisteFromList );
 
-                                        artistesList.add(artistes1);
+                                        artistesList.add(jsonArtisteFromList);
                                         // artistesList.get(iA);
 
                                         Log.d(TAG, "artistesList =  " + artistesList);
