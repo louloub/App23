@@ -126,7 +126,7 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
             <!-- LISTE DJS -->
-            <TextView
+            <!--<TextView
                 android:id="@+id/tvArtisteName"
                 android:ellipsize="marquee"
                 android:layout_width="wrap_content"
@@ -135,7 +135,14 @@
                 android:layout_margin="@dimen/generalMargin"
                 android:layout_toRightOf="@id/ivPhotoEvent"
                 android:text="DJ1 - DJ2 - DJ3 ..."
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />-->
+
+            <!-- LISTE DJS -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recylcerViewArtistesEventList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
         </LinearLayout>
 
         <!-- LINEAR LIEUX -->

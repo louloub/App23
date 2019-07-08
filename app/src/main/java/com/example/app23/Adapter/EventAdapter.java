@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +32,12 @@ import com.example.app23.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static android.view.View.GONE;
+import static com.android.volley.VolleyLog.TAG;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
 
@@ -91,9 +94,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String preventesUrl = preventes.getPreventesUrl();
 
         // ARTISTES
-        Artistes artistes = (Artistes) event.getArtistes();
+        ArrayList<Artistes> artistesFromList = event.getArtistes();
         // TODO : afficher plusieurs artistes avec un loop
-        String artisteName = artistes.getName();
+        Log.d(TAG, "artistesFromList = " + artistesFromList );
+
+        // String artisteName = artistesFromList.getClass(Artistes);
         // TODO : rendre le DJ cliquable si il est sur notre site
 
         // LIEUX
@@ -129,7 +134,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvNameEvent.setText(name);
         holder.tvDateStart.setText(dateStartString);
         holder.tvDateEnd.setText(dateEndString);
-        holder.tvArtisteName.setText(artisteName);
+        // TODO à modifier setText
+        // holder.tvArtisteName.setText("test test test");
         holder.tvLieux.setText(nomLieux);
 
         holder.btnPreventes.setVisibility(View.VISIBLE);
@@ -211,7 +217,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //---------------------------------------------
         holder.btnConcours.setOnClickListener(v ->
         {
-            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux,concoursUrl);
+            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistesFromList,lieux,concoursUrl);
 
             Intent intent = new Intent(mCtx, EventPageActivity.class);
             intent.putExtra("event", eventForIntent);
@@ -233,7 +239,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //-------------------------------------------------
         holder.itemView.setOnClickListener(v -> {
 
-            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistes,lieux, concoursUrl);
+            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistesFromList,lieux, concoursUrl);
 
             Intent intent = new Intent(mCtx, EventPageActivity.class);
             intent.putExtra("event", eventForIntent);
@@ -261,7 +267,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
             ivFacebookEvent = itemView.findViewById(R.id.ivFacebookEvent);
-            tvArtisteName = itemView.findViewById(R.id.tvArtisteName);
+            // tvArtisteName = itemView.findViewById(R.id.tvArtisteName);
             tvLieux = itemView.findViewById(R.id.tvLieux);
             btnPreventes = itemView.findViewById(R.id.btnPreventes);
             btnConcours = itemView.findViewById(R.id.btnConcours);
@@ -277,7 +283,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
     }
 
-    /*//----------------------
+    /*
+    //----------------------
     // INTENT FB APPLICATION
     //----------------------
     public static Intent getOpenFacebookIntent(PackageManager pm, String url) {

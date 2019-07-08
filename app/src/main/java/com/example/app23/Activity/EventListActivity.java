@@ -129,7 +129,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
                             // CONCOURS
                             String concoursUrl = eventJsonObject.getString("concours_url");
-                            Log.d(TAG, "concoursUrl = "  +concoursUrl);
 
                             //--------------------------
                             // RETRIEVE PREVENTES OBJECT
@@ -144,13 +143,11 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                 if (!eventJsonObject.isNull("preventes_event"))
                                 {
                                     JSONObject preventes = eventJsonObject.getJSONObject("preventes_event");
-                                    // get data JSONArray from preventes
                                     if (preventes.has("nombre_preventes"))
                                     {
                                         if (!preventes.isNull("nombre_preventes"))
                                         {
                                             int newPreventesNbr = preventes.getInt("nombre_preventes");
-                                            Log.d(TAG, "newPreventesNbr = " +newPreventesNbr);
                                             preventesEvent.setNombre(newPreventesNbr);
                                         } else {
                                         }
@@ -160,7 +157,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             if (!preventes.isNull("prix_preventes"))
                                             {
                                                 int newPreventesPrix = preventes.getInt("prix_preventes");
-                                                Log.d(TAG, "newPreventesPrix = " +newPreventesPrix);
                                                 preventesEvent.setPrix(newPreventesPrix);
                                             } else {
                                             }
@@ -170,7 +166,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                                 if (!preventes.isNull("preventes_url"))
                                                 {
                                                     String newPreventesUrl = preventes.getString("preventes_url");
-                                                    Log.d(TAG, "newPreventesUrl = " +newPreventesUrl);
                                                     preventesEvent.setPreventesUrl(newPreventesUrl);
                                                 } else {
                                                 }
@@ -188,21 +183,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             //-------------------------
                             // RETRIEVE ARTISTES OBJECT
                             //-------------------------
-                            String nameArtiste = "";
-                            String bioArtiste = "";
-                            String photoUrlArtiste = "";
-                            String facebookUrlArtiste = "";
-                            String soundcloudUrlArtiste = "";
-                            String beatportUrlArtiste = "";
-                            String mixcloudUrlArtiste = "";
-                            String twitterUrlArtiste = "";
-                            String residentAdvisorUrlArtiste = "";
-                            String instagramUrlArtiste = "";
-                            String siteUrlArtiste = "";
-
-                            Artistes artiste = new Artistes(nameArtiste,bioArtiste,photoUrlArtiste,facebookUrlArtiste,
-                                    soundcloudUrlArtiste,beatportUrlArtiste,mixcloudUrlArtiste,twitterUrlArtiste,
-                                    residentAdvisorUrlArtiste,instagramUrlArtiste,siteUrlArtiste);
 
                             ArrayList artistesList = new ArrayList<Artistes>();
 
@@ -213,21 +193,20 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     // JSON ARRAY ARTISTES contient les 4 Artistes
                                     JSONArray jsonArrayArtistes = eventJsonObject.getJSONArray("artistes_event");
 
-                                    for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
-                                    {
-                                        // JSON ARTISTE FROM list est un artiste au format JSON OBJECT
-                                        JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
+                                    if(jsonArrayArtistes.length()>0){
 
-                                        artistesList.add(jsonArtisteFromList);
-
+                                        for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
+                                        {
+                                            // JSON ARTISTE FROM list est un artiste au format JSON OBJECT
+                                            JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
+                                            Log.d(TAG, "jsonArtisteFromList = " +jsonArtisteFromList );
+                                            artistesList.add(jsonArtisteFromList);
+                                        }
                                     }
                                 } else {
                                 }
                             } else {
                             }
-
-                            // protected static ArrayList<Player> players = new ArrayList<Player>();
-                            // Map<String, Object> profileMap = profile.toMap();
 
                             //------------------------
                             // RETRIEVE LIEUX OBJET
@@ -281,10 +260,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // creating adapter object and setting it to recyclerview
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
-
-
-
-
                         }
 
                     } catch (JSONException e) {

@@ -58,15 +58,14 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //initializing the productlist
+        //initializing the ArtistesList
         artistesList = new ArrayList<>();
 
         mContext = getApplicationContext();
 
-        // textView = findViewById(R.id.textView);
-
         loadArtistes();
 
+        // Name for ActionBar
         getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
 
         //---------------
