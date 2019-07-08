@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Artistes extends ArrayList<Artistes> implements Serializable {
+public class Artistes  implements Serializable {
 
     private String name;
     private String bio;
@@ -156,8 +156,8 @@ public class Artistes extends ArrayList<Artistes> implements Serializable {
         return result;
     }
 
-    @Override
+    /*@Override
     public Stream<Artistes> stream() {
         return null;
-    }
+    }*/
 }

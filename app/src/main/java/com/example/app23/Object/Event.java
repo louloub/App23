@@ -98,7 +98,7 @@ public class Event implements Serializable {
         return artistes;
     }
 
-    public void setArtistes(Artistes artistes) {
+    public void setArtistes(ArrayList<Artistes> artistes) {
         this.artistes = artistes;
     }
 
