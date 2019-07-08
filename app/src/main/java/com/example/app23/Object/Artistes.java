@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Artistes  implements Serializable {
+public class Artistes implements Serializable {
 
     private String name;
     private String bio;

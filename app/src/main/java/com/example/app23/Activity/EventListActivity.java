@@ -188,7 +188,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             String facebook_url = "";
 
                             ArrayList<Artistes> artistesList = new ArrayList<>();
-                            Artistes artistesFromJsonObject = new Artistes(name,facebook_url);
+
 
                             if(eventJsonObject.has("artistes_event"))
                             {
@@ -201,7 +201,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                         {
                                             // JSON ARTISTE FROM list : artiste au format JSON OBJECT
                                             JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
-
+                                            Artistes artistesFromJsonObject = new Artistes(name,facebook_url);
                                             /*Artistes artistesFromJsonObject = new Artistes(jsonArtisteFromList);
                                             Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject);*/
 
@@ -211,16 +211,16 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                                     artistesFromJsonObject.setName(nameArtiste);
                                                     Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
 
-                                                    if(jsonArtisteFromList.has("facebook_url_artiste"))
-                                                    {
-                                                        String artisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
-                                                        artistesFromJsonObject.setFacebookUrl(artisteFacebookUrl);
-                                                        Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
-                                                        //artistesList.add(artistesFromJsonObject);
-                                                        // Log.d(TAG, "artistesList = " +artistesList );
-                                                    }else {
-                                                    }
+                                                }else {
+                                                }
 
+                                                if(jsonArtisteFromList.has("facebook_url_artiste"))
+                                                {
+                                                    String artisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
+                                                    artistesFromJsonObject.setFacebookUrl(artisteFacebookUrl);
+                                                    Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
+                                                    //artistesList.add(artistesFromJsonObject);
+                                                    // Log.d(TAG, "artistesList = " +artistesList );
                                                 }else {
                                                 }
 
@@ -228,8 +228,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             Log.d(TAG, "artistesList = " +artistesList );
                                         }
 
-                                    artistesList.add(artistesFromJsonObject);
-                                    Log.d(TAG, "artistesList = " +artistesList );
+                                    /*artistesList.add(artistesFromJsonObject);
+                                    Log.d(TAG, "artistesList = " +artistesList );*/
 
                                 } else {
                                 }
