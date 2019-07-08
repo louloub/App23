@@ -38,6 +38,10 @@ public class Artistes extends ArrayList<Artistes> implements Serializable {
         this.siteUrl = siteUrl;
     }
 
+    public Artistes(String name, String facebook_url) {
+
+    }
+
     public Artistes(JSONObject jsonArtisteFromList) {
     }
 

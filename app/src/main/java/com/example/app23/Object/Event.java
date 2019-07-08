@@ -17,6 +17,7 @@ public class Event implements Serializable {
     private Lieux lieux;
     private String concoursUrl;
 
+    // Constructeur complet
     public Event(String photoUrl, String name, Date dateStart, Date dateEnd, String facebookUrl,
                  Preventes preventes, ArrayList<Artistes> artistes, Lieux lieux, String concoursUrl) {
         this.photoUrl = photoUrl;
@@ -27,6 +28,13 @@ public class Event implements Serializable {
         this.preventes = preventes;
         this.artistes = artistes;
         this.lieux = lieux;
+        this.concoursUrl = concoursUrl;
+    }
+
+    // Constructeur pour le click sur le bouton concours dans la liste des événements
+    public Event(String photoUrl, String name, String concoursUrl) {
+        this.photoUrl = photoUrl;
+        this.name = name;
         this.concoursUrl = concoursUrl;
     }
 

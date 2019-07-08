@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.app23.Activity.ArtistesPageActivity;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
 import com.example.app23.Object.Artistes;
@@ -29,6 +32,7 @@ import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
+import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -67,6 +71,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new EventViewHolder(view);
     }
 
+    RecyclerView recyclerView;
+    // recyclerView = findViewById(R.id.recylcerView);
+
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
         Event event = eventList.get(position);
@@ -93,10 +100,40 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String nbrPreventesString = Integer.toString(nbrPreventesInt);
         String preventesUrl = preventes.getPreventesUrl();
 
+
         // ARTISTES
+        // TODO START TEST
+
+        //ArrayList<Artistes> artistesFromList = (new ArrayList<>());
         ArrayList<Artistes> artistesFromList = event.getArtistes();
+        Log.d(TAG,"artistesFromList = " +artistesFromList);
+
+        /*Gson gson = new Gson();
+
+        int artisteListSize = artistesFromList.size();
+
+        for (int ial = 0; ial < artisteListSize; ial++)
+
+            {
+                String test = String.valueOf(artistesFromList.get(ial));
+                Artistes object = gson.fromJson(test, Artistes.class);
+
+
+
+                // Artistes artistesArtistesFromJson = gson.fromJson(artistesFromList,Artistes.class);
+                // Artistes artistesArtistesFromJson = (Artistes) artistesFromList.get(ial) ;
+
+                // Artistes artisteObjectFromList = artistesFromList.get(ial);
+                // String artisteNameFromList = artisteObjectFromList.getName();
+                // Log.d(TAG,"artisteObjectFromList = " +artisteObjectFromList);
+            }*/
+
+
+        // TODO END TEST
+
+
         // TODO : afficher plusieurs artistes avec un loop
-        Log.d(TAG, "artistesFromList = " + artistesFromList );
+        // Log.d(TAG, "artistesFromList = " + artistesFromList );
 
         // String artisteName = artistesFromList.getClass(Artistes);
         // TODO : rendre le DJ cliquable si il est sur notre site
@@ -134,6 +171,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvNameEvent.setText(name);
         holder.tvDateStart.setText(dateStartString);
         holder.tvDateEnd.setText(dateEndString);
+        // TODO à modifier setText
+        // TODO à modifier setText
+        // TODO à modifier setText
         // TODO à modifier setText
         // holder.tvArtisteName.setText("test test test");
         holder.tvLieux.setText(nomLieux);
@@ -194,6 +234,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 //--------------
                 // END WEBVIEW
                 //--------------
+
+                //--------------
+                // ALERT DIALOG
+                //--------------
                 alertDialogPreventes.setView(webViewPreventes);
                 alertDialogPreventes.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                     @Override
@@ -205,11 +249,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             });
         }
 
+        //-------------------
+        // CONTEST VISIBILIY
+        //-------------------
         holder.btnConcours.setVisibility(View.VISIBLE);
         if (concoursUrl.isEmpty()) {
             holder.btnConcours.setVisibility(View.GONE);
         } else {
-
         }
 
         //---------------------------------------------
@@ -217,7 +263,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //---------------------------------------------
         holder.btnConcours.setOnClickListener(v ->
         {
-            Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistesFromList,lieux,concoursUrl);
+            Event eventForIntent = new Event(photo,name,concoursUrl);
 
             Intent intent = new Intent(mCtx, EventPageActivity.class);
             intent.putExtra("event", eventForIntent);
@@ -228,16 +274,30 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //--------------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON EVENT SOCIAL NETWORK ICON
         //--------------------------------------------------------
-        holder.ivFacebookEvent.setOnClickListener(v -> {
+        /*holder.ivFacebookEvent.setOnClickListener(v -> {
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(facebook));
             mCtx.startActivity(intent);
+        });*/
+
+        // BUTTON ANIMATION
+        Animation animation = AnimationUtils.loadAnimation(mCtx, R.anim.alpha);
+
+        holder.ivFacebookEvent.setOnClickListener(v -> {
+            holder.ivFacebookEvent.startAnimation(animation);
+            // String facebookUrl = artiste.getFacebookUrl();
+
+            getOpenFacebookIntent(mCtx.getPackageManager(), facebook);
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            String facebookUrlApp = getFacebookURL(mCtx, facebook);
+            facebookIntent.setData(Uri.parse(facebookUrlApp));
+            mCtx.startActivity(facebookIntent);
         });
 
         //-------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON EVENT IN THE LIST
         //-------------------------------------------------
-        holder.itemView.setOnClickListener(v -> {
+        /*holder.itemView.setOnClickListener(v -> {
 
             Event eventForIntent = new Event(photo,name,dateStart,dateEnd,facebook,preventes,artistesFromList,lieux, concoursUrl);
 
@@ -245,7 +305,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             intent.putExtra("event", eventForIntent);
 
             mCtx.startActivity(intent);
-        });
+        });*/
     }
 
     @Override
@@ -258,6 +318,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         TextView tvNameEvent, tvDateStart, tvDateEnd, tvArtisteName, tvLieux;
         ImageView ivPhotoEvent, ivFacebookEvent;
         Button btnPreventes, btnConcours;
+        RecyclerView recylcerViewArtistesEventList;
 
         public EventViewHolder(View itemView) {
             super(itemView);
@@ -271,6 +332,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvLieux = itemView.findViewById(R.id.tvLieux);
             btnPreventes = itemView.findViewById(R.id.btnPreventes);
             btnConcours = itemView.findViewById(R.id.btnConcours);
+            recylcerViewArtistesEventList = itemView.findViewById(R.id.recylcerViewArtistesEventList);
         }
     }
 
@@ -352,5 +414,38 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // create and show the alert dialog
         android.support.v7.app.AlertDialog dialog = myPopup.create();
         myPopup.show();
+    }
+
+    //----------------------
+    // INTENT FB APPLICATION
+    //----------------------
+    public static Intent getOpenFacebookIntent(PackageManager pm, String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+    // Todo : les constantes sont initié sur l'activité précédente, comment gérer ca ?
+    // method to get the right URL to use in the intent
+    public static String getFacebookURL(Context context, String url) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { // newer versions of fb app
+                return "fb://facewebmodal/f?href=" + url;
+            } else { // older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
+            return FACEBOOK_URL_FOR_SHARING; // normal web url
+        }
     }
 }

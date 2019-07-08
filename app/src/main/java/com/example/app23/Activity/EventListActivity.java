@@ -184,7 +184,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // RETRIEVE ARTISTES OBJECT
                             //-------------------------
 
-                            ArrayList artistesList = new ArrayList<Artistes>();
+                            ArrayList<Artistes> artistesList = new ArrayList<>();
 
                             if(eventJsonObject.has("artistes_event"))
                             {
@@ -193,14 +193,35 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     // JSON ARRAY ARTISTES contient les 4 Artistes
                                     JSONArray jsonArrayArtistes = eventJsonObject.getJSONArray("artistes_event");
 
-                                    if(jsonArrayArtistes.length()>0){
-
+                                    if(jsonArrayArtistes.length()>0)
+                                    {
                                         for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
                                         {
-                                            // JSON ARTISTE FROM list est un artiste au format JSON OBJECT
+                                            // JSON ARTISTE FROM list : artiste au format JSON OBJECT
                                             JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
+
+                                            /*Artistes artistesFromJsonObject = new Artistes(jsonArtisteFromList);
+                                            Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject);*/
+
+                                            String name = "";
+                                            String facebook_url = "";
+
+                                            Artistes artistesFromJsonObject = new Artistes(name,facebook_url);
+
+                                                if(jsonArtisteFromList.has("name_artiste"))
+                                                {
+                                                    String nameArtiste = jsonArtisteFromList.getString("name_artiste");
+                                                    artistesFromJsonObject.setName(nameArtiste);
+                                                }else {
+                                                }
+                                                if(jsonArtisteFromList.has("facebook_url_artiste"))
+                                                {
+                                                    String artisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
+                                                    artistesFromJsonObject.setFacebookUrl(artisteFacebookUrl);
+                                                }else {
+                                                }
                                             Log.d(TAG, "jsonArtisteFromList = " +jsonArtisteFromList );
-                                            artistesList.add(jsonArtisteFromList);
+                                            artistesList.add(artistesFromJsonObject);
                                         }
                                     }
                                 } else {
