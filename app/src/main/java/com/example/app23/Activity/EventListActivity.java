@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.app23.Adapter.ArtistesEventAdapter;
 import com.example.app23.Adapter.EventAdapter;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Object.Event;
@@ -45,6 +46,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
     // recyclerview
     RecyclerView recyclerViewEventList;
+    RecyclerView recyclerViewArtistesEventList;
     private Context mContext;
 
     @Override
@@ -54,11 +56,13 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
         // getting the recyclerview from xml
         recyclerViewEventList = findViewById(R.id.recylcerViewEventList);
+        //recyclerViewArtistesEventList = findViewById(R.id.);
 
         recyclerViewEventList.setHasFixedSize(true);
         recyclerViewEventList.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerViewArtistesEventList.setLayoutManager(new LinearLayoutManager(this));
 
-        //initializing the productlist
+        //initializing the eventlist
         eventList = new ArrayList<>();
 
         mContext = getApplicationContext();
@@ -189,7 +193,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
 
                             ArrayList<Artistes> artistesList = new ArrayList<>();
 
-
                             if(eventJsonObject.has("artistes_event"))
                             {
                                 if (!eventJsonObject.isNull("artistes_event"))
@@ -202,15 +205,12 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             // JSON ARTISTE FROM list : artiste au format JSON OBJECT
                                             JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
                                             Artistes artistesFromJsonObject = new Artistes(name,facebook_url);
-                                            /*Artistes artistesFromJsonObject = new Artistes(jsonArtisteFromList);
-                                            Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject);*/
 
                                                 if(jsonArtisteFromList.has("name_artiste"))
                                                 {
                                                     String nameArtiste = jsonArtisteFromList.getString("name_artiste");
                                                     artistesFromJsonObject.setName(nameArtiste);
                                                     Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
-
                                                 }else {
                                                 }
 
@@ -219,8 +219,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                                     String artisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
                                                     artistesFromJsonObject.setFacebookUrl(artisteFacebookUrl);
                                                     Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
-                                                    //artistesList.add(artistesFromJsonObject);
-                                                    // Log.d(TAG, "artistesList = " +artistesList );
                                                 }else {
                                                 }
 
@@ -228,13 +226,13 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                             Log.d(TAG, "artistesList = " +artistesList );
                                         }
 
-                                    /*artistesList.add(artistesFromJsonObject);
-                                    Log.d(TAG, "artistesList = " +artistesList );*/
-
                                 } else {
                                 }
                             } else {
                             }
+
+                            /*ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter(EventListActivity.this,artistesList);
+                            recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
 
                             //------------------------
                             // RETRIEVE LIEUX OBJET
@@ -288,6 +286,11 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // creating adapter object and setting it to recyclerview
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
+
+                            /*ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter
+                                    (EventListActivity.this,artistesList);
+                            recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
+
                         }
 
                     } catch (JSONException e) {

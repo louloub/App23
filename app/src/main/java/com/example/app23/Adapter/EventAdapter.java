@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.app23.Activity.ArtistesEventActivity;
 import com.example.app23.Activity.ArtistesPageActivity;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
@@ -52,6 +54,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
     public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
 
+    RecyclerView recyclerViewArtistesEventList;
+
     // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/sharer/sharer.php?u=";
 
     // TODO : comment gérer le changement de ville pour cette constante ?
@@ -71,17 +75,31 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new EventViewHolder(view);
     }
 
-    RecyclerView recyclerView;
-    // recyclerView = findViewById(R.id.recylcerView);
+    /*RecyclerView recyclerView;
+    recyclerView = findViewById(R.id.recylcerView);*/
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
         Event event = eventList.get(position);
 
+        // PHOTO
         String photo = event.getPhotoUrl();
+
+        //--------------------------------------------------
+        // RECUPERATION & AFFICHAGE DE LA PHOTO AVEC SON URL
+        //--------------------------------------------------
+        Glide.with(mCtx)
+                .load(event.getPhotoUrl())
+                .into(holder.ivPhotoEvent);
+
+        //-----
+        // NAME
+        //-----
         String name = event.getName();
 
+        //-----
         // DATE
+        //-----
         Date dateStart = event.getDateStart();
         DateFormat formatterDateStart = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         String dateStartString = formatterDateStart.format(dateStart);
@@ -90,9 +108,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         DateFormat formatterDateEnd = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         String dateEndString = formatterDateEnd.format(dateEnd);
 
+        //-------------
+        // FACEBOOK URL
+        //-------------
         String facebook = event.getFacebookUrl();
 
+        //----------
         // PREVENTES
+        //----------
         Preventes preventes = event.getPreventes();
         int prixPreventesInt = preventes.getPrix();
         String prixPreventesString = Integer.toString(prixPreventesInt);
@@ -100,49 +123,39 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String nbrPreventesString = Integer.toString(nbrPreventesInt);
         String preventesUrl = preventes.getPreventesUrl();
 
-
+        //---------
         // ARTISTES
-        // TODO START TEST
-
-        //ArrayList<Artistes> artistesFromList = (new ArrayList<>());
+        //---------
         ArrayList<Artistes> artistesFromList = event.getArtistes();
         Log.d(TAG,"artistesFromList = " +artistesFromList);
 
-        /*Gson gson = new Gson();
+        for (int i = 0; i < artistesFromList.size(); i++) {
+            Artistes artistes = artistesFromList.get(i);
+            String nameArtistsFromList = artistes.getName();
+            String facebookUrlFromList = artistes.getFacebookUrl();
+            Log.d(TAG, "artistes = " + artistes);
+        }
 
-        int artisteListSize = artistesFromList.size();
-
-        for (int ial = 0; ial < artisteListSize; ial++)
-
-            {
-                String test = String.valueOf(artistesFromList.get(ial));
-                Artistes object = gson.fromJson(test, Artistes.class);
-
-
-
-                // Artistes artistesArtistesFromJson = gson.fromJson(artistesFromList,Artistes.class);
-                // Artistes artistesArtistesFromJson = (Artistes) artistesFromList.get(ial) ;
-
-                // Artistes artisteObjectFromList = artistesFromList.get(ial);
-                // String artisteNameFromList = artisteObjectFromList.getName();
-                // Log.d(TAG,"artisteObjectFromList = " +artisteObjectFromList);
-            }*/
-
+        //-----------------
+        // ADAPTER ARTISTES
+        //-----------------
+        ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter(mCtx,artistesFromList);
+        holder.recyclerViewArtistesEventList.setAdapter(artistesAdapter);
 
         // TODO END TEST
-
-
-        // TODO : afficher plusieurs artistes avec un loop
-        // Log.d(TAG, "artistesFromList = " + artistesFromList );
 
         // String artisteName = artistesFromList.getClass(Artistes);
         // TODO : rendre le DJ cliquable si il est sur notre site
 
+        //------
         // LIEUX
+        //------
         Lieux lieux = event.getLieux();
         String nomLieux = lieux.getName();
 
+        //---------
         // CONCOURS
+        //---------
         String concoursUrl = event.getConcoursUrl();
 
         //---------------------------------
@@ -158,13 +171,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
         else {}
 
-        //--------------------------------------
-        // RECUPERATION DE LA PHOTO AVEC SON URL
-        //--------------------------------------
-        Glide.with(mCtx)
-                .load(event.getPhotoUrl())
-                .into(holder.ivPhotoEvent);
-
         //-------------
         // SET CONTENT
         //-------------
@@ -178,6 +184,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // holder.tvArtisteName.setText("test test test");
         holder.tvLieux.setText(nomLieux);
 
+        //----------
+        // PREVENTES
+        //----------
         holder.btnPreventes.setVisibility(View.VISIBLE);
         if (nbrPreventesInt==0) {
             holder.btnPreventes.setVisibility(GONE);
@@ -249,9 +258,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             });
         }
 
-        //-------------------
+        //------------------
         // CONTEST VISIBILIY
-        //-------------------
+        //------------------
         holder.btnConcours.setVisibility(View.VISIBLE);
         if (concoursUrl.isEmpty()) {
             holder.btnConcours.setVisibility(View.GONE);
@@ -280,7 +289,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             mCtx.startActivity(intent);
         });*/
 
+        //-----------------
         // BUTTON ANIMATION
+        //-----------------
         Animation animation = AnimationUtils.loadAnimation(mCtx, R.anim.alpha);
 
         holder.ivFacebookEvent.setOnClickListener(v -> {
@@ -318,7 +329,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         TextView tvNameEvent, tvDateStart, tvDateEnd, tvArtisteName, tvLieux;
         ImageView ivPhotoEvent, ivFacebookEvent;
         Button btnPreventes, btnConcours;
-        RecyclerView recylcerViewArtistesEventList;
+        RecyclerView recyclerViewArtistesEventList;
 
         public EventViewHolder(View itemView) {
             super(itemView);
@@ -332,7 +343,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             tvLieux = itemView.findViewById(R.id.tvLieux);
             btnPreventes = itemView.findViewById(R.id.btnPreventes);
             btnConcours = itemView.findViewById(R.id.btnConcours);
-            recylcerViewArtistesEventList = itemView.findViewById(R.id.recylcerViewArtistesEventList);
+            recyclerViewArtistesEventList = itemView.findViewById(R.id.recyclerViewArtistesEventList);
+            recyclerViewArtistesEventList.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
     }
 
