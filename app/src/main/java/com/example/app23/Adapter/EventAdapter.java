@@ -6,9 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.app23.Activity.DividerItemDecorator;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
 import com.example.app23.Object.Artistes;
@@ -46,17 +43,7 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
 
-    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
-    // public static String FACEBOOK_URL_FOR_SHARING = "fb://page/?id=258326807569567";
-    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/Bejiines/photos/a.386011438160632/2492243550870733/?type=3&theater&ifg=1";
-    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/photos/a.295593667176214/2270758406326387/?type=3&theater";
-    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
-    public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
-
-    // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/sharer/sharer.php?u=";
-
-    // TODO : comment gérer le changement de ville pour cette constante ?
-    public static String FACEBOOK_PAGE_ID = "YourDJMontpellier";
+    public static String FACEBOOK_URL_FOR_SHARING = "https://www.yourdj.fr";
 
     private Context mCtx;
     private List<Event> eventList;
@@ -125,7 +112,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //-----------------
         // ADAPTER ARTISTES
         //-----------------
-        ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter(mCtx,artistesFromList);
+        ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter(mCtx,artistesFromList);
         holder.recyclerViewArtistesEventList.setAdapter(artistesAdapter);
 
         //------
@@ -133,6 +120,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //------
         Lieux lieux = event.getLieux();
         String nomLieux = lieux.getName();
+        String iFrameLieux = lieux.getMapLieuIframe();
+        Log.d(TAG, "iFrameLieux = " +iFrameLieux);
 
         //---------
         // CONCOURS
@@ -234,6 +223,77 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 alertDialogPreventes.show();
             });
         }
+
+        //------------------------------------
+        // LISTENER FOR WHEN WE CLICK ON PLACE
+        //------------------------------------
+            holder.tvLieux.setOnClickListener(v -> {
+                if (!iFrameLieux.isEmpty())
+                {
+                    AlertDialog.Builder alertDialogLieux = new AlertDialog.Builder(mCtx);
+                    alertDialogLieux.setTitle("Ca se passe ici !");
+
+                    //--------------
+                    // START WEBVIEW
+                    //--------------
+                    String iframe = "<!DOCTYPE html>" +
+                            "<html>" +
+                            "<body>" +
+                            "<iframe width=\"100%\" height=\"1000\" id=\"sc-widget\" scrolling=\"yes\" frameborder=\"yes\" " +
+                            "src=\"" + iFrameLieux + "\">" +
+                            "</iframe>" +
+                            "</body>" +
+                            "</html>";
+
+                    WebView webViewPreventes = new WebView(mCtx);
+                    webViewPreventes.getSettings().setJavaScriptEnabled(true);
+                    webViewPreventes.addJavascriptInterface(new WebViewResizer(), "WebViewResizer");
+                    webViewPreventes.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                            view.loadUrl(url);
+                            return true;
+                        }
+
+                        @Override
+                        public void onPageFinished(WebView webView, String url) {
+                            // webView.loadUrl("javascript:window.WebViewResizer.processHeight(document.querySelector('body').offsetHeight);");
+                            super.onPageFinished(webView, url);
+                        }
+
+                        private boolean loadUrl(WebView view, String url) {
+                            if (url.startsWith("http:") || url.startsWith("https:")) {
+                                view.loadUrl(url);
+                                return false;
+                            }
+                            // Otherwise allow the OS to handle it
+                            else if (url.startsWith("tel:")) {
+                                Intent tel = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+                                // startActivity(tel);
+                                return true;
+                            }
+                            return true;
+                        }
+                    });
+                    webViewPreventes.loadDataWithBaseURL("", iframe, "text/html", "UTF-8", "");
+
+                    //--------------
+                    // END WEBVIEW
+                    //--------------
+
+                    //--------------
+                    // ALERT DIALOG
+                    //--------------
+                    alertDialogLieux.setView(webViewPreventes);
+                    alertDialogLieux.setNegativeButton("Fermer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialogLieux.show();
+                }
+            });
 
         //------------------
         // CONTEST VISIBILIY
@@ -345,40 +405,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
     }
 
-    /*
-    //----------------------
-    // INTENT FB APPLICATION
-    //----------------------
-    public static Intent getOpenFacebookIntent(PackageManager pm, String url) {
-        Uri uri = Uri.parse(url);
-        try {
-            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
-            if (applicationInfo.enabled) {
-                // http://stackoverflow.com/a/24547437/1048340
-                uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=" + url);
-            }
-
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        return new Intent(Intent.ACTION_VIEW, uri);
-    }
-
-    // method to get the right URL to use in the intent
-    public String getConcoursFacebookURL(Context context, String url) {
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-            if (versionCode >= 3002850) { // newer versions of fb app
-                return "fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=" + url;
-            } else { // older versions of fb app
-                return "fb://page/" + FACEBOOK_PAGE_ID;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
-            return FACEBOOK_URL_FOR_SHARING; // normal web url
-        }
-    }*/
-
     //----------------------------------------
     // ALERTDIALOG FOR CLICK ON CONTEST BUTTON
     //----------------------------------------
@@ -432,7 +458,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new Intent(Intent.ACTION_VIEW, uri);
     }
 
-    // Todo : les constantes sont initié sur l'activité précédente, comment gérer ca ?
     // method to get the right URL to use in the intent
     public static String getFacebookURL(Context context, String url) {
         PackageManager packageManager = context.getPackageManager();
@@ -441,11 +466,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             if (versionCode >= 3002850) { // newer versions of fb app
                 return "fb://facewebmodal/f?href=" + url;
             } else { // older versions of fb app
-                return "fb://page/" + FACEBOOK_PAGE_ID;
+                return "fb://page/" + url;
             }
         } catch (PackageManager.NameNotFoundException e) {
-            // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
-            return FACEBOOK_URL_FOR_SHARING; // normal web url
+            return url; // normal web url
         }
     }
 }

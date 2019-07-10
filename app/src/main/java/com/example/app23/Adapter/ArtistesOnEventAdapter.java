@@ -2,7 +2,6 @@ package com.example.app23.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.app23.Activity.ArtistesListActivity;
 import com.example.app23.Activity.ArtistesPageActivity;
 import com.example.app23.Object.Artistes;
 import com.example.app23.R;
@@ -24,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class ArtistesEventAdapter extends RecyclerView.Adapter<ArtistesEventAdapter.ArtistesEventViewHolder>  {
+public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEventAdapter.ArtistesEventViewHolder>  {
 
     // JSON Source
     private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes4.json";
@@ -39,7 +37,7 @@ public class ArtistesEventAdapter extends RecyclerView.Adapter<ArtistesEventAdap
     RecyclerView recyclerView;
 
     // Counstructor
-    public ArtistesEventAdapter(Context mCtx, List<Artistes> artistesEventList) {
+    public ArtistesOnEventAdapter(Context mCtx, List<Artistes> artistesEventList) {
         this.mCtx = mCtx;
         this.artistesEventList = artistesEventList;
     }

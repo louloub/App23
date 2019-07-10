@@ -13,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.app23.Adapter.ArtistesEventAdapter;
 import com.example.app23.Adapter.EventAdapter;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Object.Event;
@@ -231,7 +230,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             } else {
                             }
 
-                            /*ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter(EventListActivity.this,artistesList);
+                            /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter(EventListActivity.this,artistesList);
                             recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
 
                             //------------------------
@@ -261,12 +260,21 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                         } else {
                                         }
                                     }
-                                    if (lieux.has("adresse_lieux"))
+                                    if (lieux.has("iframe_url_lieux"))
                                     {
-                                        if (!lieux.isNull("adresse_lieux"))
+                                        if (!lieux.isNull("iframe_url_lieux"))
                                         {
-                                            String newAdresseLieux = lieux.getString("adresse_lieux");
-                                            lieuxEvent.setAdresse(newAdresseLieux);
+                                            String newIframeUrlLieux = lieux.getString("iframe_url_lieux");
+                                            lieuxEvent.setMapLieuIframe(newIframeUrlLieux);
+                                        } else {
+                                        }
+                                    }
+                                    if (lieux.has("name_lieux"))
+                                    {
+                                        if (!lieux.isNull("name_lieux"))
+                                        {
+                                            String newNameLieux = lieux.getString("name_lieux");
+                                            lieuxEvent.setNameLieux(newNameLieux);
                                         } else {
                                         }
                                     }
@@ -287,7 +295,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
 
-                            /*ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter
+                            /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter
                                     (EventListActivity.this,artistesList);
                             recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
 

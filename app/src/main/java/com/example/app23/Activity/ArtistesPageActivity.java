@@ -17,8 +17,6 @@ import com.example.app23.Object.Artistes;
 import com.example.app23.R;
 
 import static android.view.View.GONE;
-import static com.example.app23.Adapter.EventAdapter.FACEBOOK_PAGE_ID;
-import static com.example.app23.Adapter.EventAdapter.FACEBOOK_URL_FOR_SHARING;
 
 public class ArtistesPageActivity extends OptionMenuActivity {
 
@@ -220,7 +218,6 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         return new Intent(Intent.ACTION_VIEW, uri);
     }
 
-    // Todo : les constantes sont initié sur l'activité précédente, comment gérer ca ?
     // method to get the right URL to use in the intent
     public static String getFacebookURL(Context context, String url) {
         PackageManager packageManager = context.getPackageManager();
@@ -229,11 +226,10 @@ public class ArtistesPageActivity extends OptionMenuActivity {
             if (versionCode >= 3002850) { // newer versions of fb app
                 return "fb://facewebmodal/f?href=" + url + "posts";
             } else { // older versions of fb app
-                return "fb://page/" + FACEBOOK_PAGE_ID;
+                return "fb://page/" + url;
             }
         } catch (PackageManager.NameNotFoundException e) {
-            // Todo : quelle URL entrer dans la constante pour ce cas de figure ?
-            return FACEBOOK_URL_FOR_SHARING; // normal web url
+            return url; // normal web url
         }
     }
 }
