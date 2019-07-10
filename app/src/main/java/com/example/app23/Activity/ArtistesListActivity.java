@@ -99,7 +99,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     //------------------------
     // LOAD ARTISTES FROM JSON
     //------------------------
-    private void loadArtistes()
+    public void loadArtistes()
     {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
@@ -107,12 +107,8 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 (Request.Method.GET, URL, null, response ->
         {
             try {
-                Log.d(TAG, " JsonArrayRequest in try jsonArrayArtistesRequest " +response);
-
                 // Browse request contain json
                 for (int i = 0; i < response.length(); i++) {
-
-                    Log.d(TAG, " JsonArrayRequest in for " +i);
 
                     // Getting object from json array
                     JSONObject artistesJsonObject = response.getJSONObject(i);

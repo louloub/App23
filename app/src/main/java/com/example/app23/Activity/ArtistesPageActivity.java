@@ -31,7 +31,6 @@ public class ArtistesPageActivity extends OptionMenuActivity {
         setContentView(R.layout.activity_artistes_page);
 
         // Retrieve intent data
-        // TODO : crash car cast en ARTISTE impossible depuis que ARTISTE est extend arraylist
         Artistes artiste = (Artistes) getIntent().getSerializableExtra("artiste");
 
         // Retrieve data's objet

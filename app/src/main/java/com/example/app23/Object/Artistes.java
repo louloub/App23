@@ -4,8 +4,6 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 public class Artistes implements Serializable {
 
@@ -38,12 +36,11 @@ public class Artistes implements Serializable {
         this.siteUrl = siteUrl;
     }
 
-    public Artistes(String name, String facebook_url) {
+    public Artistes(String name, String facebook_url) { }
 
-    }
+    public Artistes(String name) { }
 
-    public Artistes(JSONObject jsonArtisteFromList) {
-    }
+    public Artistes(JSONObject jsonArtisteFromList) { }
 
     public String getName() {
         return name;

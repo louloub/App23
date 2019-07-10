@@ -20,13 +20,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.app23.Activity.ArtistesEventActivity;
-import com.example.app23.Activity.ArtistesPageActivity;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
 import com.example.app23.Object.Artistes;
@@ -34,7 +30,6 @@ import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
-import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -54,8 +49,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/MIND.SoundVector/posts/2811124258961306";
     public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/YourDJToulouse/posts/2246241378778090";
 
-    RecyclerView recyclerViewArtistesEventList;
-
     // public static String FACEBOOK_URL_FOR_SHARING = "https://www.facebook.com/sharer/sharer.php?u=";
 
     // TODO : comment gérer le changement de ville pour cette constante ?
@@ -74,9 +67,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         View view = inflater.inflate(R.layout.event_list_model, null);
         return new EventViewHolder(view);
     }
-
-    /*RecyclerView recyclerView;
-    recyclerView = findViewById(R.id.recylcerView);*/
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
@@ -129,22 +119,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         ArrayList<Artistes> artistesFromList = event.getArtistes();
         Log.d(TAG,"artistesFromList = " +artistesFromList);
 
-        for (int i = 0; i < artistesFromList.size(); i++) {
-            Artistes artistes = artistesFromList.get(i);
-            String nameArtistsFromList = artistes.getName();
-            String facebookUrlFromList = artistes.getFacebookUrl();
-            Log.d(TAG, "artistes = " + artistes);
-        }
-
         //-----------------
         // ADAPTER ARTISTES
         //-----------------
         ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter(mCtx,artistesFromList);
         holder.recyclerViewArtistesEventList.setAdapter(artistesAdapter);
 
-        // TODO END TEST
-
-        // String artisteName = artistesFromList.getClass(Artistes);
         // TODO : rendre le DJ cliquable si il est sur notre site
 
         //------
@@ -177,10 +157,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvNameEvent.setText(name);
         holder.tvDateStart.setText(dateStartString);
         holder.tvDateEnd.setText(dateEndString);
-        // TODO à modifier setText
-        // TODO à modifier setText
-        // TODO à modifier setText
-        // TODO à modifier setText
         // holder.tvArtisteName.setText("test test test");
         holder.tvLieux.setText(nomLieux);
 
@@ -283,11 +259,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //--------------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON EVENT SOCIAL NETWORK ICON
         //--------------------------------------------------------
-        /*holder.ivFacebookEvent.setOnClickListener(v -> {
+        /*
+        holder.ivFacebookEvent.setOnClickListener(v -> {
             Intent intent = new Intent (Intent.ACTION_VIEW);
             intent.setData(Uri.parse(facebook));
             mCtx.startActivity(intent);
-        });*/
+        });
+        */
 
         //-----------------
         // BUTTON ANIMATION
