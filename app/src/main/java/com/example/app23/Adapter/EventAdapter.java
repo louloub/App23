@@ -6,7 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.app23.Activity.DividerItemDecorator;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
 import com.example.app23.Object.Artistes;
@@ -117,15 +121,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // ARTISTES
         //---------
         ArrayList<Artistes> artistesFromList = event.getArtistes();
-        Log.d(TAG,"artistesFromList = " +artistesFromList);
 
         //-----------------
         // ADAPTER ARTISTES
         //-----------------
         ArtistesEventAdapter artistesAdapter = new ArtistesEventAdapter(mCtx,artistesFromList);
         holder.recyclerViewArtistesEventList.setAdapter(artistesAdapter);
-
-        // TODO : rendre le DJ cliquable si il est sur notre site
 
         //------
         // LIEUX
@@ -238,7 +239,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         // CONTEST VISIBILIY
         //------------------
         holder.btnConcours.setVisibility(View.VISIBLE);
-        if (concoursUrl.isEmpty()) {
+        if (concoursUrl.isEmpty())
+        {
             holder.btnConcours.setVisibility(View.GONE);
         } else {
         }
@@ -322,7 +324,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             btnPreventes = itemView.findViewById(R.id.btnPreventes);
             btnConcours = itemView.findViewById(R.id.btnConcours);
             recyclerViewArtistesEventList = itemView.findViewById(R.id.recyclerViewArtistesEventList);
-            recyclerViewArtistesEventList.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+            // Affichage horizontal des artistes dans la liste des événements
+            recyclerViewArtistesEventList.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL, false));
+            // Affichage d'une bar entre chaque artistes de la liste
+            recyclerViewArtistesEventList.addItemDecoration(new DividerItemDecoration(itemView.getContext(), DividerItemDecoration.HORIZONTAL));
+
+            // Test supprimer la dernière bar aprés le dernier artiste (fonctionne pas)
+            /*RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecorator(ContextCompat.getDrawable(itemView.getContext(), R.drawable.divider));
+            recyclerViewArtistesEventList.addItemDecoration(dividerItemDecoration);*/
+
         }
     }
 
