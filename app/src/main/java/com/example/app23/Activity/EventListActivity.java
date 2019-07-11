@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -149,8 +150,12 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     {
                                         if (!preventes.isNull("nombre_preventes"))
                                         {
-                                            int newPreventesNbr = preventes.getInt("nombre_preventes");
-                                            preventesEvent.setNombre(newPreventesNbr);
+                                            String newPreventesNbrString = preventes.getString("nombre_preventes");
+                                            if (!TextUtils.isEmpty(newPreventesNbrString)) {
+                                                int newPreventesNbr = Integer.parseInt(newPreventesNbrString);
+                                                preventesEvent.setNombre(newPreventesNbr);
+                                            }else {
+                                            }
                                         } else {
                                         }
 
@@ -158,8 +163,12 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                         {
                                             if (!preventes.isNull("prix_preventes"))
                                             {
-                                                int newPreventesPrix = preventes.getInt("prix_preventes");
-                                                preventesEvent.setPrix(newPreventesPrix);
+                                                String newPreventesPrixString = preventes.getString("nombre_preventes");
+                                                if (!TextUtils.isEmpty(newPreventesPrixString)) {
+                                                    int newPreventesPrix = preventes.getInt("prix_preventes");
+                                                    preventesEvent.setPrix(newPreventesPrix);
+                                                }else {
+                                                }
                                             } else {
                                             }
 
