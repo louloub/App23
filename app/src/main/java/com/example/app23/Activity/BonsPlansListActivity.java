@@ -1,6 +1,7 @@
 package com.example.app23.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,9 +31,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.android.volley.VolleyLog.TAG;
+
 public class BonsPlansListActivity extends OptionMenuActivity {
 
-    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
+    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event3.json";
     private static final String TAG = "BonsPlansListActivity" ;
     private static final String NAME_FOR_ACTIONBAR = "Bons Plans";
     private Context mContext;
@@ -50,6 +53,14 @@ public class BonsPlansListActivity extends OptionMenuActivity {
         recylcerViewBonsPlansList.setHasFixedSize(true);
         recylcerViewBonsPlansList.setLayoutManager(new LinearLayoutManager(this));
         loadEvents();
+
+        int eventListSize = eventList.size();
+
+        if (eventListSize == 0){
+            Log.d(TAG, "eventListSize" +eventListSize);
+            alertDialogNoBonsPlans();
+        }else{
+        }
     }
 
     //------------------------
@@ -60,6 +71,13 @@ public class BonsPlansListActivity extends OptionMenuActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
         JsonArrayRequest jsonArrayEventRequest = new JsonArrayRequest
+
+
+        /*if (response.length()==0)
+        {
+            alertDialogNoBonsPlans();
+        }*/
+
                 (Request.Method.GET, URL, null, response ->
                 {
                     try {
@@ -143,65 +161,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
 
                                 // FACEBOOK
                                 String facebookUrlEvent = eventJsonObject.getString("facebook_url_event");
-
-                                /*// CONCOURS
-                                String concoursUrl = eventJsonObject.getString("concours_url");
-
-                                //--------------------------
-                                // RETRIEVE PREVENTES OBJECT
-                                //--------------------------
-                                int preventesNbr = 0;
-                                int preventesPrix = 0;
-                                String preventesUrl = "";
-                                Preventes preventesEvent = new Preventes(preventesNbr,preventesPrix, preventesUrl);
-
-                                if(eventJsonObject.has("preventes_event"))
-                                {
-                                    if (!eventJsonObject.isNull("preventes_event"))
-                                    {
-                                        JSONObject preventes = eventJsonObject.getJSONObject("preventes_event");
-                                        if (preventes.has("nombre_preventes"))
-                                        {
-                                            if (!preventes.isNull("nombre_preventes"))
-                                            {
-                                                String newPreventesNbrString = preventes.getString("nombre_preventes");
-                                                    if (!TextUtils.isEmpty(newPreventesNbrString)) {
-                                                        int newPreventesNbr = Integer.parseInt(newPreventesNbrString);
-                                                        preventesEvent.setNombre(newPreventesNbr);
-                                                    }else {
-                                                    }
-                                            } else {
-                                            }
-                                            if (preventes.has("prix_preventes"))
-                                            {
-                                                if (!preventes.isNull("prix_preventes"))
-                                                {
-                                                    String newPreventesPrixString = preventes.getString("nombre_preventes");
-                                                    if (!TextUtils.isEmpty(newPreventesPrixString)) {
-                                                        int newPreventesPrix = preventes.getInt("prix_preventes");
-                                                        preventesEvent.setPrix(newPreventesPrix);
-                                                    }else {
-                                                    }
-                                                } else {
-                                                }
-                                                if (preventes.has("preventes_url"))
-                                                {
-                                                    if (!preventes.isNull("preventes_url"))
-                                                    {
-                                                        String newPreventesUrl = preventes.getString("preventes_url");
-                                                        preventesEvent.setPreventesUrl(newPreventesUrl);
-                                                    } else {
-                                                    }
-                                                } else {
-                                                }
-                                            } else {
-                                            }
-                                        } else {
-                                        }
-                                    } else {
-                                    }
-                                } else {
-                                }*/
 
                                 //-------------------------
                                 // RETRIEVE ARTISTES OBJECT
@@ -301,10 +260,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                 // creating adapter object and setting it to recyclerview
                                 BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
                                 recylcerViewBonsPlansList.setAdapter(adapter);
-
-                                /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter
-                                        (EventListActivity.this,artistesList);
-                                recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
                             }else {
                             }
                         }
@@ -320,5 +275,44 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                 );
 
         requestQueue.add(jsonArrayEventRequest);
+    }
+
+    public void alertDialogNoBonsPlans()
+    {
+        // Setup Alert builder
+        android.support.v7.app.AlertDialog.Builder myPopup = new android.support.v7.app.AlertDialog.Builder(this);
+        myPopup.setTitle("Pas encore de bons plans disponibles");
+        myPopup.setMessage("Tu peux t'inscrire à notre newsletter ou nous suivre sur Facebook pour ne rien rater :");
+
+        /*// Ddd a radio button list
+        String[] villes = {"Montpellier", "Toulouse", "Marseille", "Bordeaux", "Nantes"};
+        int checkedItems = 0;
+        myPopup.setSingleChoiceItems(villes, checkedItems, (dialog, which) -> {
+        });
+        myPopup.setPositiveButton("Valider", (dialogInterface, i) -> {
+            ListView lw = ((android.support.v7.app.AlertDialog)dialogInterface).getListView();
+            Object checkedItem = lw.getAdapter().getItem(lw.getCheckedItemPosition());
+            Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItem, Toast.LENGTH_LONG).show();
+            // TODO : utiliser "checkedItem" pour le choix du contenu par ville
+        });
+
+        *//*myPopup.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Vous avez cliquez sur Non", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+        myPopup.setCancelable(false);
+        myPopup.setNegativeButton("Fermer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                BonsPlansListActivity.super.onBackPressed();
+            }
+        });
+        // create and show the alert dialog
+        android.support.v7.app.AlertDialog dialog = myPopup.create();
+        myPopup.show();
     }
 }

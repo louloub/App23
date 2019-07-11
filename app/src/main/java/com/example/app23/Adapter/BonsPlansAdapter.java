@@ -69,6 +69,15 @@ public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.Bons
     public void onBindViewHolder(BonsPlansAdapter.BonsPlansViewHolder holder, int position) {
         Event event = eventList.get(position);
 
+        /*int eventListSize = eventList.size();
+
+        if (eventListSize == 0){
+            Log.d(TAG, "eventListSize" +eventListSize);
+            alertDialogNoBonsPlans();
+        }else{
+
+        }*/
+
         // PHOTO
         String photo = event.getPhotoUrl();
 
@@ -416,12 +425,12 @@ public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.Bons
     // ALERTDIALOG FOR CLICK ON CONTEST BUTTON
     //----------------------------------------
 
-    public void alertDialogConcours()
+    public void alertDialogNoBonsPlans()
     {
         // Setup Alert builder
         android.support.v7.app.AlertDialog.Builder myPopup = new android.support.v7.app.AlertDialog.Builder(mCtx);
-        myPopup.setTitle("Consignes du concours YourDJ !");
-        myPopup.setMessage("Message");
+        myPopup.setTitle("Pas encore de bons plans disponibles");
+        myPopup.setMessage("Tu peux t'inscrire à notre newsletter ou nous suivre sur Facebook pour ne rien rater :");
 
         /*// Ddd a radio button list
         String[] villes = {"Montpellier", "Toulouse", "Marseille", "Bordeaux", "Nantes"};
