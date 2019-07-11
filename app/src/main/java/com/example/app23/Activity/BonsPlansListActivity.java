@@ -1,25 +1,22 @@
 package com.example.app23.Activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.app23.Adapter.BonsPlansAdapter;
 import com.example.app23.Adapter.EventAdapter;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
-import com.example.app23.Swipe.OnSwipeTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,69 +29,26 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class EventListActivity extends OptionMenuActivity implements View.OnTouchListener  {
+public class BonsPlansListActivity extends OptionMenuActivity {
 
-    private static final String TAG = "EventListActiviy";
     private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
-
-    // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event.json";
-    private static final String NAME_FOR_ACTIONBAR = "Événements";
-
-    // a list to store all the event
-    List<Event> eventList;
-
-    // recyclerview
-    RecyclerView recyclerViewEventList;
+    private static final String TAG = "BonsPlansListActivity" ;
+    private static final String NAME_FOR_ACTIONBAR = "Bons Plans";
     private Context mContext;
+    List<Event> eventList;
+    RecyclerView recylcerViewBonsPlansList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_list);
-
-        // getting the recyclerview from xml
-        recyclerViewEventList = findViewById(R.id.recylcerViewEventList);
-        //recyclerViewArtistesEventList = findViewById(R.id.);
-
-        recyclerViewEventList.setHasFixedSize(true);
-        recyclerViewEventList.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerViewArtistesEventList.setLayoutManager(new LinearLayoutManager(this));
-
-        //initializing the eventlist
+        setContentView(R.layout.activity_bons_plans);
         eventList = new ArrayList<>();
-
         mContext = getApplicationContext();
-
-        loadEvents();
-
         getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
-
-        //---------------
-        // LISTENER SWIPE
-        //---------------
-        recyclerViewEventList.setOnTouchListener(new OnSwipeTouchListener(this) {
-            @Override
-            public void onSwipeDown() {
-                // Toast.makeText(ArtistesListActivity.this, "Down", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSwipeLeft() {
-                // Toast.makeText(ArtistesListActivity.this, "Left", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSwipeUp() {
-                // Toast.makeText(ArtistesListActivity.this, "Up", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSwipeRight() {
-                // Toast.makeText(ArtistesListActivity.this, "Right", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EventListActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        recylcerViewBonsPlansList = findViewById(R.id.recylcerViewBonsPlansList);
+        recylcerViewBonsPlansList.setHasFixedSize(true);
+        recylcerViewBonsPlansList.setLayoutManager(new LinearLayoutManager(this));
+        loadEvents();
     }
 
     //------------------------
@@ -198,31 +152,31 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                                     // JSON ARRAY ARTISTES contient les 4 Artistes
                                     JSONArray jsonArrayArtistes = eventJsonObject.getJSONArray("artistes_event");
 
-                                        for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
+                                    for (int iA = 0; iA < jsonArrayArtistes.length(); iA++)
+                                    {
+                                        // JSON ARTISTE FROM list : artiste au format JSON OBJECT
+                                        JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
+                                        Artistes artistesFromJsonObject = new Artistes(name,facebook_url);
+
+                                        if(jsonArtisteFromList.has("name_artiste"))
                                         {
-                                            // JSON ARTISTE FROM list : artiste au format JSON OBJECT
-                                            JSONObject jsonArtisteFromList = jsonArrayArtistes.getJSONObject(iA);
-                                            Artistes artistesFromJsonObject = new Artistes(name,facebook_url);
-
-                                                if(jsonArtisteFromList.has("name_artiste"))
-                                                {
-                                                    String nameArtiste = jsonArtisteFromList.getString("name_artiste");
-                                                    artistesFromJsonObject.setName(nameArtiste);
-                                                    Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
-                                                }else {
-                                                }
-
-                                                if(jsonArtisteFromList.has("facebook_url_artiste"))
-                                                {
-                                                    String artisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
-                                                    artistesFromJsonObject.setFacebookUrl(artisteFacebookUrl);
-                                                    Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
-                                                }else {
-                                                }
-
-                                            artistesList.add(artistesFromJsonObject);
-                                            Log.d(TAG, "artistesList = " +artistesList );
+                                            String nameArtiste = jsonArtisteFromList.getString("name_artiste");
+                                            artistesFromJsonObject.setName(nameArtiste);
+                                            Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
+                                        }else {
                                         }
+
+                                        if(jsonArtisteFromList.has("facebook_url_artiste"))
+                                        {
+                                            String artisteFacebookUrl = jsonArtisteFromList.getString("facebook_url_artiste");
+                                            artistesFromJsonObject.setFacebookUrl(artisteFacebookUrl);
+                                            Log.d(TAG, "artistesFromJsonObject = " +artistesFromJsonObject );
+                                        }else {
+                                        }
+
+                                        artistesList.add(artistesFromJsonObject);
+                                        Log.d(TAG, "artistesList = " +artistesList );
+                                    }
 
                                 } else {
                                 }
@@ -291,8 +245,8 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             eventList.add(event);
 
                             // creating adapter object and setting it to recyclerview
-                            EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
-                            recyclerViewEventList.setAdapter(adapter);
+                            BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
+                            recylcerViewBonsPlansList.setAdapter(adapter);
 
                             /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter
                                     (EventListActivity.this,artistesList);
@@ -312,15 +266,5 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                 );
 
         requestQueue.add(jsonArrayEventRequest);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }

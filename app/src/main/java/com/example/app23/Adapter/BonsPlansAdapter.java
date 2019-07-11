@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.app23.Activity.BonsPlansListActivity;
 import com.example.app23.Activity.EventListActivity;
 import com.example.app23.Activity.EventPageActivity;
 import com.example.app23.Object.Artistes;
@@ -41,29 +42,31 @@ import java.util.List;
 import static android.view.View.GONE;
 import static com.android.volley.VolleyLog.TAG;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>  {
+public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.BonsPlansViewHolder>  {
 
     public static String FACEBOOK_URL_FOR_SHARING = "https://www.yourdj.fr";
 
     private Context mCtx;
     private List<Event> eventList;
 
-    public EventAdapter(EventListActivity mCtx, List<Event> eventList) {
+    public BonsPlansAdapter(BonsPlansListActivity mCtx, List<Event> eventList) {
         this.mCtx = mCtx;
         this.eventList = eventList;
     }
 
-    public EventAdapter(Context applicationContext, List<Event> eventList) {
-    }
+    /*public BonsPlansAdapter(Context applicationContext, List<Event> eventList) {
+        this.mCtx = mCtx;
+        this.eventList = eventList;
+    }*/
 
-    public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BonsPlansViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.event_list_model, null);
-        return new EventViewHolder(view);
+        return new BonsPlansViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(EventViewHolder holder, int position) {
+    public void onBindViewHolder(BonsPlansAdapter.BonsPlansViewHolder holder, int position) {
         Event event = eventList.get(position);
 
         // PHOTO
@@ -170,11 +173,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 //--------------
                 String iframe = "<!DOCTYPE html>" +
                         "<html>" +
-                            "<body>" +
-                                "<iframe width=\"100%\" height=\"1000\" id=\"sc-widget\" scrolling=\"yes\" frameborder=\"yes\" " +
-                                "src=\""+preventesUrl+"\">" +
-                                "</iframe>" +
-                            "</body>" +
+                        "<body>" +
+                        "<iframe width=\"100%\" height=\"1000\" id=\"sc-widget\" scrolling=\"yes\" frameborder=\"yes\" " +
+                        "src=\""+preventesUrl+"\">" +
+                        "</iframe>" +
+                        "</body>" +
                         "</html>";
 
                 WebView webViewPreventes = new WebView(mCtx);
@@ -230,73 +233,73 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         //------------------------------------
         // LISTENER FOR WHEN WE CLICK ON PLACE
         //------------------------------------
-            holder.tvLieux.setOnClickListener(v -> {
-                if (!iFrameLieux.isEmpty())
-                {
-                    AlertDialog.Builder alertDialogLieux = new AlertDialog.Builder(mCtx);
-                    alertDialogLieux.setTitle("Ca se passe ici !");
+        holder.tvLieux.setOnClickListener(v -> {
+            if (!iFrameLieux.isEmpty())
+            {
+                AlertDialog.Builder alertDialogLieux = new AlertDialog.Builder(mCtx);
+                alertDialogLieux.setTitle("Ca se passe ici !");
 
-                    //--------------
-                    // START WEBVIEW
-                    //--------------
-                    String iframe = "<!DOCTYPE html>" +
-                            "<html>" +
-                            "<body>" +
-                            "<iframe width=\"100%\" height=\"1000\" id=\"sc-widget\" scrolling=\"yes\" frameborder=\"yes\" " +
-                            "src=\"" + iFrameLieux + "\">" +
-                            "</iframe>" +
-                            "</body>" +
-                            "</html>";
+                //--------------
+                // START WEBVIEW
+                //--------------
+                String iframe = "<!DOCTYPE html>" +
+                        "<html>" +
+                        "<body>" +
+                        "<iframe width=\"100%\" height=\"1000\" id=\"sc-widget\" scrolling=\"yes\" frameborder=\"yes\" " +
+                        "src=\"" + iFrameLieux + "\">" +
+                        "</iframe>" +
+                        "</body>" +
+                        "</html>";
 
-                    WebView webViewPreventes = new WebView(mCtx);
-                    webViewPreventes.getSettings().setJavaScriptEnabled(true);
-                    webViewPreventes.addJavascriptInterface(new WebViewResizer(), "WebViewResizer");
-                    webViewPreventes.setWebViewClient(new WebViewClient() {
-                        @Override
-                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                WebView webViewPreventes = new WebView(mCtx);
+                webViewPreventes.getSettings().setJavaScriptEnabled(true);
+                webViewPreventes.addJavascriptInterface(new WebViewResizer(), "WebViewResizer");
+                webViewPreventes.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        view.loadUrl(url);
+                        return true;
+                    }
+
+                    @Override
+                    public void onPageFinished(WebView webView, String url) {
+                        // webView.loadUrl("javascript:window.WebViewResizer.processHeight(document.querySelector('body').offsetHeight);");
+                        super.onPageFinished(webView, url);
+                    }
+
+                    private boolean loadUrl(WebView view, String url) {
+                        if (url.startsWith("http:") || url.startsWith("https:")) {
                             view.loadUrl(url);
+                            return false;
+                        }
+                        // Otherwise allow the OS to handle it
+                        else if (url.startsWith("tel:")) {
+                            Intent tel = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+                            // startActivity(tel);
                             return true;
                         }
+                        return true;
+                    }
+                });
+                webViewPreventes.loadDataWithBaseURL("", iframe, "text/html", "UTF-8", "");
 
-                        @Override
-                        public void onPageFinished(WebView webView, String url) {
-                            // webView.loadUrl("javascript:window.WebViewResizer.processHeight(document.querySelector('body').offsetHeight);");
-                            super.onPageFinished(webView, url);
-                        }
+                //--------------
+                // END WEBVIEW
+                //--------------
 
-                        private boolean loadUrl(WebView view, String url) {
-                            if (url.startsWith("http:") || url.startsWith("https:")) {
-                                view.loadUrl(url);
-                                return false;
-                            }
-                            // Otherwise allow the OS to handle it
-                            else if (url.startsWith("tel:")) {
-                                Intent tel = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
-                                // startActivity(tel);
-                                return true;
-                            }
-                            return true;
-                        }
-                    });
-                    webViewPreventes.loadDataWithBaseURL("", iframe, "text/html", "UTF-8", "");
-
-                    //--------------
-                    // END WEBVIEW
-                    //--------------
-
-                    //--------------
-                    // ALERT DIALOG
-                    //--------------
-                    alertDialogLieux.setView(webViewPreventes);
-                    alertDialogLieux.setNegativeButton("Fermer", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    alertDialogLieux.show();
-                }
-            });
+                //--------------
+                // ALERT DIALOG
+                //--------------
+                alertDialogLieux.setView(webViewPreventes);
+                alertDialogLieux.setNegativeButton("Fermer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogLieux.show();
+            }
+        });
 
         //------------------
         // CONTEST VISIBILIY
@@ -367,14 +370,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return eventList.size();
     }
 
-    class EventViewHolder extends RecyclerView.ViewHolder {
+    class BonsPlansViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNameEvent, tvDateStart, tvDateEnd, tvArtisteName, tvLieux;
         ImageView ivPhotoEvent, ivFacebookEvent;
         Button btnPreventes, btnConcours;
         RecyclerView recyclerViewArtistesEventList;
+        RecyclerView recylcerViewBonsPlansList;
 
-        public EventViewHolder(View itemView) {
+        public BonsPlansViewHolder(View itemView) {
             super(itemView);
 
             ivPhotoEvent = itemView.findViewById(R.id.ivPhotoEvent);

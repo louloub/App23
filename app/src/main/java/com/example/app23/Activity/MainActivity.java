@@ -102,7 +102,7 @@ public class MainActivity extends OptionMenuActivity {
     }
 
     private void openBonsPlansActivity() {
-        Intent intent = new Intent(this, BonsPlansActivity.class);
+        Intent intent = new Intent(this, BonsPlansListActivity.class);
         startActivity(intent);
     }
 }
