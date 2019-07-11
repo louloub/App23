@@ -59,6 +59,13 @@ public class MainActivity extends OptionMenuActivity {
             openEventActivity();
         });
 
+        // BUTTON BONS PLANS
+        Button btn_bons_plans = findViewById(R.id.carre_bonsplans);
+        btn_bons_plans.setOnClickListener(v -> {
+            btn_bons_plans.startAnimation(animation);
+            openBonsPlansActivity();
+        });
+
         // ALERTE DIALOG
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         boolean dialogShown = settings.getBoolean("dialogShown", false);
@@ -91,6 +98,11 @@ public class MainActivity extends OptionMenuActivity {
 
     private void openEventActivity() {
         Intent intent = new Intent(this, EventListActivity.class);
+        startActivity(intent);
+    }
+
+    private void openBonsPlansActivity() {
+        Intent intent = new Intent(this, BonsPlansActivity.class);
         startActivity(intent);
     }
 }
