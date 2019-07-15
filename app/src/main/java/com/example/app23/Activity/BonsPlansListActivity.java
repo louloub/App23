@@ -43,7 +43,9 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class BonsPlansListActivity extends OptionMenuActivity {
 
+    // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
     private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event4.json";
+
     private static final String TAG = "BonsPlansListActivity" ;
     private static final String NAME_FOR_ACTIONBAR = "Bons Plans";
     private Context mContext;
@@ -267,9 +269,21 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                     BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
                                     recylcerViewBonsPlansList.setAdapter(adapter);*/
                             }else {
-                                Log.d(TAG, " eventList pas de bons plans = " +eventList );
-                                alertDialogNoBonsPlans();
+                                /*Log.d(TAG, " eventList pas de bons plans = " +eventList );
+                                alertDialogNoBonsPlans();*/
                             }
+                            Log.d(TAG, " eventList pas de bons plans = " +eventList );
+                            // alertDialogNoBonsPlans();
+                        }
+                        Log.d(TAG, " eventList fin de boucle FOR = " +eventList );
+                        if (eventList.isEmpty()) {
+                            Log.d(TAG, "eventList est pas vide = " +eventList );
+                            // creating adapter object and setting it to recyclerview
+                            BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
+                            recylcerViewBonsPlansList.setAdapter(adapter);
+                            alertDialogNoBonsPlans();
+                        }else {
+                            Log.d(TAG, "eventList n'est pas vide = " +eventList );
                         }
 
 
