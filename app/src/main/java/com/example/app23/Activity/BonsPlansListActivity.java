@@ -43,8 +43,8 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class BonsPlansListActivity extends OptionMenuActivity {
 
-    // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
-    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event4.json";
+    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
+    // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event4.json";
 
     private static final String TAG = "BonsPlansListActivity" ;
     private static final String NAME_FOR_ACTIONBAR = "Bons Plans";
@@ -139,7 +139,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                             }
 
                             String pvUrlForTest = preventesEvent.getPreventesUrl();
-                            Log.d(TAG, "pvUrlForTest = " +pvUrlForTest);
 
                             //------------------------------------
                             // TEST IF THEIR ARE BONS PLANS OR NOT
@@ -252,41 +251,23 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                         facebookUrlEvent, preventesEvent, artistesList, lieuxEvent, concoursUrl);
 
                                 eventList.add(event);
-                                Log.d(TAG, "eventList bplist est rempli = " +eventList );
-
-                                // BonsPlansModel.setListe(eventList);
 
                                 if (!eventList.isEmpty()) {
-                                Log.d(TAG, "eventList n'est pas vide = " +eventList );
                                     // creating adapter object and setting it to recyclerview
                                     BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
                                     recylcerViewBonsPlansList.setAdapter(adapter);
                                 }else {
-                                    Log.d(TAG, "eventList est vide = " +eventList );
-                                    // alertDialogNoBonsPlans();
                                 }
-                                    /*// creating adapter object and setting it to recyclerview
-                                    BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
-                                    recylcerViewBonsPlansList.setAdapter(adapter);*/
                             }else {
-                                /*Log.d(TAG, " eventList pas de bons plans = " +eventList );
-                                alertDialogNoBonsPlans();*/
                             }
-                            Log.d(TAG, " eventList pas de bons plans = " +eventList );
-                            // alertDialogNoBonsPlans();
                         }
-                        Log.d(TAG, " eventList fin de boucle FOR = " +eventList );
                         if (eventList.isEmpty()) {
-                            Log.d(TAG, "eventList est pas vide = " +eventList );
                             // creating adapter object and setting it to recyclerview
                             BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
                             recylcerViewBonsPlansList.setAdapter(adapter);
                             alertDialogNoBonsPlans();
                         }else {
-                            Log.d(TAG, "eventList n'est pas vide = " +eventList );
                         }
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (ParseException e) {
@@ -298,35 +279,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                         }
                 );
         requestQueue.add(jsonArrayEventRequest);
-
-        /*ArrayList list = new ArrayList(Collections.singleton(jsonArrayEventRequest));
-
-        int i = list.size();
-
-        Log.d(TAG, "i = " +i);*/
-
-        /*Log.d(TAG,"jsonArrayEventRequest = " + jsonArrayEventRequest);
-        byte[] str = jsonArrayEventRequest.getBody();
-        Log.d(TAG,"str = " + str);*/
-
-        /*if (str.) {
-           Log.d(TAG,"str <0 = " + str);
-        }else{
-            Log.d(TAG,"str >0 = " + str);
-        }*/
-
-
-        /*Cache.Entry cache = jsonArrayEventRequest.getCacheEntry();
-
-        Log.d(TAG,"cacheEntry = " + cache);
-
-        if (cache.isExpired()) {
-            Log.d(TAG,"cacheEntry expired = " + cache);
-        }
-        else {
-            Log.d(TAG,"cacheEntry not expired =  " + cache);
-
-        }*/
     }
 
     public void alertDialogNoBonsPlans()
