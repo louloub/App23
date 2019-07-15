@@ -3,36 +3,17 @@ package com.example.app23.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
+
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.app23.Adapter.BonsPlansAdapter;
-import com.example.app23.Object.Artistes;
+
 import com.example.app23.Object.Event;
-import com.example.app23.Object.Lieux;
-import com.example.app23.Object.Preventes;
 import com.example.app23.R;
-import com.example.app23.controller.BonsPlansController;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends OptionMenuActivity {
 

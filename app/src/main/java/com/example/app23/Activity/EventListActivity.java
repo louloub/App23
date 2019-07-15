@@ -238,9 +238,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             } else {
                             }
 
-                            /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter(EventListActivity.this,artistesList);
-                            recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
-
                             //------------------------
                             // RETRIEVE LIEUX OBJET
                             //------------------------
@@ -302,11 +299,6 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
                             // creating adapter object and setting it to recyclerview
                             EventAdapter adapter = new EventAdapter(EventListActivity.this, eventList);
                             recyclerViewEventList.setAdapter(adapter);
-
-                            /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter
-                                    (EventListActivity.this,artistesList);
-                            recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
-
                         }
 
                     } catch (JSONException e) {

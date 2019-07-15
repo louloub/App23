@@ -13,19 +13,16 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.BonsPlansAdapter;
-import com.example.app23.Adapter.EventAdapter;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
-import com.example.app23.model.BonsPlansModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,16 +31,14 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
-import static com.android.volley.VolleyLog.TAG;
 
 public class BonsPlansListActivity extends OptionMenuActivity {
 
+    // JSON avec 17 events, dont des bons plans :
     private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event2.json";
+    // JSON sans bons plans :
     // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event4.json";
 
     private static final String TAG = "BonsPlansListActivity" ;

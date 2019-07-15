@@ -2,8 +2,10 @@ package com.example.app23.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEventAdapter.ArtistesEventViewHolder>  {
 
@@ -56,10 +60,11 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
     @Override
     public void onBindViewHolder(ArtistesEventViewHolder holder, int i) {
         Artistes artistes = artistesEventList.get(i);
-
         String artisteNameArtisteEvent = artistes.getName();
-
         holder.tvArtistesNameOnEvent.setText(artisteNameArtisteEvent);
+
+        // Color Background if artiste is on the website (& clickable)
+        loadArtistesForChangeBackground(artisteNameArtisteEvent,holder);
 
         //------------------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON ARTISTE IF REGISTER IN YOURDJ
@@ -67,7 +72,6 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
 
         holder.tvArtistesNameOnEvent.setOnClickListener(v -> {
             Intent intent = new Intent(mCtx, ArtistesPageActivity.class);
-
             loadArtistes(artisteNameArtisteEvent);
         });
     }
@@ -91,9 +95,9 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
         }
     }
 
-    //------------------------
-    // LOAD ARTISTES FROM JSON
-    //------------------------
+    //------------------------------------
+    // LOAD ARTISTES FROM JSON FOR DISPLAY
+    //------------------------------------
     public void loadArtistes(String nameArtisteFromEventToTest)
     {
         RequestQueue requestQueue = Volley.newRequestQueue(mCtx);
@@ -144,5 +148,58 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
                         }
                 );
         requestQueue.add(jsonArrayArtistesRequest);
+    }
+
+    //------------------------------------------------------------
+    // LOAD ARTISTES FROM JSON FOR CHANGE BACKGROUND IF ON WEBSITE
+    //------------------------------------------------------------
+    public void loadArtistesForChangeBackground(String nameArtisteFromEventToTest, ArtistesEventViewHolder holder)
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(mCtx);
+
+        JsonArrayRequest jsonArrayArtistesRequest = new JsonArrayRequest
+                (Request.Method.GET, URL, null, response ->
+                {
+                    try {
+                        // Browse request contain json
+                        for (int i = 0; i < response.length(); i++) {
+
+                            // Getting object from json array
+                            JSONObject artistesJsonObject = response.getJSONObject(i);
+
+                            String name = artistesJsonObject.getString("name");
+
+                            if (name.equals(nameArtisteFromEventToTest))
+                            {
+                                String bio = artistesJsonObject.getString("bio");
+                                String photo = artistesJsonObject.getString("photo_url");
+                                String facebook = artistesJsonObject.getString("facebook_url");
+                                String soundcloud = artistesJsonObject.getString("soundcloud_url");
+                                String beatport = artistesJsonObject.getString("beatport_url");
+                                String mixcloud = artistesJsonObject.getString("mixcloud_url");
+                                String twitter = artistesJsonObject.getString("twitter_url");
+                                String residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
+                                String instagram = artistesJsonObject.getString("instagram_url");
+                                String site = artistesJsonObject.getString("site_url");
+
+                                Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
+                                        twitter,residentAdvisor,instagram,site);
+
+                                holder.tvArtistesNameOnEvent.setBackgroundColor(0xFF00FF00);
+
+                            }
+                            else {
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                        error -> {
+                            // Do something when error occurred
+                        }
+                );
+        requestQueue.add(jsonArrayArtistesRequest);
+        // return false;
     }
 }

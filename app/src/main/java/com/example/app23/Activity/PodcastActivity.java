@@ -11,8 +11,6 @@ import android.webkit.WebViewClient;
 
 import com.example.app23.R;
 
-import java.util.Objects;
-
 public class PodcastActivity extends OptionMenuActivity {
 
     private static final String NAME_FOR_ACTIONBAR = "Podcast";

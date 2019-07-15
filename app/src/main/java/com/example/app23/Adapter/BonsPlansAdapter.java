@@ -44,8 +44,6 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.BonsPlansViewHolder>  {
 
-    public static String FACEBOOK_URL_FOR_SHARING = "https://www.yourdj.fr";
-
     private Context mCtx;
     private List<Event> eventList;
 
@@ -68,24 +66,6 @@ public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.Bons
     @Override
     public void onBindViewHolder(BonsPlansAdapter.BonsPlansViewHolder holder, int position) {
         Event event = eventList.get(position);
-
-        int eventListSize = eventList.size();
-
-        /*if (!eventList.isEmpty()){
-            Log.d(TAG, "eventListSize" +eventListSize);
-            // alertDialogNoBonsPlans();
-        }else{
-            Log.d(TAG, "eventListSize" +eventListSize);
-        }*/
-
-        /*int eventListSize = eventList.size();
-
-        if (eventListSize == 0){
-            Log.d(TAG, "eventListSize" +eventListSize);
-            alertDialogNoBonsPlans();
-        }else{
-
-        }*/
 
         // PHOTO
         String photo = event.getPhotoUrl();
@@ -428,43 +408,6 @@ public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.Bons
             // height could be 0 if WebView visibility is Visibility.GONE.
             // If changing the WebView height, do it on the main thread!
         }
-    }
-
-    //----------------------------------------
-    // ALERTDIALOG FOR CLICK ON CONTEST BUTTON
-    //----------------------------------------
-
-    public void alertDialogNoBonsPlans()
-    {
-        // Setup Alert builder
-        android.support.v7.app.AlertDialog.Builder myPopup = new android.support.v7.app.AlertDialog.Builder(mCtx);
-        myPopup.setTitle("Pas encore de bons plans disponibles");
-        myPopup.setMessage("Tu peux t'inscrire à notre newsletter ou nous suivre sur Facebook pour ne rien rater :");
-
-        /*// Ddd a radio button list
-        String[] villes = {"Montpellier", "Toulouse", "Marseille", "Bordeaux", "Nantes"};
-        int checkedItems = 0;
-        myPopup.setSingleChoiceItems(villes, checkedItems, (dialog, which) -> {
-        });
-        myPopup.setPositiveButton("Valider", (dialogInterface, i) -> {
-            ListView lw = ((android.support.v7.app.AlertDialog)dialogInterface).getListView();
-            Object checkedItem = lw.getAdapter().getItem(lw.getCheckedItemPosition());
-            Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItem, Toast.LENGTH_LONG).show();
-            // TODO : utiliser "checkedItem" pour le choix du contenu par ville
-        });
-
-        *//*myPopup.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(), "Vous avez cliquez sur Non", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-        myPopup.setCancelable(false);
-
-        // create and show the alert dialog
-        android.support.v7.app.AlertDialog dialog = myPopup.create();
-        myPopup.show();
     }
 
     //----------------------
