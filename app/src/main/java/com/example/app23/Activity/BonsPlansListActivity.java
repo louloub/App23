@@ -13,6 +13,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -24,6 +25,7 @@ import com.example.app23.Object.Event;
 import com.example.app23.Object.Lieux;
 import com.example.app23.Object.Preventes;
 import com.example.app23.R;
+import com.example.app23.model.BonsPlansModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +34,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -40,11 +43,11 @@ import static com.android.volley.VolleyLog.TAG;
 
 public class BonsPlansListActivity extends OptionMenuActivity {
 
-    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event3.json";
+    private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/event4.json";
     private static final String TAG = "BonsPlansListActivity" ;
     private static final String NAME_FOR_ACTIONBAR = "Bons Plans";
     private Context mContext;
-    List<Event> eventList;
+    ArrayList<Event> eventList;
     RecyclerView recylcerViewBonsPlansList;
 
     @Override
@@ -58,14 +61,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
         recylcerViewBonsPlansList.setHasFixedSize(true);
         recylcerViewBonsPlansList.setLayoutManager(new LinearLayoutManager(this));
         loadEvents();
-
-        int eventListSize = eventList.size();
-
-        if (eventListSize == 0){
-            Log.d(TAG, "eventListSize" +eventListSize);
-            alertDialogNoBonsPlans();
-        }else{
-        }
     }
 
     //------------------------
@@ -76,12 +71,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
         JsonArrayRequest jsonArrayEventRequest = new JsonArrayRequest
-
-
-        /*if (response.length()==0)
-        {
-            alertDialogNoBonsPlans();
-        }*/
 
                 (Request.Method.GET, URL, null, response ->
                 {
@@ -150,6 +139,9 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                             String pvUrlForTest = preventesEvent.getPreventesUrl();
                             Log.d(TAG, "pvUrlForTest = " +pvUrlForTest);
 
+                            //------------------------------------
+                            // TEST IF THEIR ARE BONS PLANS OR NOT
+                            //------------------------------------
                             if (!TextUtils.isEmpty(concoursUrl) || !pvUrlForTest.isEmpty())
                             {
                                 String nameEvent = eventJsonObject.getString("name_event");
@@ -209,9 +201,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                 } else {
                                 }
 
-                                /*ArtistesOnEventAdapter artistesAdapter = new ArtistesOnEventAdapter(EventListActivity.this,artistesList);
-                                recyclerViewArtistesEventList.setAdapter(artistesAdapter);*/
-
                                 //------------------------
                                 // RETRIEVE LIEUX OBJET
                                 //------------------------
@@ -261,13 +250,29 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                         facebookUrlEvent, preventesEvent, artistesList, lieuxEvent, concoursUrl);
 
                                 eventList.add(event);
+                                Log.d(TAG, "eventList bplist est rempli = " +eventList );
 
-                                // creating adapter object and setting it to recyclerview
-                                BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
-                                recylcerViewBonsPlansList.setAdapter(adapter);
+                                // BonsPlansModel.setListe(eventList);
+
+                                if (!eventList.isEmpty()) {
+                                Log.d(TAG, "eventList n'est pas vide = " +eventList );
+                                    // creating adapter object and setting it to recyclerview
+                                    BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
+                                    recylcerViewBonsPlansList.setAdapter(adapter);
+                                }else {
+                                    Log.d(TAG, "eventList est vide = " +eventList );
+                                    // alertDialogNoBonsPlans();
+                                }
+                                    /*// creating adapter object and setting it to recyclerview
+                                    BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
+                                    recylcerViewBonsPlansList.setAdapter(adapter);*/
                             }else {
+                                Log.d(TAG, " eventList pas de bons plans = " +eventList );
+                                alertDialogNoBonsPlans();
                             }
                         }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (ParseException e) {
@@ -279,6 +284,35 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                         }
                 );
         requestQueue.add(jsonArrayEventRequest);
+
+        /*ArrayList list = new ArrayList(Collections.singleton(jsonArrayEventRequest));
+
+        int i = list.size();
+
+        Log.d(TAG, "i = " +i);*/
+
+        /*Log.d(TAG,"jsonArrayEventRequest = " + jsonArrayEventRequest);
+        byte[] str = jsonArrayEventRequest.getBody();
+        Log.d(TAG,"str = " + str);*/
+
+        /*if (str.) {
+           Log.d(TAG,"str <0 = " + str);
+        }else{
+            Log.d(TAG,"str >0 = " + str);
+        }*/
+
+
+        /*Cache.Entry cache = jsonArrayEventRequest.getCacheEntry();
+
+        Log.d(TAG,"cacheEntry = " + cache);
+
+        if (cache.isExpired()) {
+            Log.d(TAG,"cacheEntry expired = " + cache);
+        }
+        else {
+            Log.d(TAG,"cacheEntry not expired =  " + cache);
+
+        }*/
     }
 
     public void alertDialogNoBonsPlans()
@@ -286,7 +320,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
         // Setup Alert builder
         android.support.v7.app.AlertDialog.Builder myPopup = new android.support.v7.app.AlertDialog.Builder(this);
         myPopup.setTitle("Pas encore de bons plans disponibles");
-        myPopup.setMessage("Tu peux t'inscrire à notre newsletter pour être prévenu en live juste ici :");
+        myPopup.setMessage("Tu peux t'inscrire à notre newsletter pour recevoir un mail par semaine avec tous les bons plans :");
 
         /*String iframe = "<!DOCTYPE html>" +
                 "<html>" +
@@ -350,7 +384,6 @@ public class BonsPlansListActivity extends OptionMenuActivity {
             // If changing the WebView height, do it on the main thread!
         }
     }
-
 
     String codeHtmlNewsletter =
             "<!-- Begin Mailchimp Signup Form -->\n" +

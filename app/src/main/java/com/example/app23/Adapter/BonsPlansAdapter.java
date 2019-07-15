@@ -69,6 +69,15 @@ public class BonsPlansAdapter extends RecyclerView.Adapter<BonsPlansAdapter.Bons
     public void onBindViewHolder(BonsPlansAdapter.BonsPlansViewHolder holder, int position) {
         Event event = eventList.get(position);
 
+        int eventListSize = eventList.size();
+
+        /*if (!eventList.isEmpty()){
+            Log.d(TAG, "eventListSize" +eventListSize);
+            // alertDialogNoBonsPlans();
+        }else{
+            Log.d(TAG, "eventListSize" +eventListSize);
+        }*/
+
         /*int eventListSize = eventList.size();
 
         if (eventListSize == 0){
