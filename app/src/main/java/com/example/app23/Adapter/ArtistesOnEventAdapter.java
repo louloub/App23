@@ -2,8 +2,10 @@ package com.example.app23.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+import static android.support.v4.content.ContextCompat.*;
 
 public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEventAdapter.ArtistesEventViewHolder>  {
 
@@ -39,6 +42,9 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
     private Context mCtx;
     // Recycler view for display artiste page
     RecyclerView recyclerView;
+
+    // Color for background artiste if it's clickable
+    int colorString = 0xFFA1C332;
 
     // Counstructor
     public ArtistesOnEventAdapter(Context mCtx, List<Artistes> artistesEventList) {
@@ -161,32 +167,13 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
                 (Request.Method.GET, URL, null, response ->
                 {
                     try {
-                        // Browse request contain json
                         for (int i = 0; i < response.length(); i++) {
-
-                            // Getting object from json array
                             JSONObject artistesJsonObject = response.getJSONObject(i);
-
                             String name = artistesJsonObject.getString("name");
-
                             if (name.equals(nameArtisteFromEventToTest))
                             {
-                                String bio = artistesJsonObject.getString("bio");
-                                String photo = artistesJsonObject.getString("photo_url");
-                                String facebook = artistesJsonObject.getString("facebook_url");
-                                String soundcloud = artistesJsonObject.getString("soundcloud_url");
-                                String beatport = artistesJsonObject.getString("beatport_url");
-                                String mixcloud = artistesJsonObject.getString("mixcloud_url");
-                                String twitter = artistesJsonObject.getString("twitter_url");
-                                String residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
-                                String instagram = artistesJsonObject.getString("instagram_url");
-                                String site = artistesJsonObject.getString("site_url");
-
-                                Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
-                                        twitter,residentAdvisor,instagram,site);
-
-                                holder.tvArtistesNameOnEvent.setBackgroundColor(0xFF00FF00);
-
+                                // SET COLOR OF BACKGROUND IF ARTISTE IS ON WEBSITE
+                                holder.tvArtistesNameOnEvent.setBackgroundColor(colorString);
                             }
                             else {
                             }
