@@ -69,7 +69,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
 
         JsonArrayRequest jsonArrayEventRequest = new JsonArrayRequest
 
-                (Request.Method.GET, URL, null, response ->
+                (Request.Method.POST, URL, null, response ->
                 {
                     try {
                         // Browse request contain json

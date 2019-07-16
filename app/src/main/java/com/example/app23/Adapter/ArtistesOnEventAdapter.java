@@ -109,7 +109,7 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
         RequestQueue requestQueue = Volley.newRequestQueue(mCtx);
 
         JsonArrayRequest jsonArrayArtistesRequest = new JsonArrayRequest
-                (Request.Method.GET, URL, null, response ->
+                (Request.Method.POST, URL, null, response ->
                 {
                     try {
                         // Browse request contain json
@@ -164,7 +164,7 @@ public class ArtistesOnEventAdapter extends RecyclerView.Adapter<ArtistesOnEvent
         RequestQueue requestQueue = Volley.newRequestQueue(mCtx);
 
         JsonArrayRequest jsonArrayArtistesRequest = new JsonArrayRequest
-                (Request.Method.GET, URL, null, response ->
+                (Request.Method.POST, URL, null, response ->
                 {
                     try {
                         for (int i = 0; i < response.length(); i++) {

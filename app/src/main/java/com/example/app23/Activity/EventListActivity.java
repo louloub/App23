@@ -106,7 +106,7 @@ public class EventListActivity extends OptionMenuActivity implements View.OnTouc
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
         JsonArrayRequest jsonArrayEventRequest = new JsonArrayRequest
-                (Request.Method.GET, URL, null, response ->
+                (Request.Method.POST, URL, null, response ->
                 {
                     try {
                         // Browse request contain json

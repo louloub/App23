@@ -103,7 +103,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
         JsonArrayRequest jsonArrayArtistesRequest = new JsonArrayRequest
-                (Request.Method.GET, URL, null, response ->
+                (Request.Method.POST, URL, null, response ->
         {
             try {
                 // Browse request contain json
