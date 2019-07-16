@@ -15,6 +15,7 @@ import android.webkit.WebViewClient;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.BonsPlansAdapter;
@@ -67,9 +68,11 @@ public class BonsPlansListActivity extends OptionMenuActivity {
     {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
+        JSONArray jsonArrayRequestForAPI = new JSONArray();
+
         JsonArrayRequest jsonArrayEventRequest = new JsonArrayRequest
 
-                (Request.Method.POST, URL, null, response ->
+                (Request.Method.POST, URL, jsonArrayRequestForAPI, response ->
                 {
                     try {
                         // Browse request contain json
@@ -80,6 +83,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
 
                             // CONCOURS
                             String concoursUrl = eventJsonObject.getString("concours_url");
+                            jsonArrayRequestForAPI.put(concoursUrl);
 
                             //--------------------------
                             // RETRIEVE PREVENTES OBJECT
@@ -118,6 +122,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                                     if (!TextUtils.isEmpty(newPreventesUrl)) {
                                                         preventesEvent.setPreventesUrl(newPreventesUrl);
                                                         Log.d(TAG, "newPreventesUrl = " +newPreventesUrl);
+                                                        jsonArrayRequestForAPI.put(preventesEvent);
                                                     } else {
                                                     }
                                                 } else {
@@ -141,19 +146,25 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                             if (!TextUtils.isEmpty(concoursUrl) || !pvUrlForTest.isEmpty())
                             {
                                 String nameEvent = eventJsonObject.getString("name_event");
+                                jsonArrayRequestForAPI.put(nameEvent);
+
                                 String photoUrlEvent = eventJsonObject.getString("photo_url_event");
+                                jsonArrayRequestForAPI.put(photoUrlEvent);
 
                                 // DATE
                                 String dateStartDate = eventJsonObject.getString("dateStart_event");
                                 SimpleDateFormat dateStartString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
                                 Date dateStartEvent = dateStartString.parse(dateStartDate);
+                                jsonArrayRequestForAPI.put(dateStartEvent);
 
                                 String dateEndDate = eventJsonObject.getString("dateEnd_event");
                                 SimpleDateFormat dateEndString = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm", Locale.getDefault());
                                 Date dateEndEvent = dateEndString.parse(dateEndDate);
+                                jsonArrayRequestForAPI.put(dateEndEvent);
 
                                 // FACEBOOK
                                 String facebookUrlEvent = eventJsonObject.getString("facebook_url_event");
+                                jsonArrayRequestForAPI.put(facebookUrlEvent);
 
                                 //-------------------------
                                 // RETRIEVE ARTISTES OBJECT
@@ -190,6 +201,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
 
                                             artistesList.add(artistesFromJsonObject);
                                             Log.d(TAG, "artistesList = " + artistesList);
+                                            jsonArrayRequestForAPI.put(artistesList);
                                         }
 
                                     } else {
@@ -234,6 +246,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                             } else {
                                             }
                                         }
+                                        jsonArrayRequestForAPI.put(lieuxEvent);
                                     } else {
                                     }
                                 } else {
@@ -246,6 +259,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                                         facebookUrlEvent, preventesEvent, artistesList, lieuxEvent, concoursUrl);
 
                                 eventList.add(event);
+                                jsonArrayRequestForAPI.put(eventList);
 
                                 if (!eventList.isEmpty()) {
                                     // creating adapter object and setting it to recyclerview
@@ -261,6 +275,7 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                             BonsPlansAdapter adapter = new BonsPlansAdapter(BonsPlansListActivity.this, eventList);
                             recylcerViewBonsPlansList.setAdapter(adapter);
                             alertDialogNoBonsPlans();
+                            jsonArrayRequestForAPI.put(eventList);
                         }else {
                         }
                     } catch (JSONException e) {
@@ -268,6 +283,8 @@ public class BonsPlansListActivity extends OptionMenuActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+
+
                 },
                         error -> {
                             // Do something when error occurred
