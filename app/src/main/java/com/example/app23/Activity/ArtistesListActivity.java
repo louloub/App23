@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.ArtistesAdapter;
 import com.example.app23.Object.Artistes;
@@ -50,7 +53,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
     // 4
     // TODO : VINCENT ?
-    private static final String URL = "https://www.yourdj.fr/api/api.php";
+    private static final String URL = "https://www.yourdj.fr/api/1.0/dj/";
 
     //a list to store all the products
     List<Artistes> artistesList;
@@ -144,13 +147,72 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     //------------------------
     // LOAD ARTISTES FROM API
     //------------------------
-    public void loadArtistes() {
+
+    public void loadArtistes ()
+        {
+        JSONObject getparams = new JSONObject();
+            try {
+                getparams.put("city", "montpellier");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                getparams.put("page", "1");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                getparams.put("content_per_pages", "10");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                URL, getparams,
+                    new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Success Callback
+                        Log.d(TAG,"response =" +response.toString() );
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Failure Callback
+                    }
+                })
+
+            {
+                /** Passing some request headers* */
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    HashMap headers = new HashMap();
+                    headers.put("apikey", "6GFNK892Gb+28bfG");
+                    return headers;
+            }
+            };
+
+        // Adding the request to the queue along with a unique string tag
+            ArtistesListActivity.getInstance().addToRequestQueue(jsonObjReq, "postRequest");
+    }
+
+    //------------------------
+    // LOAD ARTISTES FROM API
+    //------------------------
+    public void loadArtistesZ() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         // TODO : VINCENT ?
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put("6GFNK892Gb+28bfG");
-        Log.d(TAG,"jsonArray = " +jsonArray);
+        JSONObject jsonO = new JSONObject();
+        String key = "6GFNK892Gb+28bfG";
+        try {
+            jsonO.put("apiKey","6GFNK892Gb+28bfG");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG,"jsonO = " +jsonO);
 
         /*JSONArray params = new JSONArray();
         params.put(Integer.parseInt("Content-Type"), "application/json; charset=UTF-8");
@@ -162,41 +224,37 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         MyData.put("Field", "Value");*/
 
         // TODO : VINCENT ? on appel ici le jsonArray avec la key de l'API
-        JsonArrayRequest jsonArrayArtistesRequest = new JsonArrayRequest
-                (Request.Method.POST, URL, jsonArray, response ->
+        JsonObjectRequest jsonArrayArtistesRequest = new JsonObjectRequest
+                (Request.Method.GET, URL, null, response ->
                 {
-                    try {
-                        // Browse request contain json
-                        for (int i = 0; i < response.length(); i++) {
+                    /*// Browse request contain json
+                    for (int i = 0; i < response.length(); i++) {
 
-                            // Getting object from json array
-                            JSONObject artistesJsonObject = response.getJSONObject(i);
+                        // Getting object from json array
+                        JSONObject artistesJsonObject = response.getJSONObject(i);
 
-                            String name = artistesJsonObject.getString("name");
-                            String bio = artistesJsonObject.getString("bio");
-                            String photo = artistesJsonObject.getString("photo_url");
-                            String facebook = artistesJsonObject.getString("facebook_url");
-                            String soundcloud = artistesJsonObject.getString("soundcloud_url");
-                            String beatport = artistesJsonObject.getString("beatport_url");
-                            String mixcloud = artistesJsonObject.getString("mixcloud_url");
-                            String twitter = artistesJsonObject.getString("twitter_url");
-                            String residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
-                            String instagram = artistesJsonObject.getString("instagram_url");
-                            String site = artistesJsonObject.getString("site_url");
+                        String name = artistesJsonObject.getString("name");
+                        String bio = artistesJsonObject.getString("bio");
+                        String photo = artistesJsonObject.getString("photo_url");
+                        String facebook = artistesJsonObject.getString("facebook_url");
+                        String soundcloud = artistesJsonObject.getString("soundcloud_url");
+                        String beatport = artistesJsonObject.getString("beatport_url");
+                        String mixcloud = artistesJsonObject.getString("mixcloud_url");
+                        String twitter = artistesJsonObject.getString("twitter_url");
+                        String residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
+                        String instagram = artistesJsonObject.getString("instagram_url");
+                        String site = artistesJsonObject.getString("site_url");
 
-                            Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
-                                    twitter,residentAdvisor,instagram,site);
+                        Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
+                                twitter,residentAdvisor,instagram,site);
 
-                            artistesList.add(artiste);
+                        artistesList.add(artiste);
 
-                            //creating adapter object and setting it to recyclerview
-                            ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
-                            recyclerView.setAdapter(adapter);
-                        }
+                        //creating adapter object and setting it to recyclerview
+                        ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
+                        recyclerView.setAdapter(adapter);
+                    }*/
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                     //
                 },
                         error -> {
