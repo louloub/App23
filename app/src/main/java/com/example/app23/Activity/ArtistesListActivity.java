@@ -181,6 +181,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                     uri4,getparams, response -> {
                 Log.d(TAG, "loadArtistesM response = "+response );
+
             },
                     error -> {
                         Log.d(TAG, "loadArtistesM error = "+error );
