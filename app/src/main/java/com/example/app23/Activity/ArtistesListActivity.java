@@ -2,6 +2,7 @@ package com.example.app23.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.ArtistesAdapter;
 import com.example.app23.Object.Artistes;
@@ -28,7 +30,10 @@ import com.google.gson.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,6 +155,12 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
     public void loadArtistes ()
         {
+            String city = "montpellier";
+            String page = "1";
+            String contentperpages = "10";
+            String uri4 = "https://www.yourdj.fr/api/1.0/dj/?city=" +city+ "&page=" +page+ "&contentperpages=" +contentperpages+ "";
+            Log.d(TAG,"loadArtistesM uri " +uri4 );
+
         JSONObject getparams = new JSONObject();
             try {
                 getparams.put("city", "montpellier");
@@ -167,36 +178,43 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 e.printStackTrace();
             }
 
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                URL, getparams,
-                    new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //Success Callback
-                        Log.d(TAG,"response =" +response.toString() );
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Failure Callback
-                    }
-                })
+            StringRequest myReq = new StringRequest(Request.Method.GET,
+                    uri4,
+                    createMyReqSuccessListener(),
+                    (Response.ErrorListener) createMyReqErrorListener())
 
             {
-                /** Passing some request headers* */
                 @Override
                 public Map getHeaders() throws AuthFailureError {
                     HashMap headers = new HashMap();
                     headers.put("apikey", "6GFNK892Gb+28bfG");
+                    Log.d(TAG,"loadArtistesM headers = " +headers );
                     return headers;
-            }
-            };
+                }
+                };
 
-        // Adding the request to the queue along with a unique string tag
-            ArtistesListActivity.getInstance().addToRequestQueue(jsonObjReq, "postRequest");
+
+
+            // requestQueue.add(myReq);
+
+
+
+            // Adding the request to the queue along with a unique string tag
+            ArtistesListActivity.getInstance().addToRequestQueue(myReq, "postRequest");
+        }
+
+    private Response.Listener<String> createMyReqSuccessListener() {
+        Response.Listener<String> string = null;
+        Log.d(TAG,"loadArtistesM Success");
+        return string;
     }
+
+    private Response.Listener<String> createMyReqErrorListener() {
+        Response.Listener<String> string = null;
+        Log.d(TAG,"loadArtistesM Errorr");
+        return string;
+    }
+
 
     //------------------------
     // LOAD ARTISTES FROM API
