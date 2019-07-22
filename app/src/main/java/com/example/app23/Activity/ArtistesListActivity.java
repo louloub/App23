@@ -196,28 +196,9 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 }
             };
 
-            /*StringRequest myReq = new StringRequest(Request.Method.GET,
-                    uri4, createMyReqSuccessListener(),
-                    (Response.ErrorListener) createMyReqErrorListener())*/
-
-            // requestQueue.add(myReq);
-
             // Adding the request to the queue along with a unique string tag
             ArtistesListActivity.getInstance().addToRequestQueue(jsonObjectRequest, "postRequest");
         }
-
-    private Response.Listener<String> createMyReqSuccessListener() {
-        Response.Listener<String> string = null;
-        Log.d(TAG,"loadArtistesM Success");
-        return string;
-    }
-
-    private Response.Listener<String> createMyReqErrorListener() {
-        Response.Listener<String> string = null;
-        Log.d(TAG,"loadArtistesM Errorr");
-        return string;
-    }
-
 
     //------------------------
     // LOAD ARTISTES FROM API
