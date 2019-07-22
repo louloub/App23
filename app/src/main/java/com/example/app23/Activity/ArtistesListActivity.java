@@ -178,11 +178,14 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 e.printStackTrace();
             }
 
-            StringRequest myReq = new StringRequest(Request.Method.GET,
-                    uri4,
-                    createMyReqSuccessListener(),
-                    (Response.ErrorListener) createMyReqErrorListener())
-
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                    uri4,getparams, response -> {
+                Log.d(TAG, "loadArtistesM response = "+response );
+            },
+                    error -> {
+                        Log.d(TAG, "loadArtistesM error = "+error );
+                    }
+            )
             {
                 @Override
                 public Map getHeaders() throws AuthFailureError {
@@ -191,16 +194,16 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                     Log.d(TAG,"loadArtistesM headers = " +headers );
                     return headers;
                 }
-                };
+            };
 
-
+            /*StringRequest myReq = new StringRequest(Request.Method.GET,
+                    uri4, createMyReqSuccessListener(),
+                    (Response.ErrorListener) createMyReqErrorListener())*/
 
             // requestQueue.add(myReq);
 
-
-
             // Adding the request to the queue along with a unique string tag
-            ArtistesListActivity.getInstance().addToRequestQueue(myReq, "postRequest");
+            ArtistesListActivity.getInstance().addToRequestQueue(jsonObjectRequest, "postRequest");
         }
 
     private Response.Listener<String> createMyReqSuccessListener() {
