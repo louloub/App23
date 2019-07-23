@@ -61,34 +61,42 @@ public class ArtistesPageActivity extends OptionMenuActivity {
 
         if (facebook.isEmpty()) {
             iv_facebook.setVisibility(GONE);
+        } else {
         }
 
         if (soundcloud.isEmpty()) {
             iv_soundcloud.setVisibility(GONE);
+        } else {
         }
 
         if (beatport.isEmpty()) {
             iv_beatport.setVisibility(GONE);
+        } else {
         }
 
         if (mixcloud.isEmpty()) {
             iv_mixcloud.setVisibility(GONE);
+        } else {
         }
 
         if (twitter.isEmpty()) {
             iv_twitter.setVisibility(GONE);
+        } else {
         }
 
         if (residentAdvisor.isEmpty()) {
             iv_residentAdvisor.setVisibility(GONE);
+        } else {
         }
 
         if (instagram.isEmpty()) {
             iv_instagram.setVisibility(GONE);
+        } else {
         }
 
         if (site.isEmpty()) {
             iv_site.setVisibility(GONE);
+        } else {
         }
 
         //---------------------------------------------------------------------------
