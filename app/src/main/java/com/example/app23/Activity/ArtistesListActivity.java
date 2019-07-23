@@ -48,17 +48,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes4.json";
 
     // API
-    // 1
-    // private static final String URL = "https://www.yourdj.fr/api/1.0/dj/?city=montpellier&page=1&contentperpages=10";
-
-    // 2
-    // private static final String URL = "https://www.yourdj.fr/api/1.0/content/";
-
-    // 3
-    // private static final String URL = "https://www.yourdj.fr/api/";
-
-    // 4
-    // TODO : VINCENT ?
     private static final String URL = "https://www.yourdj.fr/api/1.0/dj/";
 
     //a list to store all the products
@@ -212,25 +201,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         String uri = "https://www.yourdj.fr/api/1.0/dj/?city=" +city+ "&page=" +page+ "&contentperpages=" +contentperpages+ "";
         Log.d(TAG,"loadArtistesM uri " +uri );
 
-        // GETPARAMS ARRAY
-        JSONArray getArrayParams = new JSONArray();
-        // TODO : ajouter les paramètres comme pour getparams (object)
-        try {
-            getArrayParams.put(0,"montpellier");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            getArrayParams.put(1,"1");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            getArrayParams.put(2,"10");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         // GETPARAMS OBJECT
         JSONObject getparams = new JSONObject();
         try {
@@ -261,99 +231,20 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                     JSONObject jsonArtistesObjects = jsonArrayArtistesAPI.getJSONObject(i);
 
                     Log.d(TAG,"loadArtistesM jsonArtistesObjects = " +jsonArtistesObjects);
+
+                    /*Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
+                            twitter,residentAdvisor,instagram,site);
+
+                    artistesList.add(artiste);*/
+
+                    //creating adapter object and setting it to recyclerview
+                    ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
+                    recyclerView.setAdapter(adapter);
                 }
 
                 } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            /*for (int i = 0; i < response.length(); i++) {
-
-                // Getting object from json array
-                JSONObject artistesJsonObject = null;
-                try {
-                    artistesJsonObject = response.getJSONObject(i);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                String name = null;
-                try {
-                    name = artistesJsonObject.getString("name");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String bio = null;
-                try {
-                    bio = artistesJsonObject.getString("bio");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String photo = null;
-                try {
-                    photo = artistesJsonObject.getString("photo_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String facebook = null;
-                try {
-                    facebook = artistesJsonObject.getString("facebook_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String soundcloud = null;
-                try {
-                    soundcloud = artistesJsonObject.getString("soundcloud_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String beatport = null;
-                try {
-                    beatport = artistesJsonObject.getString("beatport_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String mixcloud = null;
-                try {
-                    mixcloud = artistesJsonObject.getString("mixcloud_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String twitter = null;
-                try {
-                    twitter = artistesJsonObject.getString("twitter_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String residentAdvisor = null;
-                try {
-                    residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String instagram = null;
-                try {
-                    instagram = artistesJsonObject.getString("instagram_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String site = null;
-                try {
-                    site = artistesJsonObject.getString("site_url");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
-                        twitter,residentAdvisor,instagram,site);
-
-                artistesList.add(artiste);
-
-                //creating adapter object and setting it to recyclerview
-                ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
-                recyclerView.setAdapter(adapter);
-            }*/
-
         },
                 error -> {
                     Log.d(TAG, "loadArtistesM error = "+error );
@@ -367,23 +258,11 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 Log.d(TAG,"loadArtistesM headers = " +headers );
                 return headers;
             }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("city", "montpellier");
-                params.put("page", "1");
-                params.put("content_per_page", "10");
-                params.put("artistes", getArrayParams.toString());
-
-                return params;
-            }
         };
 
         // Adding the request to the queue along with a unique string tag
         ArtistesListActivity.getInstance().addToRequestQueue(jsonObjectRequest, "postRequest");
     }
-
 
     //------------------------
     // LOAD ARTISTES FROM API
@@ -464,44 +343,10 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         requestQueue.add(jsonArrayArtistesRequest);
     }
 
-    // 400 : 3 / wrong parametre URL
-    // 401 : erreur AUTH
-    // 404 : 2 / erreur URL
-
-    /*{
-            JSONArray jsonArray = new JSONArray();
-        jsonArray.put("6GFNK892Gb+28bfG");
-        Log.d(TAG,"jsonArray = " +jsonArray);
-
-            *//** Passing some request headers* *//**//*
-            @Override
-            public Map getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
-                headers.put("Content-Type", "application/json");
-                headers.put("apiKey", "6GFNK892Gb+28bfG");
-                return headers;*//*
-
-     *//*@Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json");
-                params.put("apiKey", "6GFNK892Gb");
-                return params;*//*
-
-     *//*@Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap headers = new HashMap();
-                headers.put("Content-Type", "application/json");
-                headers.put("apiKey", "6GFNK892Gb+28bfG");
-                return headers;
-            }*//*
-        };*/
-
     //------------------------
     // LOAD ARTISTES FROM JSON
     //------------------------
-    /*public void loadArtistes()
+    public void loadArtistesFromJson()
     {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
@@ -547,7 +392,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 );
 
         requestQueue.add(jsonArrayArtistesRequest);
-    }*/
+    }
 
     public void displayMessage(String message)
     {
