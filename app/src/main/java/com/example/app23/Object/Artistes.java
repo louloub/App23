@@ -36,6 +36,8 @@ public class Artistes implements Serializable {
         this.siteUrl = siteUrl;
     }
 
+    public Artistes (){}
+
     public Artistes(String name, String facebook_url) { }
 
     public Artistes(String name) { }

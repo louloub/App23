@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -149,11 +150,10 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         getRequestQueue().cancelAll(tag);
     }
 
-    //------------------------
-    // LOAD ARTISTES FROM API
-    //------------------------
-
-    public void loadArtistes ()
+    //-------------------------------------
+    // LOAD ARTISTES FROM API (fonctionnel)
+    //-------------------------------------
+    public void loadArtistesY ()
         {
             String city = "montpellier";
             String page = "1";
@@ -200,6 +200,190 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
             // Adding the request to the queue along with a unique string tag
             ArtistesListActivity.getInstance().addToRequestQueue(jsonObjectRequest, "postRequest");
         }
+
+    //-------------------------------------
+    // LOAD ARTISTES FROM API (fonctionnel)
+    //-------------------------------------
+    public void loadArtistes ()
+    {
+        String city = "montpellier";
+        String page = "1";
+        String contentperpages = "10";
+        String uri = "https://www.yourdj.fr/api/1.0/dj/?city=" +city+ "&page=" +page+ "&contentperpages=" +contentperpages+ "";
+        Log.d(TAG,"loadArtistesM uri " +uri );
+
+        // GETPARAMS ARRAY
+        JSONArray getArrayParams = new JSONArray();
+        // TODO : ajouter les paramètres comme pour getparams (object)
+        try {
+            getArrayParams.put(0,"montpellier");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            getArrayParams.put(1,"1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            getArrayParams.put(2,"10");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // GETPARAMS OBJECT
+        JSONObject getparams = new JSONObject();
+        try {
+            getparams.put("city", "montpellier");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            getparams.put("page", "1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            getparams.put("content_per_pages", "10");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                uri,getparams, response ->
+        {
+
+            try {
+                JSONArray jsonArrayArtistesAPI = (JSONArray) response.get("results");
+                Log.d(TAG,"loadArtistesM test = " +jsonArrayArtistesAPI);
+
+                for (int i = 0; i < jsonArrayArtistesAPI.length(); i++) {
+                    JSONObject jsonArtistesObjects = jsonArrayArtistesAPI.getJSONObject(i);
+
+                    Log.d(TAG,"loadArtistesM jsonArtistesObjects = " +jsonArtistesObjects);
+                }
+
+                } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            /*for (int i = 0; i < response.length(); i++) {
+
+                // Getting object from json array
+                JSONObject artistesJsonObject = null;
+                try {
+                    artistesJsonObject = response.getJSONObject(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String name = null;
+                try {
+                    name = artistesJsonObject.getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String bio = null;
+                try {
+                    bio = artistesJsonObject.getString("bio");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String photo = null;
+                try {
+                    photo = artistesJsonObject.getString("photo_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String facebook = null;
+                try {
+                    facebook = artistesJsonObject.getString("facebook_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String soundcloud = null;
+                try {
+                    soundcloud = artistesJsonObject.getString("soundcloud_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String beatport = null;
+                try {
+                    beatport = artistesJsonObject.getString("beatport_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String mixcloud = null;
+                try {
+                    mixcloud = artistesJsonObject.getString("mixcloud_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String twitter = null;
+                try {
+                    twitter = artistesJsonObject.getString("twitter_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String residentAdvisor = null;
+                try {
+                    residentAdvisor = artistesJsonObject.getString("residentAdvisor_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String instagram = null;
+                try {
+                    instagram = artistesJsonObject.getString("instagram_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String site = null;
+                try {
+                    site = artistesJsonObject.getString("site_url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Artistes artiste = new Artistes(name,bio,photo,facebook,soundcloud,beatport,mixcloud,
+                        twitter,residentAdvisor,instagram,site);
+
+                artistesList.add(artiste);
+
+                //creating adapter object and setting it to recyclerview
+                ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
+                recyclerView.setAdapter(adapter);
+            }*/
+
+        },
+                error -> {
+                    Log.d(TAG, "loadArtistesM error = "+error );
+                }
+        )
+        {
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("apikey", "6GFNK892Gb+28bfG");
+                Log.d(TAG,"loadArtistesM headers = " +headers );
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("city", "montpellier");
+                params.put("page", "1");
+                params.put("content_per_page", "10");
+                params.put("artistes", getArrayParams.toString());
+
+                return params;
+            }
+        };
+
+        // Adding the request to the queue along with a unique string tag
+        ArtistesListActivity.getInstance().addToRequestQueue(jsonObjectRequest, "postRequest");
+    }
+
 
     //------------------------
     // LOAD ARTISTES FROM API
