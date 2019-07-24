@@ -3,7 +3,9 @@ package com.example.app23.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,6 +40,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.util.Base64;
 
 public class ArtistesListActivity extends OptionMenuActivity implements View.OnTouchListener {
 
@@ -195,6 +199,11 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     //-------------------------------------
     public void loadArtistes ()
     {
+        String choiceVille = getIntent().getStringExtra("ChoiceVille");
+
+        Log.d(TAG,"loadArtistesM choiceVille = " +choiceVille);
+
+        // String city = choiceVille;
         String city = "montpellier";
         String page = "1";
         String contentperpages = "10";
@@ -266,6 +275,8 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                         if (!jsonArtistesObjects.isNull("content"))
                         {
                             String newBio = jsonArtistesObjects.getString("content");
+                            /*byte[] decodedBio = Base64.getDecoder().decode(newBio);
+                            String encodedBio = Base64.getEncoder().encodeToString(decodedBio);*/
                             artistesFromApi.setBio(newBio);
                         } else {
                         }
