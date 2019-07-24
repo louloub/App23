@@ -1,7 +1,11 @@
 package com.example.app23.Activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,6 +15,10 @@ import android.widget.Toast;
 import com.example.app23.R;
 
 public class OptionMenuActivity extends AppCompatActivity {
+
+    private static final String TAG = "OptionMenuActivity" ;
+    public static final String CITY_CHOICE = "MyCityChoice";
+
 
     //------------
     // OPTION MENU
@@ -39,6 +47,23 @@ public class OptionMenuActivity extends AppCompatActivity {
             Object checkedItem = lw.getAdapter().getItem(lw.getCheckedItemPosition());
             Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItem, Toast.LENGTH_LONG).show();
             // TODO : utiliser "checkedItem" pour le choix du contenu par ville
+            String cityChoice = checkedItem.toString();
+            Log.d(TAG,"cityChoice = " +cityChoice);
+
+            SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("cityChoice", cityChoice);
+            editor.commit();
+
+            // INTENT CHOICE VILLE FOR ARTISTES LIST ACTIVITY
+            /*Intent intentChoiceVilleForArtistesListActivity = new Intent(getBaseContext(), ArtistesListActivity.class);
+            intentChoiceVilleForArtistesListActivity.putExtra("ChoiceVille", cityChoice);
+            startActivity(intentChoiceVilleForArtistesListActivity);*/
+
+            // INTENT CHOICE VILLE FOR EVENT LIST ACTIVITY
+            /*Intent intentChoiceVilleForEventListActivity = new Intent(getBaseContext(), EventListActivity.class);
+            intentChoiceVilleForEventListActivity.putExtra("ChoiceVille", cityChoice);
+            startActivity(intentChoiceVilleForEventListActivity);*/
         });
 
         /*myPopup.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {

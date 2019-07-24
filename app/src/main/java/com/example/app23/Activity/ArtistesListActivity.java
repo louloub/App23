@@ -2,57 +2,49 @@ package com.example.app23.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.ArtistesAdapter;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Swipe.OnSwipeTouchListener;
 import com.example.app23.R;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import java.util.Base64;
 
 public class ArtistesListActivity extends OptionMenuActivity implements View.OnTouchListener {
 
     private static final String NAME_FOR_ACTIONBAR = "Artistes";
     private static final String TAG = "ArtistesActiviy";
+    // String choiceVille = getIntent().getStringExtra("ChoiceVille");
 
     // LAST JSON WORK
     // private static final String URL = "https://yourdj.fr/themes/yourdj/layouts/page/artistes4.json";
 
     // API
     private static final String URL = "https://www.yourdj.fr/api/1.0/dj/";
+
+    final int page = 1;
 
     //a list to store all the products
     List<Artistes> artistesList;
@@ -71,6 +63,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         // API
         mInstance = this;
 
@@ -78,7 +71,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
         //getting the recyclerview from xml
         recyclerView = findViewById(R.id.recylcerView);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -87,10 +79,14 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
         mContext = getApplicationContext();
 
-        loadArtistes();
-
         // Name for ActionBar
         getSupportActionBar().setTitle(NAME_FOR_ACTIONBAR);
+
+        // Show content form city choice
+        SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
+        String city = settings.getString("cityChoice", "");
+        // final int page = 1;
+        loadArtistes(city,page);
 
         //---------------
         // LISTENER SWIPE
@@ -197,36 +193,62 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     //-------------------------------------
     // LOAD ARTISTES FROM API (fonctionnel)
     //-------------------------------------
-    public void loadArtistes ()
+    public void loadArtistes(String city, int page)
     {
-        String choiceVille = getIntent().getStringExtra("ChoiceVille");
 
-        Log.d(TAG,"loadArtistesM choiceVille = " +choiceVille);
+        /*for (int i = 0; i < jsonArrayArtistesAPI.length(); i++) {
+
+        }*/
+
+        // String choiceVille = getIntent().getStringExtra("ChoiceVille");
+        // Log.d(TAG,"loadArtistesM choiceVille = " +choiceVille);
+
+        /*SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
+        String city = settings.getString("cityChoice", "");*/
 
         // String city = choiceVille;
-        String city = "montpellier";
-        String page = "1";
+        // String city = "toulouse";
+        // final int[] page = {1};
         String contentperpages = "10";
-        String uri = "https://www.yourdj.fr/api/1.0/dj/?city=" +city+ "&page=" +page+ "&contentperpages=" +contentperpages+ "";
+        String uri = "https://www.yourdj.fr/api/1.0/dj/?city=" +city+ "&page=" + page + "&contentperpages=" +contentperpages+ "";
         Log.d(TAG,"loadArtistesM uri " +uri );
 
         // GETPARAMS OBJECT
         JSONObject getparams = new JSONObject();
         try {
-            getparams.put("city", "montpellier");
+            getparams.put("city", city);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            getparams.put("page", "1");
+            getparams.put("page", page);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            getparams.put("content_per_pages", "10");
+            getparams.put("content_per_pages", contentperpages);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        // Method for track the end of scrolling (bottom)
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    Toast.makeText(ArtistesListActivity.this, "fin du listing artistes", Toast.LENGTH_SHORT).show();
+                    int i = page;
+                    i++ ;
+                    // final int pageIncrementation = page+1;
+                    Log.d(TAG,"page = " +i);
+                    loadArtistes(city, i);
+                }
+            }
+        });
 
         //--------------------
         // JSON OBJECT REQUEST
