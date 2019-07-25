@@ -59,6 +59,9 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     private RequestQueue requestQueue;
     private static ArtistesListActivity mInstance;
 
+    boolean isLoading = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -231,24 +234,34 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
             e.printStackTrace();
         }
 
+        // int lastCompletelyVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+
+        // int lastVisibleItem, totalItemCount;
+
         // Method for track the end of scrolling (bottom)
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        /*recyclerView.(new RecyclerViewScrollListener.OnScrollListener()
         {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+
+            public void onScrollingUp (){
+                Log.d(TAG, "onScrollingUp");
+            }
+
+            public void onBottomReached(){
+                Log.d(TAG, "onBottomReached");
+            }
+
+
+            *//*public void onScrollStateChanged(RecyclerView recyclerView, int newState)
             {
                 super.onScrollStateChanged(recyclerView, newState);
+
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE)
                 {
                     Toast.makeText(ArtistesListActivity.this, "fin du listing artistes", Toast.LENGTH_SHORT).show();
-                    int i = page;
-                    i++ ;
-                    // final int pageIncrementation = page+1;
-                    Log.d(TAG,"page = " +i);
-                    loadArtistes(city, i);
                 }
-            }
-        });
+            }*//*
+
+        });*/
 
         //--------------------
         // JSON OBJECT REQUEST
