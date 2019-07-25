@@ -55,49 +55,6 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         String site = artistes.getSiteUrl();
         String instagram = artistes.getInstagramUrl();
 
-        //------------------------------------
-        // DISPLAY ICON SOCIAL NETWORK IF LINK
-        //------------------------------------
-            /*if (facebook.isEmpty()) {
-                holder.ivFacebook.setVisibility(GONE);
-            }
-            else {}
-
-            if (soundcloud.isEmpty()) {
-                holder.ivSoundcloud.setVisibility(GONE);
-            }
-            else {}
-
-            if (beatport.isEmpty()) {
-                holder.ivBeatport.setVisibility(GONE);
-            }
-            else {}
-
-            if (mixcloud.isEmpty()) {
-                holder.ivMixcloud.setVisibility(GONE);
-            }
-            else {}
-
-            if (twitter.isEmpty()) {
-                holder.ivTwitter.setVisibility(GONE);
-            }
-            else {}
-
-            if (residentAdvisor.isEmpty()) {
-                holder.ivResidentAdvisor.setVisibility(GONE);
-            }
-            else {}
-
-            if (instagram.isEmpty()) {
-                holder.ivInstagram.setVisibility(GONE);
-            }
-            else {}
-
-            if (site.isEmpty()) {
-                holder.ivSite.setVisibility(GONE);
-            }
-            else {}*/
-
         holder.tvName.setText(artistes.getName());
         holder.tvBio.setText(artistes.getBio());
 
@@ -111,58 +68,6 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
         Glide.with(mCtx)
                 .load(artistes.getPhotoUrl())
                 .into(holder.ivPhoto);
-
-        //--------------------------------------------------
-        // LISTENER FOR WHEN WE CLICK ON SOCIAL NETWORK ICON
-        //--------------------------------------------------
-        /*holder.ivFacebook.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(facebook));
-            mCtx.startActivity(intent);
-        });
-
-        holder.ivSoundcloud.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(soundcloud));
-            mCtx.startActivity(intent);
-        });
-
-        holder.ivBeatport.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(beatport));
-            mCtx.startActivity(intent);
-        });
-
-        holder.ivMixcloud.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(mixcloud));
-            mCtx.startActivity(intent);
-        });
-
-        holder.ivTwitter.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(twitter));
-            mCtx.startActivity(intent);
-        });
-
-        holder.ivResidentAdvisor.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(residentAdvisor));
-            mCtx.startActivity(intent);
-
-        });
-
-        holder.ivSite.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(site));
-            mCtx.startActivity(intent);
-        });
-
-        holder.ivInstagram.setOnClickListener(v -> {
-            Intent intent = new Intent (Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(instagram));
-            mCtx.startActivity(intent);
-        });*/
 
         //-------------------------------------------------
         // LISTENER FOR WHEN WE CLICK ON ARTIST IN THE LIST
