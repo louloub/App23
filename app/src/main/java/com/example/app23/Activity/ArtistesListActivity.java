@@ -21,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.ArtistesAdapter;
 import com.example.app23.Builder.GetParamsBuilder;
+import com.example.app23.Builder.JsonArtistesObjectsBuilder;
 import com.example.app23.Builder.UrlBuilder;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Swipe.OnSwipeTouchListener;
@@ -256,159 +257,9 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
                 for (int i = 0; i < jsonArrayArtistesAPI.length(); i++)
                 {
-                    JSONObject jsonArtistesObjects = jsonArrayArtistesAPI.getJSONObject(i);
+                    JsonArtistesObjectsBuilder.getArtistesObjectsFromAPI(jsonArrayArtistesAPI,i);
 
-                    String name = "";
-                    String bio = "";
-                    String photoUrl = "";
-                    String facebook_url = "";
-                    String soundcloudUrl = "";
-                    String beatportUrl = "";
-                    String mixcloudUrl = "";
-                    String twitterUrl = "";
-                    String residentAdvisorUrl = "";
-                    String instagramUrl = "";
-                    String siteUrl = "";
-
-                    Artistes artistesFromApi = new Artistes(name,bio,photoUrl,facebook_url,
-                            soundcloudUrl,beatportUrl,mixcloudUrl,twitterUrl,residentAdvisorUrl,
-                            instagramUrl,siteUrl);
-
-                    // NAME
-                    if (jsonArtistesObjects.has("name"))
-                    {
-                        if (!jsonArtistesObjects.isNull("name"))
-                        {
-                            String newName = jsonArtistesObjects.getString("name");
-                            artistesFromApi.setName(newName);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // BIO
-                    if (jsonArtistesObjects.has("content"))
-                    {
-                        if (!jsonArtistesObjects.isNull("content"))
-                        {
-                            String newBio = jsonArtistesObjects.getString("content");
-                            /*byte[] decodedBio = Base64.getDecoder().decode(newBio);
-                            String encodedBio = Base64.getEncoder().encodeToString(decodedBio);*/
-                            artistesFromApi.setBio(newBio);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // PHOTO
-                    if (jsonArtistesObjects.has("image"))
-                    {
-                        if (!jsonArtistesObjects.isNull("image"))
-                        {
-                            String newPhotoUrl = jsonArtistesObjects.getString("image");
-                            artistesFromApi.setPhotoUrl("https://www.yourdj.fr/" +newPhotoUrl);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // FB
-                    if (jsonArtistesObjects.has("urlfb"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlfb"))
-                        {
-                            String newFacebook = jsonArtistesObjects.getString("urlfb");
-                            artistesFromApi.setFacebookUrl(newFacebook);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // SC
-                    if (jsonArtistesObjects.has("urlsc"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlsc"))
-                        {
-                            String newSoundcloud = jsonArtistesObjects.getString("urlsc");
-                            artistesFromApi.setSoundcloudUrl(newSoundcloud);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // BP
-                    if (jsonArtistesObjects.has("urlbp"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlbp"))
-                        {
-                            String newBeatport = jsonArtistesObjects.getString("urlbp");
-                            artistesFromApi.setBeatportUrl(newBeatport);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // MC
-                    if (jsonArtistesObjects.has("urlmc"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlmc"))
-                        {
-                            String newMixcloud = jsonArtistesObjects.getString("urlmc");
-                            artistesFromApi.setMixcloudUrl(newMixcloud);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // TW
-                    if (jsonArtistesObjects.has("urltw"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urltw"))
-                        {
-                            String newTwitter = jsonArtistesObjects.getString("urltw");
-                            artistesFromApi.setTwitterUrl(newTwitter);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // RA
-                    if (jsonArtistesObjects.has("urlra"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlra"))
-                        {
-                            String newResidentAdvisor = jsonArtistesObjects.getString("urlra");
-                            artistesFromApi.setResidentAdvisorUrl(newResidentAdvisor);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // INSTA
-                    if (jsonArtistesObjects.has("urlinsta"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlinsta"))
-                        {
-                            String newInstagram = jsonArtistesObjects.getString("urlinsta");
-                            artistesFromApi.setInstagramUrl(newInstagram);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    // SITE
-                    if (jsonArtistesObjects.has("urlsite"))
-                    {
-                        if (!jsonArtistesObjects.isNull("urlsite"))
-                        {
-                            String newSite = jsonArtistesObjects.getString("urlsite");
-                            artistesFromApi.setSiteUrl(newSite);
-                        } else {
-                        }
-                    } else {
-                    }
-
-                    artistesList.add(artistesFromApi);
+                    artistesList.add(JsonArtistesObjectsBuilder.getArtistesObjectsFromAPI(jsonArrayArtistesAPI,i));
 
                     //creating adapter object and setting it to recyclerview
                     if (recyclerView.getAdapter() == null) {
@@ -420,6 +271,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                         recyclerView.getAdapter().notifyItemInserted(artistesList.size());
                     }
                 }
+                // TODO : déplacer la création de l'adapter
 
                 } catch (JSONException e) {
                 e.printStackTrace();
