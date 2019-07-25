@@ -207,24 +207,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // GET PARAMS BUILDER
         JSONObject getParams = GetParamsBuilder.getParams(city,page,contentperpages);
 
-        // int lastCompletelyVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
-
-        // int lastVisibleItem, totalItemCount;
-
-        // Method for track the end of scrolling (bottom)
-
-        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });*/
-
         // TODO : a de placer dans une autre methofe
         recyclerView.addOnScrollListener(new RecyclerViewScrollListener((LinearLayoutManager)
                 this.recyclerView.getLayoutManager(), new RecyclerViewScrollListener.OnScrollListener()
@@ -238,7 +220,12 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
             @Override
             public void onBottomReached() {
 
-                // TODO : appeler loadArtites en incrémentant page
+                Log.d(TAG,"onBottomReached");
+
+                // loadArtistes(city,page++,contentperpages);
+                // TODO : appeler loadArtistes en incrémentant "page"
+                // TODO : modifier URI avec incrémentation de "page"
+                // TODO : lancer load artiste avec la nouvelle URI ??
 
             }
         }));
@@ -253,34 +240,39 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
             try {
 
                 // TODO: Move to static class builder that return the builded object
+
                 JSONArray jsonArrayArtistesAPI = (JSONArray) response.get("results");
 
                 for (int i = 0; i < jsonArrayArtistesAPI.length(); i++)
                 {
-                    JsonArtistesObjectsBuilder.getArtistesObjectsFromAPI(jsonArrayArtistesAPI,i);
-
                     artistesList.add(JsonArtistesObjectsBuilder.getArtistesObjectsFromAPI(jsonArrayArtistesAPI,i));
-
-                    //creating adapter object and setting it to recyclerview
-                    if (recyclerView.getAdapter() == null) {
-                        ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
-                        recyclerView.setAdapter(adapter);
-                    }
-                    // le ELSE ajoute les nouveaux items à le suite des derniers items
-                    else {
-                        recyclerView.getAdapter().notifyItemInserted(artistesList.size());
-                    }
                 }
-                // TODO : déplacer la création de l'adapter
 
                 } catch (JSONException e) {
                 e.printStackTrace();
-            }
+                }
+
+                if (recyclerView.getAdapter() == null) {
+                    ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
+                    recyclerView.setAdapter(adapter);
+                }
+
+                // le ELSE ajoute les nouveaux items à le suite des derniers items
+                else {
+                    recyclerView.getAdapter().notifyItemInserted(artistesList.size());
+                }
         },
+
+
+
                 error -> {
                     Log.d(TAG, "loadArtistesM error = "+error );
                 }
+
         )
+
+
+
         {
             @Override
             public Map getHeaders() throws AuthFailureError {
