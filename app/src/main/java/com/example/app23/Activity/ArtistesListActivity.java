@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +20,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app23.Adapter.ArtistesAdapter;
+import com.example.app23.Builder.GetParamsBuilder;
+import com.example.app23.Builder.UrlBuilder;
 import com.example.app23.Object.Artistes;
 import com.example.app23.Swipe.OnSwipeTouchListener;
 import com.example.app23.R;
@@ -45,6 +48,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     private static final String URL = "https://www.yourdj.fr/api/1.0/dj/";
 
     final int page = 1;
+    final int contentperpages = 10;
 
     //a list to store all the products
     List<Artistes> artistesList;
@@ -60,7 +64,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     private static ArtistesListActivity mInstance;
 
     boolean isLoading = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -88,8 +91,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // Show content form city choice
         SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
         String city = settings.getString("cityChoice", "");
-        // final int page = 1;
-        loadArtistes(city,page);
+        loadArtistes(city,page,contentperpages);
 
         //---------------
         // LISTENER SWIPE
@@ -196,84 +198,64 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     //-------------------------------------
     // LOAD ARTISTES FROM API (fonctionnel)
     //-------------------------------------
-    public void loadArtistes(String city, int page)
+    public void loadArtistes(String city, int page, int contentperpages)
     {
+        // URI BUILDER
+        String uri = UrlBuilder.getUrl(city, page, contentperpages);
 
-        /*for (int i = 0; i < jsonArrayArtistesAPI.length(); i++) {
-
-        }*/
-
-        // String choiceVille = getIntent().getStringExtra("ChoiceVille");
-        // Log.d(TAG,"loadArtistesM choiceVille = " +choiceVille);
-
-        /*SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
-        String city = settings.getString("cityChoice", "");*/
-
-        // String city = choiceVille;
-        // String city = "toulouse";
-        // final int[] page = {1};
-        String contentperpages = "10";
-        String uri = "https://www.yourdj.fr/api/1.0/dj/?city=" +city+ "&page=" + page + "&contentperpages=" +contentperpages+ "";
-        Log.d(TAG,"loadArtistesM uri " +uri );
-
-        // GETPARAMS OBJECT
-        JSONObject getparams = new JSONObject();
-        try {
-            getparams.put("city", city);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            getparams.put("page", page);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            getparams.put("content_per_pages", contentperpages);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // GET PARAMS BUILDER
+        JSONObject getParams = GetParamsBuilder.getParams(city,page,contentperpages);
 
         // int lastCompletelyVisibleItemPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
 
         // int lastVisibleItem, totalItemCount;
 
         // Method for track the end of scrolling (bottom)
-        /*recyclerView.(new RecyclerViewScrollListener.OnScrollListener()
-        {
 
-            public void onScrollingUp (){
-                Log.d(TAG, "onScrollingUp");
-            }
-
-            public void onBottomReached(){
-                Log.d(TAG, "onBottomReached");
-            }
-
-
-            *//*public void onScrollStateChanged(RecyclerView recyclerView, int newState)
-            {
+        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+            }
 
-                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE)
-                {
-                    Toast.makeText(ArtistesListActivity.this, "fin du listing artistes", Toast.LENGTH_SHORT).show();
-                }
-            }*//*
-
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
         });*/
+
+        // TODO : a de placer dans une autre methofe
+        recyclerView.addOnScrollListener(new RecyclerViewScrollListener((LinearLayoutManager)
+                this.recyclerView.getLayoutManager(), new RecyclerViewScrollListener.OnScrollListener()
+        {
+            @Override
+            public void onScrollingUp() {
+
+
+            }
+
+            @Override
+            public void onBottomReached() {
+
+                // TODO : appeler loadArtites en incrémentant page
+
+            }
+        }));
 
         //--------------------
         // JSON OBJECT REQUEST
         //--------------------
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                uri,getparams, response ->
+                uri,getParams, response ->
         {
             try {
+
+                // TODO: Move to static class builder that return the builded object
                 JSONArray jsonArrayArtistesAPI = (JSONArray) response.get("results");
 
-                for (int i = 0; i < jsonArrayArtistesAPI.length(); i++) {
+                for (int i = 0; i < jsonArrayArtistesAPI.length(); i++)
+                {
                     JSONObject jsonArtistesObjects = jsonArrayArtistesAPI.getJSONObject(i);
 
                     String name = "";
@@ -427,13 +409,16 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                     }
 
                     artistesList.add(artistesFromApi);
-                    Log.d(TAG,"loadArtistesM artistesList = " +artistesList);
-                    Log.d(TAG,"loadArtistesM artistesFromApi = " +artistesFromApi);
-
 
                     //creating adapter object and setting it to recyclerview
-                    ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
-                    recyclerView.setAdapter(adapter);
+                    if (recyclerView.getAdapter() == null) {
+                        ArtistesAdapter adapter = new ArtistesAdapter(ArtistesListActivity.this, artistesList);
+                        recyclerView.setAdapter(adapter);
+                    }
+                    // le ELSE ajoute les nouveaux items à le suite des derniers items
+                    else {
+                        recyclerView.getAdapter().notifyItemInserted(artistesList.size());
+                    }
                 }
 
                 } catch (JSONException e) {
@@ -602,4 +587,5 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // ??
         return true;
     }
+
 }
