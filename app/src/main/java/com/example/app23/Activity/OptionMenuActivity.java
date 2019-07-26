@@ -19,7 +19,6 @@ public class OptionMenuActivity extends AppCompatActivity {
     private static final String TAG = "OptionMenuActivity" ;
     public static final String CITY_CHOICE = "MyCityChoice";
 
-
     //------------
     // OPTION MENU
     //------------
@@ -29,6 +28,7 @@ public class OptionMenuActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.menu_activity_main,menu);
         return true;
     }
+
     //--------------
     // ALERTE DIALOG
     //--------------
@@ -54,6 +54,10 @@ public class OptionMenuActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("cityChoice", cityChoice);
             editor.commit();
+
+            // FOR RELOAD CONTENT WHEN CITY IS CHOICE
+            finish();
+            startActivity(getIntent());
 
             // INTENT CHOICE VILLE FOR ARTISTES LIST ACTIVITY
             /*Intent intentChoiceVilleForArtistesListActivity = new Intent(getBaseContext(), ArtistesListActivity.class);

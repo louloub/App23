@@ -85,9 +85,7 @@ public class ArtistesAdapter extends RecyclerView.Adapter<ArtistesAdapter.Artist
     }
 
     @Override
-    public int getItemCount() {
-        return artistesList.size();
-    }
+    public int getItemCount() {return artistesList.size();}
 
     class ArtistesViewHolder extends RecyclerView.ViewHolder {
 
