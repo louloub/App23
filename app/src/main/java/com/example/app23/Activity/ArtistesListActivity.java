@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -48,13 +46,14 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     // API
     private static final String URL = "https://www.yourdj.fr/api/1.0/dj/";
 
-    final int page = 1;
+    // Class Variable for URL
+    private int page = 1;
     final int contentperpages = 10;
 
-    //a list to store all the products
+    // List to store all artistes
     List<Artistes> artistesList;
 
-    //the recyclerview
+    // recyclerview
     RecyclerView recyclerView;
     private Context mContext;
 
@@ -63,8 +62,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     // API
     private RequestQueue requestQueue;
     private static ArtistesListActivity mInstance;
-
-    boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -92,7 +89,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // Show content form city choice
         SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
         String city = settings.getString("cityChoice", "");
-        loadArtistes(city,page,contentperpages);
+        loadArtistes(city, contentperpages);
 
         //---------------
         // LISTENER SWIPE
@@ -199,7 +196,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
     //-------------------------------------
     // LOAD ARTISTES FROM API (fonctionnel)
     //-------------------------------------
-    public void loadArtistes(String city, int page, int contentperpages)
+    public void loadArtistes(String city, int contentperpages)
     {
         // URI BUILDER
         String uri = UrlBuilder.getUrl(city, page, contentperpages);
@@ -207,7 +204,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // GET PARAMS BUILDER
         JSONObject getParams = GetParamsBuilder.getParams(city,page,contentperpages);
 
-        // TODO : a déplacer dans une autre methode
         recyclerView.addOnScrollListener(new RecyclerViewScrollListener((LinearLayoutManager)
                 this.recyclerView.getLayoutManager(), new RecyclerViewScrollListener.OnScrollListener()
         {
@@ -216,13 +212,12 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 Log.d(TAG,"onScrollingUp");
             }
 
-            @Override
             public void onBottomReached() {
                 Log.d(TAG,"onBottomReached");
-                // loadArtistes(city, new int[]{page[0]++},contentperpages);
-                // TODO : appeler loadArtistes en incrémentant "page"
-                // TODO : modifier URI avec incrémentation de "page"
-                // TODO : lancer load artiste avec la nouvelle URI ??
+
+                page++;
+                loadArtistes(city, contentperpages);
+                Log.d(TAG, "onBottomReached page = " +page);
             }
         }));
 
@@ -234,7 +229,6 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 uri,getParams, response ->
         {
             try {
-                // TODO: Move to static class builder that return the builded object
                 JSONArray jsonArrayArtistesAPI = (JSONArray) response.get("results");
 
                 for (int i = 0; i < jsonArrayArtistesAPI.length(); i++)
