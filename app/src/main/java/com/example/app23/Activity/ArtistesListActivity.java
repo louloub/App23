@@ -207,26 +207,22 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // GET PARAMS BUILDER
         JSONObject getParams = GetParamsBuilder.getParams(city,page,contentperpages);
 
-        // TODO : a de placer dans une autre methofe
+        // TODO : a déplacer dans une autre methode
         recyclerView.addOnScrollListener(new RecyclerViewScrollListener((LinearLayoutManager)
                 this.recyclerView.getLayoutManager(), new RecyclerViewScrollListener.OnScrollListener()
         {
             @Override
             public void onScrollingUp() {
-
-
+                Log.d(TAG,"onScrollingUp");
             }
 
             @Override
             public void onBottomReached() {
-
                 Log.d(TAG,"onBottomReached");
-
-                // loadArtistes(city,page++,contentperpages);
+                // loadArtistes(city, new int[]{page[0]++},contentperpages);
                 // TODO : appeler loadArtistes en incrémentant "page"
                 // TODO : modifier URI avec incrémentation de "page"
                 // TODO : lancer load artiste avec la nouvelle URI ??
-
             }
         }));
 
@@ -238,9 +234,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                 uri,getParams, response ->
         {
             try {
-
                 // TODO: Move to static class builder that return the builded object
-
                 JSONArray jsonArrayArtistesAPI = (JSONArray) response.get("results");
 
                 for (int i = 0; i < jsonArrayArtistesAPI.length(); i++)
@@ -262,17 +256,9 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
                     recyclerView.getAdapter().notifyItemInserted(artistesList.size());
                 }
         },
-
-
-
                 error -> {
-                    Log.d(TAG, "loadArtistesM error = "+error );
-                }
-
-        )
-
-
-
+                    Log.d(TAG, "loadArtistesM error = " +error );
+                })
         {
             @Override
             public Map getHeaders() throws AuthFailureError {
@@ -431,5 +417,4 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
         // ??
         return true;
     }
-
 }
