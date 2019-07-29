@@ -18,6 +18,12 @@ public class OptionMenuActivity extends AppCompatActivity {
 
     private static final String TAG = "OptionMenuActivity" ;
     public static final String CITY_CHOICE = "MyCityChoice";
+    // int checkedItems = 0;
+
+    /*SharedPreferences settings = getSharedPreferences("MyCityChoice", Context.MODE_PRIVATE);
+    String str = settings.getString("MyCityChoice",null);
+
+    int i = 0;*/
 
     //------------
     // OPTION MENU
@@ -34,40 +40,57 @@ public class OptionMenuActivity extends AppCompatActivity {
     //--------------
     public void alertDialogCityChoice()
     {
+        int checkedItems = 0;
+
+        SharedPreferences settings = getSharedPreferences("MyCityChoice", Context.MODE_PRIVATE);
+        String cityChoiceSharedPreferences = settings.getString("MyCityChoice",null);
+
+        assert cityChoiceSharedPreferences != null;
+        if(cityChoiceSharedPreferences.equals("Montpellier")) {
+            checkedItems = 0;
+        } else if (cityChoiceSharedPreferences.equals("Toulouse")) {
+            checkedItems = 1;
+        } else if (cityChoiceSharedPreferences.equals("Marseille")) {
+            checkedItems = 2;
+        } else if (cityChoiceSharedPreferences.equals("Bordeaux")) {
+            checkedItems = 3;
+        } else if (cityChoiceSharedPreferences.equals("Nantes")) {
+            checkedItems = 4;
+        }
+        else {
+            checkedItems = 0;
+        }
+
+        Log.d(TAG,"cityChoiceSharedPreferences = " +cityChoiceSharedPreferences);
+
         // Setup Alert builder
         android.support.v7.app.AlertDialog.Builder myPopup = new AlertDialog.Builder(this);
         myPopup.setTitle("Choisis ta ville préférentielle");
         // Ddd a radio button list
         String[] villes = {"Montpellier", "Toulouse", "Marseille", "Bordeaux", "Nantes"};
-        int checkedItems = 0;
+
         myPopup.setSingleChoiceItems(villes, checkedItems, (dialog, which) -> {
         });
         myPopup.setPositiveButton("Valider", (dialogInterface, i) -> {
             ListView lw = ((AlertDialog)dialogInterface).getListView();
-            Object checkedItem = lw.getAdapter().getItem(lw.getCheckedItemPosition());
-            Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItem, Toast.LENGTH_LONG).show();
-            // TODO : utiliser "checkedItem" pour le choix du contenu par ville
-            String cityChoice = checkedItem.toString();
-            Log.d(TAG,"cityChoice = " +cityChoice);
+            Object checkedItemObject = lw.getAdapter().getItem(lw.getCheckedItemPosition());
+            Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItemObject, Toast.LENGTH_LONG).show();
+            String checkedItemString = checkedItemObject.toString();
 
-            SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
+            // SHARED PREFERECE INSTANCE
+            // SharedPreferences settings = getSharedPreferences("MyCityChoice", Context.MODE_PRIVATE);
+            Log.d(TAG,"setSingleChoiceItems settings = " +settings);
+
+            // EDITOR SHARED PREFERENCE
             SharedPreferences.Editor editor = settings.edit();
-            editor.putString("cityChoice", cityChoice);
-            editor.commit();
+            editor.putString("MyCityChoice", checkedItemString);
+            editor.apply();
+
+            // checkedItems = 1 ;
 
             // FOR RELOAD CONTENT WHEN CITY IS CHOICE
             finish();
             startActivity(getIntent());
-
-            // INTENT CHOICE VILLE FOR ARTISTES LIST ACTIVITY
-            /*Intent intentChoiceVilleForArtistesListActivity = new Intent(getBaseContext(), ArtistesListActivity.class);
-            intentChoiceVilleForArtistesListActivity.putExtra("ChoiceVille", cityChoice);
-            startActivity(intentChoiceVilleForArtistesListActivity);*/
-
-            // INTENT CHOICE VILLE FOR EVENT LIST ACTIVITY
-            /*Intent intentChoiceVilleForEventListActivity = new Intent(getBaseContext(), EventListActivity.class);
-            intentChoiceVilleForEventListActivity.putExtra("ChoiceVille", cityChoice);
-            startActivity(intentChoiceVilleForEventListActivity);*/
         });
 
         /*myPopup.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {

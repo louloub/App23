@@ -88,7 +88,7 @@ public class ArtistesListActivity extends OptionMenuActivity implements View.OnT
 
         // Show content form city choice
         SharedPreferences settings = getSharedPreferences(CITY_CHOICE, Context.MODE_PRIVATE);
-        String city = settings.getString("cityChoice", "");
+        String city = settings.getString("MyCityChoice", "");
         loadArtistes(city, contentperpages);
 
         //---------------
