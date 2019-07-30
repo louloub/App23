@@ -18,12 +18,6 @@ public class OptionMenuActivity extends AppCompatActivity {
 
     private static final String TAG = "OptionMenuActivity" ;
     public static final String CITY_CHOICE = "MyCityChoice";
-    // int checkedItems = 0;
-
-    /*SharedPreferences settings = getSharedPreferences("MyCityChoice", Context.MODE_PRIVATE);
-    String str = settings.getString("MyCityChoice",null);
-
-    int i = 0;*/
 
     //------------
     // OPTION MENU
@@ -115,12 +109,12 @@ public class OptionMenuActivity extends AppCompatActivity {
 
         switch (item.getItemId())
         {
-            case R.id.menu_activity_main_params:
+            /*case R.id.menu_activity_main_params:
                 Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_activity_main_search:
+                return true;*/
+            /*case R.id.menu_activity_main_search:
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
-                return true;
+                return true;*/
             case R.id.menu_activity_logo:
                 alertDialogCityChoice();
                 Toast.makeText(this, "Choisis ta ville préférentielle ", Toast.LENGTH_LONG).show();

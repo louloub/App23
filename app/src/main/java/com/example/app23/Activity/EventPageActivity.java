@@ -32,7 +32,7 @@ public class EventPageActivity extends OptionMenuActivity {
         String concoursUrl = event.getConcoursUrl();
         String photoUrl = event.getPhotoUrl();
 
-        // XML CONNECTION
+        // XML
         TextView tvNameEvent = findViewById(R.id.tvNameEvent);
         Button buttonSharingFacebook = findViewById(R.id.btnConcours);
         ImageView ivPhotoEvent = findViewById(R.id.ivPhotoEvent);
