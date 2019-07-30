@@ -1,7 +1,6 @@
 package com.example.app23.Activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -40,19 +39,27 @@ public class OptionMenuActivity extends AppCompatActivity {
         String cityChoiceSharedPreferences = settings.getString("MyCityChoice",null);
 
         assert cityChoiceSharedPreferences != null;
-        if(cityChoiceSharedPreferences.equals("Montpellier")) {
+
+        if (cityChoiceSharedPreferences==null) {
             checkedItems = 0;
-        } else if (cityChoiceSharedPreferences.equals("Toulouse")) {
-            checkedItems = 1;
-        } else if (cityChoiceSharedPreferences.equals("Marseille")) {
-            checkedItems = 2;
-        } else if (cityChoiceSharedPreferences.equals("Bordeaux")) {
-            checkedItems = 3;
-        } else if (cityChoiceSharedPreferences.equals("Nantes")) {
-            checkedItems = 4;
-        }
-        else {
-            checkedItems = 0;
+        } else {
+
+            if(cityChoiceSharedPreferences.equals("Montpellier"))
+            {
+                checkedItems = 0;
+            }
+            else if (cityChoiceSharedPreferences.equals("Toulouse")) {
+                checkedItems = 1;
+            } else if (cityChoiceSharedPreferences.equals("Marseille")) {
+                checkedItems = 2;
+            } else if (cityChoiceSharedPreferences.equals("Bordeaux")) {
+                checkedItems = 3;
+            } else if (cityChoiceSharedPreferences.equals("Nantes")) {
+                checkedItems = 4;
+            }
+            else {
+                checkedItems = 0;
+            }
         }
 
         Log.d(TAG,"cityChoiceSharedPreferences = " +cityChoiceSharedPreferences);
