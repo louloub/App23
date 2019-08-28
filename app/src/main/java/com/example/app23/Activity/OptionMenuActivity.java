@@ -45,11 +45,9 @@ public class OptionMenuActivity extends AppCompatActivity {
         } else {
 
             if(cityChoiceSharedPreferences.equals("Montpellier"))
-            {
-                checkedItems = 0;
-            }
-            else if (cityChoiceSharedPreferences.equals("Toulouse")) {
-                checkedItems = 1;
+            { checkedItems = 0; }
+            else if (cityChoiceSharedPreferences.equals("Toulouse"))
+            { checkedItems = 1;
             } else if (cityChoiceSharedPreferences.equals("Marseille")) {
                 checkedItems = 2;
             } else if (cityChoiceSharedPreferences.equals("Bordeaux")) {
@@ -61,8 +59,6 @@ public class OptionMenuActivity extends AppCompatActivity {
                 checkedItems = 0;
             }
         }
-
-        Log.d(TAG,"cityChoiceSharedPreferences = " +cityChoiceSharedPreferences);
 
         // Setup Alert builder
         android.support.v7.app.AlertDialog.Builder myPopup = new AlertDialog.Builder(this);
@@ -78,16 +74,10 @@ public class OptionMenuActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Tu as choisi " + checkedItemObject, Toast.LENGTH_LONG).show();
             String checkedItemString = checkedItemObject.toString();
 
-            // SHARED PREFERECE INSTANCE
-            // SharedPreferences settings = getSharedPreferences("MyCityChoice", Context.MODE_PRIVATE);
-            Log.d(TAG,"setSingleChoiceItems settings = " +settings);
-
             // EDITOR SHARED PREFERENCE
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("MyCityChoice", checkedItemString);
             editor.apply();
-
-            // checkedItems = 1 ;
 
             // FOR RELOAD CONTENT WHEN CITY IS CHOICE
             finish();
